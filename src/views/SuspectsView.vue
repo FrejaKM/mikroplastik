@@ -7,7 +7,7 @@
   <div class="game-container">
     <!-- Shelf with products -->
     <div class="shelf-container">
-      <img src="/images/shelf.png" alt="Shelf" class="shelf-background" />
+      <img src="/images/horizontal_shelf.png" alt="Shelf" class="shelf-background" />
 
       <!-- Products on shelf -->
       <div v-for="product in products" :key="product.id" :class="['product', {
@@ -31,7 +31,6 @@
         <div class="score">{{ collectedCount }}/{{ totalCorrectItems }}</div>
       </div>
     </div>
-
 
     <!-- Dragging ghost element -->
     <div v-if="draggingProduct" class="drag-ghost" :style="{
@@ -69,11 +68,11 @@ const products = ref([
   },
   {
     id: 2,
-    name: 'Toothpaste',
+    name: 'Cola',
     image: '/images/products/cola.png',
     containsMicroplastic: true,
     collected: false,
-    position: { position: 'absolute', top: '20%', right: '25%' }
+    position: { position: 'absolute', top: '55%', right: '35%' }
   },
   {
     id: 3,
@@ -247,15 +246,12 @@ onUnmounted(() => {
   max-width: 100%;
   height: 100%;
   margin: 0;
-  padding: 20px;
   box-sizing: border-box;
-  gap: 50px;
 }
 
 .shelf-container {
   position: relative;
-  width: 600px;
-  height: 500px;
+  height: 200%;
 }
 
 .shelf-background {
@@ -311,14 +307,18 @@ onUnmounted(() => {
 }
 
 .basket-container {
-  position: relative;
+  position: absolute;
   width: 300px;
   height: 300px;
+  right: 450px;
+  bottom: 150px;
+  rotate: 10deg;
   transition: transform 0.2s ease;
 }
 
 .basket-container:hover {
   transform: scale(1.02);
+  rotate: 8deg;
 }
 
 .basket {
@@ -351,19 +351,13 @@ onUnmounted(() => {
   object-fit: contain;
 }
 
-.game-info {
+.score {
   position: absolute;
-  bottom: 10px;
+  bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  max-width: calc(100vw - 20px);
-  width: 100%;
-  padding: 0 10px;
   box-sizing: border-box;
-}
-
-.score {
   font-size: 36px;
   font-weight: bold;
   color: #2c3e50;
