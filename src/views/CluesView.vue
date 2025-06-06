@@ -1,10 +1,4 @@
-.pointing-hand {
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-font-size: 4rem;
-}<template>
+<template>
     <div class="clues-game">
         <!-- Post-it note with title -->
         <div class="post-it-note">

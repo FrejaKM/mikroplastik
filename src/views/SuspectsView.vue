@@ -1,41 +1,37 @@
 <template>
-  <div class="suspects-game">
-    <!-- Post-it note with instructions -->
-    <div class="post-it-note">
-      <h2>De mistænkte</h2>
-    </div>
+  <Base postItUrl="/images/post-it-green.png" title="Ofrene"
+    description="Efterforskningen starter i supermarkedet. Her gemmer nogle af de værste mikroplast-syndere sig på hylderne – uden at nogen lægger mærke til dem."
+    instructions="Træk produkter, der er kendt for at indeholde mikroplast eller blive til mikroplast, når de nedbrydes, ned i kurven"
+    :completed="gameCompleted" @continue="continueToNext">
 
-    <!-- Instructions text -->
-    <div class="instructions">
-      <p>Træk de produkter ned i kurven, du mistænker for at indeholde mikroplast eller blive til mikroplast, når de
-        nedbrydes!</p>
-    </div>
+  <div class="game-container">
+    <!-- Shelf with products -->
+    <div class="shelf-container">
+      <img src="/images/shelf.png" alt="Shelf" class="shelf-background" />
 
-    <!-- Game area -->
-    <div class="game-container">
-      <!-- Shelf with products -->
-      <div class="shelf-container">
-        <img src="/images/shelf.png" alt="Shelf" class="shelf-background" />
-
-        <!-- Products on shelf -->
-        <div v-for="product in products" :key="product.id"
-          :class="['product', { 'dragging': draggingProduct === product.id, 'collected': product.collected }]"
-          :style="product.position" @mousedown="startDrag(product, $event)">
-          <img :src="product.image" :alt="product.name" />
-        </div>
-      </div>
-
-      <!-- Shopping basket -->
-      <div class="basket-container" @mouseup="dropProduct($event)" @mouseover="onBasketHover"
-        @mouseleave="onBasketLeave">
-        <img src="/images/basket.png" alt="Shopping basket" class="basket" />
-        <div class="basket-items">
-          <div v-for="item in collectedItems" :key="item.id" class="basket-item">
-            <img :src="item.image" :alt="item.name" />
-          </div>
-        </div>
+      <!-- Products on shelf -->
+      <div v-for="product in products" :key="product.id" :class="['product', {
+        'dragging': draggingProduct === product.id,
+        'collected': product.collected
+      }]" :style="product.position" @mousedown="startDrag(product, $event)">
+        <img :src="product.image" :alt="product.name" />
       </div>
     </div>
+
+    <!-- Shopping basket -->
+    <div class="basket-container" @mouseup="dropProduct($event)" @mouseover="onBasketHover" @mouseleave="onBasketLeave">
+      <img src="/images/basket.png" alt="Shopping basket" class="basket" />
+      <div class="basket-items">
+        <div v-for="item in collectedItems" :key="item.id" class="basket-item">
+          <img :src="item.image" :alt="item.name" />
+        </div>
+      </div>
+      <!-- Score and instructions -->
+      <div class="game-info">
+        <div class="score">{{ collectedCount }}/{{ totalCorrectItems }}</div>
+      </div>
+    </div>
+
 
     <!-- Dragging ghost element -->
     <div v-if="draggingProduct" class="drag-ghost" :style="{
@@ -44,26 +40,14 @@
     }">
       <img :src="getDraggingProduct()?.image" :alt="getDraggingProduct()?.name" />
     </div>
-
-    <!-- Score and instructions -->
-    <div class="game-info">
-      <div class="score">{{ collectedCount }}/{{ totalCorrectItems }}</div>
-      <div class="detective-note">
-        <p>Efterforskningen starter i supermarkedet. Her gemmer nogle af de værste mikroplast-syndere sig på hylderne –
-          uden at nogen lægger mærke til dem.</p>
-        <p>Godt detektivarbejde! Nogle produkter indeholder små plastpartikler, mens andre bliver til mikroplast, når de
-          bliver slidt og smidt ud.</p>
-      </div>
-      <button class="continue-btn" v-if="gameCompleted" @click="continueToNext">
-        Fortsæt →
-      </button>
-    </div>
   </div>
+  </Base>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
+import Base from '../components/Base.vue'
 
 const router = useRouter()
 
@@ -256,59 +240,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.suspects-game {
-  height: 100vh;
-  width: 100vw;
-  background: #f5f5f5;
-  padding: 0;
-  position: relative;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-.post-it-note {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-image: url('/images/post-it-yellow.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 180px;
-  height: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: rotate(-5deg);
-  z-index: 10;
-}
-
-.post-it-note h2 {
-  color: #333;
-  font-weight: bold;
-  text-align: center;
-  font-size: 18px;
-  margin: 0;
-}
-
-.instructions {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  max-width: 350px;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.instructions p {
-  margin: 0;
-  font-size: 16px;
-  line-height: 1.4;
-  color: #333;
-}
-
 .game-container {
   display: flex;
   justify-content: center;
@@ -316,7 +247,7 @@ onUnmounted(() => {
   max-width: 100%;
   height: 100%;
   margin: 0;
-  padding: 80px 20px 20px 20px;
+  padding: 20px;
   box-sizing: border-box;
   gap: 50px;
 }
@@ -459,22 +390,6 @@ onUnmounted(() => {
   margin-bottom: 0;
 }
 
-.continue-btn {
-  background: #4caf50;
-  color: white;
-  border: none;
-  padding: 15px 30px;
-  font-size: 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
-}
-
-.continue-btn:hover {
-  background: #45a049;
-}
-
 /* Bounce animation for wrong answers */
 @keyframes bounce {
 
@@ -506,17 +421,6 @@ onUnmounted(() => {
   .shelf-container {
     width: 100%;
     max-width: 500px;
-  }
-
-  .instructions {
-    position: static;
-    margin: 20px auto;
-    max-width: 90%;
-  }
-
-  .post-it-note {
-    position: static;
-    margin: 20px auto;
   }
 }
 </style>
