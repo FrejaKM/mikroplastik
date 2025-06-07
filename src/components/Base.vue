@@ -19,7 +19,7 @@ export default {
         </div>
 
         <!-- Notesbog -->
-        <div class="notebook" style="background-image: url('/images/new_notebook.png')">
+        <div class="notebook" style="background-image: url('/images/note.png')">
             <div class="info-text">{{ description }}</div>
         </div>
 
@@ -126,7 +126,7 @@ export default {
     background-color: white;
     border: 2px solid black;
     border-radius: 10px;
-    font-size: clamp(10px, 1.2vw, 14px);
+    font-size: 32px;
     padding: 10px 14px;
     display: flex;
     align-items: center;

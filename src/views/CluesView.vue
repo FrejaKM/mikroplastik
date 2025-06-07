@@ -1,193 +1,290 @@
 <template>
-    <div class="clues-game">
-        <!-- Post-it note with title -->
-        <div class="post-it-note">
-            <h2>Sporene</h2>
-        </div>
+    <Base postItUrl="/images/post-it-green.png" title="Sporene"
+        description="En essentiel del af efterforskningen finder sted i supermarkedet. Her gemmer nogle af de  vigtigste spor i mikroplast mysteriet sig på hylderne – uden at nogen lægger mærke til dem."
+        instructions="Træk produkter, der er kendt for at indeholde mikroplast eller blive til mikroplast, når de nedbrydes, ned i kurven"
+        :completed="gameCompleted" @continue="continueToNext">
 
-        <!-- Main content area -->
-        <div class="game-container">
-            <!-- Left side - Notebook with clue -->
-            <div class="notebook-container">
-                <div class="notebook-page">
-                    <p>Mikroplast er efterhånden at finde alle vegne på vores planet. Men hvornår kalder man egentlig
-                        noget for mikroplast?</p>
-                </div>
-            </div>
+    <div class="game-container">
+        <!-- Shelf with products -->
+        <div class="shelf-container">
+            <img src="/images/final_shelves.png" alt="Shelf" class="shelf-background" />
 
-            <!-- Right side - Mugshot and size options -->
-            <div class="mugshot-container">
-                <!-- Mugshot background (Drop zone) -->
-                <div class="mugshot-background" :class="{ 'drop-zone-active': isOverDropZone }"
-                    @mouseenter="onDropZoneEnter" @mouseleave="onDropZoneLeave">
-                    <img src="/images/mugshot.png" alt="Mugshot background" class="mugshot-image" />
-
-                    <!-- Success message -->
-                    <div v-if="gameCompleted" class="success-overlay">
-                        <div class="success-text">Korrekt!</div>
-                    </div>
-                </div>
-
-                <!-- Microplastic size options -->
-                <div class="size-options">
-                    <div v-for="item in items" :key="item.id" :data-item-id="item.id" :class="[
-                        'plastic-piece',
-                        {
-                            'dragging': draggedItem?.id === item.id,
-                            'incorrect': incorrectItems.has(item.id),
-                            'collected': item.collected
-                        }
-                    ]" :style="{ opacity: item.opacity }" @mousedown="startDrag(item, $event)">
-                        <img :src="item.image" :alt="item.size" />
-                    </div>
-                </div>
+            <!-- Products on shelf -->
+            <div v-for="product in products" :key="product.id" :class="['product', {
+                'dragging': draggingProduct === product.id,
+                'collected': product.collected
+            }]" :style="{
+                ...product.position,
+                transform: `scale(${product.scale})`
+            }" @mousedown="startDrag(product, $event)">
+                <img :src="product.image" :alt="product.name" />
             </div>
         </div>
 
-        <!-- Drag ghost element -->
-        <div v-if="draggedItem" class="drag-ghost" :style="{
+        <!-- Shopping basket -->
+        <div class="basket-container" @mouseup="dropProduct($event)" @mouseover="onBasketHover"
+            @mouseleave="onBasketLeave">
+            <img src="/images/basket.png" alt="Shopping basket" class="basket" />
+            <div class="basket-items">
+                <div v-for="item in collectedItems" :key="item.id" class="basket-item" :style="{
+                    ...item.basketPosition,
+                    transform: `${item.basketPosition.transform} scale(${item.scale})`
+                }">
+                    <img :src="item.image" :alt="item.name" />
+                </div>
+            </div>
+            <!-- Score and instructions -->
+            <div class="game-info">
+                <div class="score">{{ collectedCount }}/{{ totalCorrectItems }}</div>
+            </div>
+        </div>
+
+        <!-- Dragging ghost element -->
+        <div v-if="draggingProduct" class="drag-ghost" :style="{
             left: mousePosition.x + 'px',
             top: mousePosition.y + 'px'
         }">
-            <img :src="draggedItem.image" :alt="draggedItem.size" />
+            <img :src="getDraggingProduct()?.image" :alt="getDraggingProduct()?.name" />
         </div>
-
-        <!-- Bottom decorative elements -->
-        <div class="bottom-elements">
-            <div class="green-arrow"></div>
-            <div class="blue-triangle"></div>
-        </div>
-
-        <!-- Continue button -->
-        <button v-if="gameCompleted" class="continue-btn" @click="continueToNext">
-            Fortsæt →
-        </button>
     </div>
+    </Base>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
+import Base from '../components/Base.vue'
 
 const router = useRouter()
 
 // Game state
-const draggedItem = ref(null)
+const draggingProduct = ref(null)
+const collectedItems = ref([])
 const mousePosition = ref({ x: 0, y: 0 })
-const isOverDropZone = ref(false)
-const gameCompleted = ref(false)
-const incorrectItems = ref(new Set())
+const isOverBasket = ref(false)
 
-// Microplastic size options with PNG images
-const items = ref([
+// Products data - define which products contain microplastics
+const products = ref([
     {
         id: 1,
-        size: '5000μm',
-        image: '/images/microplastic/plastic-5000.png',
-        isCorrect: false,
-        opacity: 1,
-        collected: false
+        name: 'Sponges',
+        image: '/images/products/sponges.png',
+        containsMicroplastic: true,
+        collected: false,
+        scale: 1.0, // Normal size
+        position: { position: 'absolute', top: '60%', left: '15%' }
     },
     {
         id: 2,
-        size: '100μm',
-        image: '/images/microplastic/plastic-100.png',
-        isCorrect: true,
-        opacity: 1,
-        collected: false
+        name: 'Cola',
+        image: '/images/products/cola.png',
+        containsMicroplastic: true,
+        collected: false,
+        scale: 1.2, // 20% bigger
+        position: { position: 'absolute', top: '55%', right: '35%' }
     },
     {
         id: 3,
-        size: '10μm',
-        image: '/images/microplastic/plastic-10.png',
-        isCorrect: false,
-        opacity: 1,
-        collected: false
+        name: 'Shoes',
+        image: '/images/products/shoes.png',
+        containsMicroplastic: true,
+        collected: false,
+        scale: 1.5, // 50% bigger
+        position: { position: 'absolute', top: '50%', left: '50%' }
     },
     {
         id: 4,
-        size: '1μm',
-        image: '/images/microplastic/plastic-1.png',
-        isCorrect: false,
-        opacity: 1,
-        collected: false
-    }
+        name: 'Pods',
+        image: '/images/products/pods.png',
+        containsMicroplastic: true,
+        collected: false,
+        scale: 0.8, // 20% smaller
+        position: { position: 'absolute', top: '35%', left: '35%' }
+    },
+    {
+        id: 5,
+        name: 'Makeup',
+        image: '/images/products/makeup.png',
+        containsMicroplastic: true,
+        collected: false,
+        scale: 0.7, // 30% smaller
+        position: { position: 'absolute', top: '35%', right: '15%' }
+    },
+    {
+        id: 6,
+        name: 'Toothpaste',
+        image: '/images/products/toothpaste.png',
+        containsMicroplastic: true,
+        collected: false,
+        scale: 0.9, // 10% smaller
+        position: { position: 'absolute', top: '50%', left: '20%' }
+    },
+    {
+        id: 7,
+        name: 'Tea Bags',
+        image: '/images/products/teabag.png',
+        containsMicroplastic: true,
+        collected: false,
+        scale: 0.6, // 40% smaller
+        position: { position: 'absolute', top: '50%', right: '30%' }
+    },
+    {
+        id: 8,
+        name: 'Chips',
+        image: '/images/products/chips.png',
+        containsMicroplastic: true,
+        collected: false,
+        scale: 1.3, // 30% bigger
+        position: { position: 'absolute', top: '55%', right: '40%' }
+    },
+    {
+        id: 9,
+        name: 'Gum',
+        image: '/images/products/gum.png',
+        containsMicroplastic: true,
+        collected: false,
+        scale: 0.5, // 50% smaller
+        position: { position: 'absolute', top: '50%', right: '20%' }
+    },
+    {
+        id: 10,
+        name: 'Shorts',
+        image: '/images/products/shorts.png',
+        containsMicroplastic: true,
+        collected: false,
+        scale: 1.4, // 40% bigger
+        position: { position: 'absolute', top: '70%', left: '30%' }
+    },
 ])
+
+// Computed properties
+const totalCorrectItems = computed(() =>
+    products.value.filter(p => p.containsMicroplastic).length
+)
+
+const collectedCount = computed(() => collectedItems.value.length)
+
+const gameCompleted = computed(() =>
+    collectedCount.value === totalCorrectItems.value
+)
+
+// Helper function to get currently dragging product
+const getDraggingProduct = () => {
+    return products.value.find(p => p.id === draggingProduct.value)
+}
+
+// Function to generate random position in basket
+const generateRandomBasketPosition = (itemIndex) => {
+    // Generate random position within the basket area
+    // Use percentage-based positioning for better distribution
+    const minLeft = 0
+    const maxLeft = 60 // Leave room for item width
+    const minTop = 0
+    const maxTop = 60 // Leave room for item height
+
+    const randomLeft = minLeft + Math.random() * (maxLeft - minLeft)
+    const randomTop = minTop + Math.random() * (maxTop - minTop)
+
+    // Add slight rotation for more natural look
+    const randomRotation = (Math.random() - 0.5) * 30 // -15 to +15 degrees
+
+    return {
+        position: 'absolute',
+        left: `${randomLeft}%`,
+        top: `${randomTop}%`,
+        transform: `rotate(${randomRotation}deg)`,
+        zIndex: itemIndex + 10 // Latest items have higher z-index
+    }
+}
 
 // Mouse tracking
 const updateMousePosition = (event) => {
     mousePosition.value = {
-        x: event.clientX - 32, // Offset to center the ghost
-        y: event.clientY - 32
+        x: event.clientX - 40, // Offset to center the ghost image
+        y: event.clientY - 40
     }
 }
 
 // Drag and drop functions
-const startDrag = (item, event) => {
-    if (incorrectItems.value.has(item.id)) return
+const startDrag = (product, event) => {
+    if (product.collected) return
 
     event.preventDefault()
-    draggedItem.value = item
+    draggingProduct.value = product.id
 
+    // Add mouse move listener
     document.addEventListener('mousemove', updateMousePosition)
     document.addEventListener('mouseup', endDrag)
 
+    // Set initial mouse position
     updateMousePosition(event)
 }
 
-const endDrag = () => {
-    if (!draggedItem.value) return
+const endDrag = (event) => {
+    if (!draggingProduct.value) return
 
-    if (isOverDropZone.value) {
+    // Check if dropped on basket
+    if (isOverBasket.value) {
         handleDrop()
     } else {
-        // Item was dropped outside the zone, animate back
-        animateItemReturn(draggedItem.value)
+        // Not dropped on basket, animate return
+        const product = getDraggingProduct()
+        if (product && !product.containsMicroplastic) {
+            animateProductReturn(product)
+        }
     }
 
-    draggedItem.value = null
+    // Clean up
+    draggingProduct.value = null
     document.removeEventListener('mousemove', updateMousePosition)
     document.removeEventListener('mouseup', endDrag)
 }
 
+const onBasketHover = () => {
+    isOverBasket.value = true
+}
+
+const onBasketLeave = () => {
+    isOverBasket.value = false
+}
+
+const dropProduct = (event) => {
+    // This is now handled by endDrag when mouse is over basket
+}
+
 const handleDrop = () => {
-    if (!draggedItem.value) return
+    const product = getDraggingProduct()
 
-    if (draggedItem.value.isCorrect) {
-        // Correct answer!
-        draggedItem.value.collected = true
-        gameCompleted.value = true
-    } else {
-        // Wrong answer - add to incorrect items and animate back
-        incorrectItems.value.add(draggedItem.value.id)
-        animateItemReturn(draggedItem.value)
+    if (!product || product.collected) return
 
-        // Make item semi-transparent
-        const itemIndex = items.value.findIndex(item => item.id === draggedItem.value.id)
-        if (itemIndex !== -1) {
-            items.value[itemIndex].opacity = 0.4
+    if (product.containsMicroplastic) {
+        // Correct! Add to basket with random position
+        product.collected = true
+        const productWithBasketPosition = {
+            ...product,
+            basketPosition: generateRandomBasketPosition(collectedItems.value.length)
         }
+        collectedItems.value.push(productWithBasketPosition)
+        console.log('Correct!', product.name)
+    } else {
+        // Wrong! Product should bounce back
+        animateProductReturn(product)
+        console.log('Wrong!', product.name)
     }
 }
 
-const animateItemReturn = (item) => {
+const animateProductReturn = (product) => {
+    // Find the product element and animate it
     setTimeout(() => {
-        const itemElement = document.querySelector(`[data-item-id="${item.id}"]`)
-        if (itemElement) {
-            itemElement.style.animation = 'bounce 0.5s ease-in-out'
+        const productElements = document.querySelectorAll('.product')
+        const productElement = productElements[product.id - 1]
+        if (productElement) {
+            productElement.style.animation = 'bounce 0.5s ease-in-out'
             setTimeout(() => {
-                itemElement.style.animation = ''
+                productElement.style.animation = ''
             }, 500)
         }
     }, 100)
-}
-
-const onDropZoneEnter = () => {
-    isOverDropZone.value = true
-}
-
-const onDropZoneLeave = () => {
-    isOverDropZone.value = false
 }
 
 const continueToNext = () => {
@@ -195,168 +292,65 @@ const continueToNext = () => {
 }
 
 onMounted(() => {
-    // Prevent default drag behavior on elements
+    // Prevent default drag behavior on images
     document.addEventListener('dragstart', (e) => {
-        e.preventDefault()
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault()
+        }
     })
 })
 
 onUnmounted(() => {
+    // Clean up event listeners
     document.removeEventListener('mousemove', updateMousePosition)
     document.removeEventListener('mouseup', endDrag)
 })
 </script>
 
 <style scoped>
-.clues-game {
-    height: 100vh;
-    width: 100vw;
-    background: #f5f5f5;
-    padding: 0;
-    position: relative;
-    overflow: hidden;
+.game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    height: 100%;
+    margin: 0;
     box-sizing: border-box;
 }
 
-.post-it-note {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-image: url('/images/post-it-sand.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 180px;
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: rotate(-5deg);
-    z-index: 10;
-}
-
-.post-it-note h2 {
-    color: #333;
-    font-weight: bold;
-    text-align: center;
-    font-size: 20px;
-    margin: 0;
-}
-
-.game-container {
-    display: flex;
-    height: 100vh;
-    padding-top: 80px;
-}
-
-.notebook-container {
-    width: 50%;
-    padding: 2rem;
-    height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.notebook-page {
-    padding: 2rem;
-    max-width: 400px;
-    height: 500px;
-    background-image: url('/images/notebook.png');
-    line-height: 25px;
-}
-
-.notebook-page p {
-    font-size: 18px;
-    color: #333;
-    margin: 0;
-    line-height: 1.6;
-}
-
-.mugshot-container {
-    width: 50%;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.mugshot-background {
+.shelf-container {
     position: relative;
-    width: 320px;
-    height: 384px;
-    border: 4px solid #000;
-    background: #e5e7eb;
-    margin-bottom: 2rem;
-    transition: all 0.2s ease;
+    height: 100%;
 }
 
-.mugshot-background.drop-zone-active {
-    border-color: #2196f3;
-    background-color: #e3f2fd;
-}
-
-.mugshot-image {
+.shelf-background {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
-.pointing-hand {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 4rem;
-}
-
-.success-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(76, 175, 80, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.success-text {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #2e7d32;
-}
-
-.size-options {
-    display: flex;
-    gap: 1.5rem;
-}
-
-.plastic-piece {
+.product {
     cursor: grab;
     transition: transform 0.2s ease;
     z-index: 5;
     user-select: none;
 }
 
-.plastic-piece:hover:not(.collected):not(.dragging):not(.incorrect) {
+.product:hover:not(.collected):not(.dragging) {
     transform: scale(1.1);
 }
 
-.plastic-piece.dragging {
+.product.dragging {
     opacity: 0.3;
     cursor: grabbing;
 }
 
-.plastic-piece.collected {
+.product.collected {
     opacity: 0;
     pointer-events: none;
 }
 
-.plastic-piece.incorrect {
-    cursor: not-allowed;
-}
-
-.plastic-piece img {
+.product img {
     width: 80px;
     height: 80px;
     object-fit: contain;
@@ -366,64 +360,117 @@ onUnmounted(() => {
 
 .drag-ghost {
     position: fixed;
-    width: 80px;
-    height: 80px;
+    width: 8vw;
+    /* Responsive size based on viewport */
+    height: 8vw;
+    max-width: 80px;
+    /* Limit maximum size */
+    max-height: 80px;
+    min-width: 40px;
+    /* Limit minimum size */
+    min-height: 40px;
     pointer-events: none;
     z-index: 1000;
     transform: scale(1.2);
     opacity: 0.9;
+    aspect-ratio: 1;
 }
 
 .drag-ghost img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0.4vw 0.4vw 0.8vw rgba(0, 0, 0, 0.5));
 }
 
-.bottom-elements {
+.basket-container {
     position: absolute;
-    bottom: 2rem;
-    left: 2rem;
-    display: flex;
-    gap: 2rem;
+    width: 25vw;
+    /* Responsive width */
+    height: 25vw;
+    /* Maintain aspect ratio */
+    max-width: 300px;
+    /* Limit maximum size */
+    max-height: 300px;
+    min-width: 200px;
+    /* Limit minimum size */
+    min-height: 200px;
+    right: min(450px, 30vw);
+    /* Responsive positioning */
+    bottom: min(150px, 10vw);
+    rotate: 10deg;
+    transition: transform 0.2s ease;
+    aspect-ratio: 1;
 }
 
-.green-arrow {
-    width: 48px;
-    height: 48px;
-    background: #4caf50;
-    transform: rotate(45deg);
-    position: relative;
+.basket-container:hover {
+    transform: scale(1.02);
 }
 
-.green-arrow::after {
-    content: '';
+.basket {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.basket-items {
     position: absolute;
-    inset: 8px;
-    background: #66bb6a;
+    top: 20%;
+    left: 20%;
+    width: 60%;
+    height: 60%;
+    overflow: hidden;
 }
 
-
-
-.continue-btn {
+.basket-item {
+    width: 20%;
+    /* Base size relative to basket */
+    height: 20%;
     position: absolute;
-    bottom: 2rem;
-    right: 2rem;
-    background: white;
-    border: 2px solid black;
-    padding: 1rem 2rem;
-    font-size: 1.25rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+    aspect-ratio: 1;
 }
 
-.continue-btn:hover {
-    background: #f5f5f5;
+.basket-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0.1vw 0.1vw 0.2vw rgba(0, 0, 0, 0.3));
 }
 
-/* Bounce animation */
+.score {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 32px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.detective-note {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+}
+
+.detective-note p {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #333;
+}
+
+.detective-note p:last-child {
+    margin-bottom: 0;
+}
+
+/* Bounce animation for wrong answers */
 @keyframes bounce {
 
     0%,
@@ -435,11 +482,11 @@ onUnmounted(() => {
     }
 
     40% {
-        transform: translateY(-10px);
+        transform: translateY(-20px);
     }
 
     60% {
-        transform: translateY(-5px);
+        transform: translateY(-10px);
     }
 }
 
@@ -447,27 +494,13 @@ onUnmounted(() => {
 @media (max-width: 768px) {
     .game-container {
         flex-direction: column;
+        gap: 40px;
         padding-top: 50px;
     }
 
-    .notebook-container,
-    .mugshot-container {
+    .shelf-container {
         width: 100%;
-        padding: 1rem;
-    }
-
-    .mugshot-background {
-        width: 280px;
-        height: 336px;
-    }
-
-    .size-options {
-        gap: 1rem;
-    }
-
-    .plastic-piece img {
-        width: 70px;
-        height: 70px;
+        max-width: 500px;
     }
 }
 </style>
