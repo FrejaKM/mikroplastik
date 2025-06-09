@@ -68,6 +68,7 @@ export default {
     overflow: hidden;
     min-height: 0;
     min-width: 0;
+    margin-top: 10px;
     rotate: 10deg;
 }
 
@@ -92,6 +93,7 @@ export default {
     justify-content: center;
     padding-top: 20%;
     overflow: hidden;
+    scale: 1.1;
 }
 
 .info-text {
@@ -112,7 +114,8 @@ export default {
 .game-content {
     grid-column: 1 / 4;
     grid-row: 1 / 6;
-    border: 1px solid #aaa;
+    border: 2px solid #000000;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -123,7 +126,7 @@ export default {
 .instructions {
     grid-column: 1 / 4;
     grid-row: 6 / 7;
-    background-color: white;
+    background-color: none;
     border: 2px solid black;
     border-radius: 10px;
     font-size: 32px;
@@ -140,23 +143,16 @@ export default {
 .continue-button {
     grid-column: 4 / 5;
     grid-row: 6 / 7;
-    font-weight: bold;
     border: 2px solid black;
     border-radius: 10px;
-    background-color: white;
+    background-color: none;
+    background: none;
     cursor: pointer;
-    font-size: clamp(10px, 1.2vw, 14px);
+    font-size: 32px;
     padding: 8px 18px;
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.2s;
-    box-sizing: border-box;
-    min-height: 0;
-    min-width: 0;
-    white-space: nowrap;
-    overflow: hidden;
 }
 
 .continue-button:hover {
-    background-color: #f0f0f0;
+    scale: 1.02;
 }
 </style>

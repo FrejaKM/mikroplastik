@@ -63,79 +63,17 @@ const collectedItems = ref([])
 const mousePosition = ref({ x: 0, y: 0 })
 const isOverBasket = ref(false)
 
-// Products data - define which products contain microplastics
+// Products data - positioned on four shelves with realistic scaling
 const products = ref([
-    {
-        id: 1,
-        name: 'Sponges',
-        image: '/images/products/sponges.png',
-        containsMicroplastic: true,
-        collected: false,
-        scale: 1.0, // Normal size
-        position: { position: 'absolute', top: '60%', left: '15%' }
-    },
-    {
-        id: 2,
-        name: 'Cola',
-        image: '/images/products/cola.png',
-        containsMicroplastic: true,
-        collected: false,
-        scale: 1.2, // 20% bigger
-        position: { position: 'absolute', top: '55%', right: '35%' }
-    },
-    {
-        id: 3,
-        name: 'Shoes',
-        image: '/images/products/shoes.png',
-        containsMicroplastic: true,
-        collected: false,
-        scale: 1.5, // 50% bigger
-        position: { position: 'absolute', top: '50%', left: '50%' }
-    },
-    {
-        id: 4,
-        name: 'Pods',
-        image: '/images/products/pods.png',
-        containsMicroplastic: true,
-        collected: false,
-        scale: 0.8, // 20% smaller
-        position: { position: 'absolute', top: '35%', left: '35%' }
-    },
+    // TOP SHELF (25% from top) - Small items like makeup, gum, pods
     {
         id: 5,
         name: 'Makeup',
         image: '/images/products/makeup.png',
         containsMicroplastic: true,
         collected: false,
-        scale: 0.7, // 30% smaller
-        position: { position: 'absolute', top: '35%', right: '15%' }
-    },
-    {
-        id: 6,
-        name: 'Toothpaste',
-        image: '/images/products/toothpaste.png',
-        containsMicroplastic: true,
-        collected: false,
-        scale: 0.9, // 10% smaller
-        position: { position: 'absolute', top: '50%', left: '20%' }
-    },
-    {
-        id: 7,
-        name: 'Tea Bags',
-        image: '/images/products/teabag.png',
-        containsMicroplastic: true,
-        collected: false,
-        scale: 0.6, // 40% smaller
-        position: { position: 'absolute', top: '50%', right: '30%' }
-    },
-    {
-        id: 8,
-        name: 'Chips',
-        image: '/images/products/chips.png',
-        containsMicroplastic: true,
-        collected: false,
-        scale: 1.3, // 30% bigger
-        position: { position: 'absolute', top: '55%', right: '40%' }
+        scale: 1.5,
+        position: { position: 'absolute', top: '67%', left: '50%' }
     },
     {
         id: 9,
@@ -143,8 +81,167 @@ const products = ref([
         image: '/images/products/gum.png',
         containsMicroplastic: true,
         collected: false,
-        scale: 0.5, // 50% smaller
-        position: { position: 'absolute', top: '50%', right: '20%' }
+        scale: 1,
+        position: { position: 'absolute', top: '11%', left: '66%' }
+    },
+    {
+        id: 4,
+        name: 'Pods',
+        image: '/images/products/pods.png',
+        containsMicroplastic: true,
+        collected: false,
+        scale: 1.5,
+        position: { position: 'absolute', top: '48%', left: '75%' }
+    },
+    {
+        id: 7,
+        name: 'Tea Bags',
+        image: '/images/products/teabag.png',
+        containsMicroplastic: true,
+        collected: false,
+        scale: 1,
+        position: { position: 'absolute', top: '50%', left: '35%' }
+    },
+    {
+        id: 20,
+        name: 'Candle',
+        image: '/images/products/candle.png',
+        containsMicroplastic: false,
+        collected: false,
+        scale: 1.3,
+        position: { position: 'absolute', top: '48%', left: '45%' }
+    },
+    {
+        id: 16,
+        name: 'Pickles',
+        image: '/images/products/pickles.png',
+        containsMicroplastic: false,
+        collected: false,
+        scale: 1.2,
+        position: { position: 'absolute', top: '29%', left: '72%' }
+    },
+    {
+        id: 17,
+        name: 'Can',
+        image: '/images/products/can.png',
+        containsMicroplastic: false,
+        collected: false,
+        scale: 1.2,
+        position: { position: 'absolute', top: '31%', left: '57%' }
+    },
+
+    // SECOND SHELF (40% from top) - Medium items
+    {
+        id: 6,
+        name: 'Toothpaste',
+        image: '/images/products/toothpaste.png',
+        containsMicroplastic: true,
+        collected: false,
+        scale: 1.3,
+        position: { position: 'absolute', top: '14%', left: '55%' }
+    },
+    {
+        id: 1,
+        name: 'Sponges',
+        image: '/images/products/sponges.png',
+        containsMicroplastic: true,
+        collected: false,
+        scale: 1.8,
+        position: { position: 'absolute', top: '27%', left: '80%' }
+    },
+    {
+        id: 2,
+        name: 'Cola',
+        image: '/images/products/cola.png',
+        containsMicroplastic: true,
+        collected: false,
+        scale: 1.7,
+        position: { position: 'absolute', top: '29%', left: '42%' }
+    },
+    {
+        id: 8,
+        name: 'Chips',
+        image: '/images/products/chips.png',
+        containsMicroplastic: true,
+        collected: false,
+        scale: 1.8,
+        position: { position: 'absolute', top: '25%', left: '15%' }
+    },
+    {
+        id: 13,
+        name: 'Milk',
+        image: '/images/products/milk.png',
+        containsMicroplastic: false,
+        collected: false,
+        scale: 1.7,
+        position: { position: 'absolute', top: '26%', left: '28%' }
+    },
+    {
+        id: 14,
+        name: 'Soda Can',
+        image: '/images/products/soda.png',
+        containsMicroplastic: false,
+        collected: false,
+        scale: 1.0,
+        position: { position: 'absolute', top: '30%', left: '66%' }
+    },
+    {
+        id: 12,
+        name: 'Eggs',
+        image: '/images/products/eggs.png',
+        containsMicroplastic: false,
+        collected: false,
+        scale: 2,
+        position: { position: 'absolute', top: '49%', left: '60%' }
+    },
+
+    // THIRD SHELF (55% from top) - Larger items
+    {
+        id: 11,
+        name: 'Oil',
+        image: '/images/products/oil.png',
+        containsMicroplastic: false,
+        collected: false,
+        scale: 1.8,
+        position: { position: 'absolute', top: '25%', left: '22%' }
+    },
+    {
+        id: 18,
+        name: 'Toilet paper',
+        image: '/images/products/paper.png',
+        containsMicroplastic: false,
+        collected: false,
+        scale: 1.8,
+        position: { position: 'absolute', top: '10%', left: '77%' }
+    },
+    {
+        id: 19,
+        name: 'Newspaper',
+        image: '/images/products/newspaper.png',
+        containsMicroplastic: false,
+        collected: false,
+        scale: 3,
+        position: { position: 'absolute', top: '48%', left: '20%' }
+    },
+    {
+        id: 15,
+        name: 'Socks',
+        image: '/images/products/socks.png',
+        containsMicroplastic: false,
+        collected: false,
+        scale: 1.5,
+        position: { position: 'absolute', top: '65%', left: '60%' }
+    },
+
+    // BOTTOM SHELF (70% from top) - Largest items
+    {
+        id: 3,
+        name: 'Shoes',
+        image: '/images/products/shoes.png',
+        containsMicroplastic: true,
+        collected: false,
+        scale: 1.8,
+        position: { position: 'absolute', top: '65%', left: '18%' }
     },
     {
         id: 10,
@@ -152,9 +249,9 @@ const products = ref([
         image: '/images/products/shorts.png',
         containsMicroplastic: true,
         collected: false,
-        scale: 1.4, // 40% bigger
-        position: { position: 'absolute', top: '70%', left: '30%' }
-    },
+        scale: 1.9,
+        position: { position: 'absolute', top: '65%', left: '35%' }
+    }
 ])
 
 // Computed properties
@@ -320,7 +417,10 @@ onUnmounted(() => {
 
 .shelf-container {
     position: relative;
-    height: 100%;
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    aspect-ratio: 4 / 3;
 }
 
 .shelf-background {
@@ -334,6 +434,10 @@ onUnmounted(() => {
     transition: transform 0.2s ease;
     z-index: 5;
     user-select: none;
+    width: 8%;
+    /* Base size relative to shelf width */
+    height: auto;
+    aspect-ratio: 1;
 }
 
 .product:hover:not(.collected):not(.dragging) {
@@ -341,7 +445,7 @@ onUnmounted(() => {
 }
 
 .product.dragging {
-    opacity: 0.3;
+    opacity: 0;
     cursor: grabbing;
 }
 
@@ -351,27 +455,23 @@ onUnmounted(() => {
 }
 
 .product img {
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0.2vw 0.2vw 0.4vw rgba(0, 0, 0, 0.3));
     pointer-events: none;
 }
 
 .drag-ghost {
     position: fixed;
     width: 8vw;
-    /* Responsive size based on viewport */
     height: 8vw;
     max-width: 80px;
-    /* Limit maximum size */
     max-height: 80px;
-    min-width: 40px;
-    /* Limit minimum size */
-    min-height: 40px;
+    min-width: 60px;
+    min-height: 60px;
     pointer-events: none;
     z-index: 1000;
-    transform: scale(1.2);
     opacity: 0.9;
     aspect-ratio: 1;
 }
@@ -385,18 +485,13 @@ onUnmounted(() => {
 
 .basket-container {
     position: absolute;
-    width: 25vw;
-    /* Responsive width */
-    height: 25vw;
-    /* Maintain aspect ratio */
+    width: 19vw;
+    height: 19vw;
     max-width: 300px;
-    /* Limit maximum size */
     max-height: 300px;
     min-width: 200px;
-    /* Limit minimum size */
     min-height: 200px;
     right: min(450px, 30vw);
-    /* Responsive positioning */
     bottom: min(150px, 10vw);
     rotate: 10deg;
     transition: transform 0.2s ease;
@@ -424,7 +519,6 @@ onUnmounted(() => {
 
 .basket-item {
     width: 20%;
-    /* Base size relative to basket */
     height: 20%;
     position: absolute;
     aspect-ratio: 1;
@@ -444,30 +538,9 @@ onUnmounted(() => {
     transform: translateX(-50%);
     text-align: center;
     box-sizing: border-box;
-    font-size: 32px;
-    font-weight: bold;
+    font-size: 30px;
     color: #2c3e50;
     margin-bottom: 15px;
-}
-
-.detective-note {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 100%;
-}
-
-.detective-note p {
-    margin: 0 0 10px 0;
-    font-size: 14px;
-    line-height: 1.4;
-    color: #333;
-}
-
-.detective-note p:last-child {
-    margin-bottom: 0;
 }
 
 /* Bounce animation for wrong answers */

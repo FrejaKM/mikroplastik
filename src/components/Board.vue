@@ -33,23 +33,23 @@ const router = useRouter()
 
 const boardItems = ref([
     {
-        id: 'mistænkte',
-        title: 'De mistænkte',
-        category: 'suspects',
-        top: '30%',
-        left: '45%',
-        rotation: -1,
-        route: '/suspects',
-        image: '/images/post-it-yellow.png'
-    },
-    {
         id: 'sporene',
         title: 'Sporene',
         category: 'clues',
+        top: '30%',
+        left: '45%',
+        rotation: -1,
+        route: '/clues',
+        image: '/images/post-it-yellow.png'
+    },
+    {
+        id: 'suspects',
+        title: 'De mistænkte',
+        category: 'suspects',
         top: '55%',
         left: '65%',
         rotation: 2,
-        route: '/clues',
+        route: '/suspects',
         image: '/images/post-it-green.png'
     },
     {
