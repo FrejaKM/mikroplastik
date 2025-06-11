@@ -1,8 +1,8 @@
 <template>
     <Base postItUrl="/images/post-it-sand.png" title="Sporene"
-        description="En essentiel del af efterforskningen finder sted i supermarkedet. Her gemmer nogle af de  vigtigste spor i mikroplast mysteriet sig på hylderne – uden at nogen lægger mærke til dem."
+        description="En essentiel del af efterforskningen finder sted i supermarkedet. Her gemmer nogle af de vigtigste spor i mikroplast mysteriet sig på hylderne – uden at nogen lægger mærke til dem."
         instructions="Træk produkter, der er kendt for at indeholde mikroplast eller blive til mikroplast, når de nedbrydes, ned i kurven"
-        :completed="gameCompleted" @continue="continueToNext">
+        levelId="sporene" :completed="gameCompleted" @continue="continueToNext" @restart="restartLevel">
 
     <div class="game-container">
         <!-- Shelf with products -->
@@ -360,6 +360,7 @@ const handleDrop = () => {
             basketPosition: generateRandomBasketPosition(collectedItems.value.length)
         }
         collectedItems.value.push(productWithBasketPosition)
+        saveProgress() // Save progress after successful collection
         console.log('Correct!', product.name)
     } else {
         // Wrong! Product should bounce back
@@ -382,11 +383,61 @@ const animateProductReturn = (product) => {
     }, 100)
 }
 
+// Progress saving and loading
+const saveProgress = () => {
+    const progressData = {
+        collectedItems: collectedItems.value,
+        collectedProducts: products.value
+            .filter(p => p.collected)
+            .map(p => p.id)
+    }
+    localStorage.setItem('levelProgress_sporene', JSON.stringify(progressData))
+}
+
+const loadProgress = () => {
+    const saved = localStorage.getItem('levelProgress_sporene')
+    if (saved) {
+        const savedData = JSON.parse(saved)
+        collectedItems.value = savedData.collectedItems || []
+
+        // Mark collected products
+        savedData.collectedProducts?.forEach(productId => {
+            const product = products.value.find(p => p.id === productId)
+            if (product) {
+                product.collected = true
+            }
+        })
+    }
+}
+
+// Level management functions
+const restartLevel = () => {
+    // Reset game state
+    collectedItems.value = []
+    products.value.forEach(product => {
+        product.collected = false
+    })
+
+    // Remove progress from localStorage
+    localStorage.removeItem('levelProgress_sporene')
+
+    // Remove from completed levels
+    const saved = localStorage.getItem('completedLevels')
+    if (saved) {
+        const completedLevels = JSON.parse(saved)
+        delete completedLevels['sporene']
+        localStorage.setItem('completedLevels', JSON.stringify(completedLevels))
+    }
+}
+
 const continueToNext = () => {
-    router.push('/')
+    router.push('/board')
 }
 
 onMounted(() => {
+    // Load saved progress when component mounts
+    loadProgress()
+
     // Prevent default drag behavior on images
     document.addEventListener('dragstart', (e) => {
         if (e.target.tagName === 'IMG') {

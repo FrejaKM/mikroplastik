@@ -6,13 +6,52 @@ export default {
         title: { type: String, required: true },
         description: { type: String, required: true },
         instructions: { type: String, required: true },
-        completed: { type: Boolean, default: false }
+        completed: { type: Boolean, default: false },
+        levelId: { type: String, required: true } // Add levelId prop
+    },
+    mounted() {
+        // Check if level was already completed
+        this.checkCompletionStatus()
+    },
+    methods: {
+        checkCompletionStatus() {
+            const saved = localStorage.getItem('completedLevels')
+            if (saved) {
+                const completedLevels = JSON.parse(saved)
+                if (completedLevels[this.levelId]) {
+                    this.$emit('update:completed', true)
+                }
+            }
+        },
+        handleContinue() {
+            // Mark level as completed
+            this.markLevelCompleted()
+
+            // Emit completion event for the board to listen to
+            window.dispatchEvent(new CustomEvent('levelCompleted', {
+                detail: { levelId: this.levelId }
+            }))
+
+            // Navigate back to board
+            this.$router.push('/board')
+        },
+        markLevelCompleted() {
+            const saved = localStorage.getItem('completedLevels')
+            const completedLevels = saved ? JSON.parse(saved) : {}
+            completedLevels[this.levelId] = true
+            localStorage.setItem('completedLevels', JSON.stringify(completedLevels))
+        }
     }
 };
 </script>
 
 <template>
     <div class="level-container">
+        <!-- Start Over Button for individual level -->
+        <button v-if="completed" class="level-restart-button" @click="$emit('restart')">
+            Start forfra
+        </button>
+
         <!-- Post-it note -->
         <div class="post-it" :style="{ backgroundImage: `url(${postItUrl})` }">
             <div class="headline">{{ title }}</div>
@@ -34,7 +73,7 @@ export default {
         </div>
 
         <!-- Fortsæt-knap -->
-        <button v-if="completed" class="continue-button" @click="$emit('continue')">
+        <button v-if="completed" class="continue-button" @click="handleContinue">
             Fortsæt →
         </button>
     </div>
@@ -55,7 +94,27 @@ export default {
     padding: 20px;
     box-sizing: border-box;
     overflow: hidden;
-    /* Remove the background-color since we're using the cork board image */
+}
+
+/* Level restart button */
+.level-restart-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #ff8c00;
+    color: white;
+    border: 2px solid #000;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.2s ease;
+}
+
+.level-restart-button:hover {
+    background: #ffa500;
 }
 
 /* Post-it */
@@ -127,7 +186,6 @@ export default {
 
 /* Instruktionstekst */
 .instructions {
-    background-color: none;
     background-color: #eef5ef;
     font-size: 30px;
     margin: 30px 30px;
@@ -146,13 +204,16 @@ export default {
     grid-row: 6 / 7;
     border: 2px solid black;
     border-radius: 10px;
-    background-color: #eef5ef;
+    background-color: #4CAF50;
+    color: white;
     cursor: pointer;
     font-size: 32px;
     padding: 8px 18px;
+    font-weight: bold;
 }
 
 .continue-button:hover {
     scale: 1.02;
+    background-color: #45a049;
 }
 </style>

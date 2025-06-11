@@ -2,6 +2,10 @@
     <div class="detective-board">
         <!-- Title Section -->
         <div class="cork-board-container">
+            <!-- Start Over Button -->
+            <button class="start-over-button" @click="startOver">
+                Start forfra
+            </button>
 
             <div class="board-header">
                 <h1 class="board-title">
@@ -13,16 +17,32 @@
             </div>
 
             <!-- Post-it notes -->
-            <div v-for="item in boardItems" :key="item.id" class="post-it" :class="item.category" :style="{
+            <div v-for="item in boardItems" :key="item.id" class="post-it-wrapper" :style="{
                 top: item.top,
                 left: item.left,
                 transform: `rotate(${item.rotation}deg)`,
-                backgroundImage: `url(${item.image})`,
-                backgroundSize: 'contain',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center'
-            }" @click="navigateToCategory(item)">
-                <span class="post-it-text">{{ item.title }}</span>
+            }">
+                <!-- Post-it note -->
+                <div class="post-it" :class="[item.category, { completed: completedLevels[item.id] }]" :style="{
+                    backgroundImage: `url(${item.image})`,
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center'
+                }" @click="navigateToCategory(item)">
+                    <span class="post-it-text">{{ item.title }}</span>
+                </div>
+            </div>
+
+            <!-- Completion images positioned independently -->
+            <div v-for="item in boardItems" :key="`completion-${item.id}`">
+                <div v-if="completedLevels[item.id]" class="completion-image" :style="{
+                    position: 'absolute',
+                    top: item.completionPosition?.top || item.top,
+                    left: item.completionPosition?.left || item.left,
+                    transform: `scale(${item.completionPosition?.scale || 1}) rotate(${item.completionPosition?.rotation || 0}deg)`,
+                    backgroundImage: `url(${item.completionImage || '/images/red-pin.png'})`,
+                }">
+                </div>
             </div>
 
         </div>
@@ -34,10 +54,40 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+
+// Completion tracking
+const completedLevels = ref({})
+
+// Load completion state from localStorage
+const loadCompletedLevels = () => {
+    const saved = localStorage.getItem('completedLevels')
+    if (saved) {
+        completedLevels.value = JSON.parse(saved)
+    }
+}
+
+// Save completion state to localStorage
+const saveCompletedLevels = () => {
+    localStorage.setItem('completedLevels', JSON.stringify(completedLevels.value))
+}
+
+// Mark level as completed
+const markLevelCompleted = (levelId) => {
+    completedLevels.value[levelId] = true
+    saveCompletedLevels()
+}
+
+// Start over function
+const startOver = () => {
+    if (confirm('Er du sikker på, at du vil starte forfra? Dette vil nulstille alle fremskridt.')) {
+        completedLevels.value = {}
+        localStorage.removeItem('completedLevels')
+    }
+}
 
 const boardItems = ref([
     {
@@ -48,7 +98,14 @@ const boardItems = ref([
         left: '55%',
         rotation: 5,
         route: '/clues',
-        image: '/images/post-it-sand.png'
+        image: '/images/post-it-sand.png',
+        completionImage: '/images/kvittering.png',
+        completionPosition: {
+            top: '62%',
+            left: '48%',
+            scale: 13,
+            rotation: 0
+        }
     },
     {
         id: 'escape',
@@ -58,7 +115,14 @@ const boardItems = ref([
         left: '70%',
         rotation: 0,
         route: '/escape',
-        image: '/images/post-it-white.png'
+        image: '/images/post-it-white.png',
+        completionImage: '/images/red-pin.png',
+        completionPosition: {
+            top: '51%',
+            left: '73%',
+            scale: 1.0,
+            rotation: -10
+        }
     },
     {
         id: 'ofrene',
@@ -68,17 +132,31 @@ const boardItems = ref([
         left: '13%',
         rotation: -5,
         route: '/victims',
-        image: '/images/post-it-green.png'
+        image: '/images/post-it-green.png',
+        completionImage: '/images/red-pin.png',
+        completionPosition: {
+            top: '16%',
+            left: '16%',
+            scale: 1.5,
+            rotation: 25
+        }
     },
     {
         id: 'suspects',
         title: 'De mistænkte',
-        category: 'escape',
+        category: 'suspects',
         top: '59%',
         left: '5%',
         rotation: -3,
         route: '/suspects',
-        image: '/images/post-it-yellow.png'
+        image: '/images/post-it-yellow.png',
+        completionImage: '/images/red-pin.png',
+        completionPosition: {
+            top: '55%',
+            left: '8%',
+            scale: 1.3,
+            rotation: 0
+        }
     },
     {
         id: 'skurk',
@@ -88,14 +166,30 @@ const boardItems = ref([
         left: '88%',
         rotation: 15,
         route: '/villain',
-        image: '/images/post-it-lime.png'
+        image: '/images/post-it-lime.png',
+        completionImage: '/images/red-pin.png',
+        completionPosition: {
+            top: '11%',
+            left: '91%',
+            scale: 0.8,
+            rotation: -20
+        }
     }
-    // Add more items as needed
 ])
 
 const navigateToCategory = (item) => {
     router.push(item.route)
 }
+
+// Check for completion when returning from a level
+onMounted(() => {
+    loadCompletedLevels()
+
+    // Listen for completion events
+    window.addEventListener('levelCompleted', (event) => {
+        markLevelCompleted(event.detail.levelId)
+    })
+})
 </script>
 
 <style scoped>
@@ -119,6 +213,27 @@ const navigateToCategory = (item) => {
     position: relative;
 }
 
+/* Start Over Button */
+.start-over-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #ff4444;
+    color: white;
+    border: 2px solid #000;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.2s ease;
+}
+
+.start-over-button:hover {
+    background: #ff6666;
+}
+
 /* Header Section */
 .board-header {
     position: absolute;
@@ -131,19 +246,15 @@ const navigateToCategory = (item) => {
     background-size: contain;
     background-position: center;
     width: 50vw;
-    /* Set a specific width instead of 100% */
     height: 23vh;
-    /* Set a specific height */
     justify-content: left;
     align-items: left;
-    /* Remove the scale property */
 }
 
 /* Title positioning on top of the PNG */
 .board-title {
     position: absolute;
     top: 30%;
-    /* Adjust this to position on the paper */
     left: 50%;
     transform: translateX(-50%);
     margin: 0;
@@ -153,7 +264,6 @@ const navigateToCategory = (item) => {
 .board-subtitle {
     position: absolute;
     top: 55%;
-    /* Adjust this to position below the title */
     left: 50%;
     transform: translateX(-50%);
     margin: 0;
@@ -178,23 +288,34 @@ const navigateToCategory = (item) => {
     font-family: 'Arial', sans-serif;
 }
 
-.post-it {
+/* Post-it wrapper for positioning */
+.post-it-wrapper {
     position: absolute;
     width: 120px;
     height: 120px;
+    z-index: 10;
+}
+
+.post-it {
+    width: 100%;
+    height: 100%;
     cursor: pointer;
     transition: transform 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 3;
-    /* Lower than header but still interactive */
+    z-index: 10;
+    position: relative;
 }
 
 .post-it:hover {
     transform: rotate(0deg) scale(1.02) !important;
     z-index: 10;
-    /* Bring to front on hover */
+}
+
+.post-it.completed {
+    z-index: 10;
+    /* Slightly dimmed when completed */
 }
 
 .post-it-text {
@@ -205,6 +326,35 @@ const navigateToCategory = (item) => {
     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
     z-index: 2;
     padding: 5px;
+}
+
+/* Completion image (red pin/checkmark) */
+.completion-image {
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 9;
+    animation: pinDrop 0.5s ease-out;
+    transform-origin: center center;
+}
+
+@keyframes pinDrop {
+    0% {
+        transform: translateY(-20px) scale(0.5);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateY(5px) scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
 }
 
 .logo-container {
@@ -232,6 +382,11 @@ const navigateToCategory = (item) => {
 
     .subtitle-text {
         font-size: 1.4rem;
+    }
+
+    .start-over-button {
+        font-size: 12px;
+        padding: 8px 16px;
     }
 }
 </style>
