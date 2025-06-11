@@ -48,7 +48,7 @@ export default {
 <template>
     <div class="level-container">
         <!-- Start Over Button for individual level -->
-        <button v-if="completed" class="level-restart-button" @click="$emit('restart')">
+        <button class="level-restart-button" @click="$emit('restart')">
             Start forfra
         </button>
 
@@ -73,9 +73,7 @@ export default {
         </div>
 
         <!-- Fortsæt-knap -->
-        <button v-if="completed" class="continue-button" @click="handleContinue">
-            Fortsæt →
-        </button>
+        <button v-if="completed" class="continue-button" @click="handleContinue"></button>
     </div>
 </template>
 
@@ -99,22 +97,22 @@ export default {
 /* Level restart button */
 .level-restart-button {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    background: #ff8c00;
-    color: white;
+    top: 40px;
+    left: 40px;
+    background: #ffffff;
+    color: rgb(0, 0, 0);
     border: 2px solid #000;
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-size: 12px;
+    box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer;
-    z-index: 1000;
-    transition: background-color 0.2s ease;
+    z-index: 100;
+    transition: background-color 0.5s ease;
 }
 
 .level-restart-button:hover {
-    background: #ffa500;
+    scale: 1.05;
 }
 
 /* Post-it */
@@ -173,6 +171,8 @@ export default {
 
 /* Spilindhold */
 .game-content {
+    padding: 20px;
+    padding-bottom: 0px;
     grid-column: 1 / 4;
     grid-row: 1 / 7;
     border: 2px solid #000000;
@@ -186,34 +186,45 @@ export default {
 
 /* Instruktionstekst */
 .instructions {
-    background-color: #eef5ef;
+    background: #ffffff;
+    color: rgb(0, 0, 0);
+    border: 2px solid #000;
+    box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.5);
+    padding: 20px 20px;
     font-size: 30px;
-    margin: 30px 30px;
     margin-top: 0px;
-    display: flex;
     text-align: center;
-    border: #000000 2px solid;
-    align-items: center;
-    overflow: hidden;
-    box-sizing: border-box;
 }
 
-/* Fortsæt-knap */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 .continue-button {
     grid-column: 4 / 5;
     grid-row: 6 / 7;
-    border: 2px solid black;
-    border-radius: 10px;
-    background-color: #4CAF50;
-    color: white;
+    background-image: url('/images/arrow.png');
+    background-size: 60%;
+    background-color: transparent;
+    border: none;
+    background-repeat: no-repeat;
+    background-position: center;
     cursor: pointer;
-    font-size: 32px;
-    padding: 8px 18px;
-    font-weight: bold;
+    animation: pulse 2s ease-in-out infinite;
+    opacity: 0.8;
 }
 
 .continue-button:hover {
-    scale: 1.02;
-    background-color: #45a049;
+    opacity: 1;
 }
 </style>

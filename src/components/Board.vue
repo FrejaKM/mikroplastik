@@ -194,7 +194,7 @@ onMounted(() => {
 
 <style scoped>
 .detective-board {
-    position: relative;
+    position: absolute;
     width: 100vw;
     height: 100vh;
     background: #F0F4F0;
@@ -213,15 +213,14 @@ onMounted(() => {
     position: relative;
 }
 
-/* Start Over Button */
 .start-over-button {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    background: #ff4444;
-    color: white;
+    top: 25px;
+    left: 20px;
+    background: #ffffff;
+    color: rgb(0, 0, 0);
     border: 2px solid #000;
-    border-radius: 8px;
+    box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.5);
     padding: 10px 20px;
     font-size: 14px;
     font-weight: bold;
@@ -231,7 +230,7 @@ onMounted(() => {
 }
 
 .start-over-button:hover {
-    background: #ff6666;
+    scale: 1.05;
 }
 
 /* Header Section */
@@ -291,8 +290,8 @@ onMounted(() => {
 /* Post-it wrapper for positioning */
 .post-it-wrapper {
     position: absolute;
-    width: 120px;
-    height: 120px;
+    width: 160px;
+    height: 160px;
     z-index: 10;
 }
 
@@ -322,7 +321,7 @@ onMounted(() => {
     color: #333;
     font-weight: bold;
     text-align: center;
-    font-size: 14px;
+    font-size: 1.3vw;
     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
     z-index: 2;
     padding: 5px;
