@@ -192,7 +192,7 @@ const navigateToCategory = (item) => {
 }
 
 .post-it:hover {
-    transform: rotate(0deg) !important;
+    transform: rotate(0deg) scale(1.02) !important;
     z-index: 10;
     /* Bring to front on hover */
 }

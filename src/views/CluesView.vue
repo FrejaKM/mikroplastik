@@ -63,9 +63,7 @@ const collectedItems = ref([])
 const mousePosition = ref({ x: 0, y: 0 })
 const isOverBasket = ref(false)
 
-// Products data - positioned on four shelves with realistic scaling
 const products = ref([
-    // TOP SHELF (25% from top) - Small items like makeup, gum, pods
     {
         id: 5,
         name: 'Makeup',
@@ -398,7 +396,6 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-    // Clean up event listeners
     document.removeEventListener('mousemove', updateMousePosition)
     document.removeEventListener('mouseup', endDrag)
 })

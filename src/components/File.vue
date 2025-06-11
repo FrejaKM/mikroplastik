@@ -1,11 +1,16 @@
 <template>
     <div class="file-container">
+        <img src="/images/file.png" alt="" class="file-image" />
+        <div class="file-text">
+            <h1>Du har fundet en fil, der indeholder vigtige oplysninger om efterforskningen.</h1>
+            <p>Læs den grundigt for at finde spor, der kan hjælpe dig med at opklare sagen.</p>
+        </div>
         <button>
-            <router-link to="/board">Go to Board</router-link>
+            <router-link to="/board">Start!</router-link>
         </button>
-    </div>
-    <div class="logo-container">
-        <img src="/images/logo.png" alt="Logo" class="logo" />
+        <div class="logo-container">
+            <img src="/images/logo.png" alt="Logo" class="logo" />
+        </div>
     </div>
 </template>
 
@@ -22,15 +27,46 @@
     box-sizing: border-box;
 }
 
+.file-image {
+    width: 90vw;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+
+.file-text {
+    position: absolute;
+    text-align: left;
+    left: 55%;
+    top: 10%;
+    max-width: 500px;
+    margin-bottom: 20px;
+}
+
+button {
+    position: absolute;
+    color: white;
+    border: 1px solid #000000;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    right: 10%;
+    top: 83%;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
 .logo-container {
     position: fixed;
-    bottom: 6px;
-    right: 8px;
+    bottom: 15%;
+    left: 20%;
     z-index: 1000;
 }
 
 .logo {
-    width: 15vh;
+    width: 25vh;
     height: auto;
 }
 </style>
