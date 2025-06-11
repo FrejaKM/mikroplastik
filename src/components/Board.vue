@@ -1,26 +1,34 @@
 <template>
     <div class="detective-board">
         <!-- Title Section -->
-        <div class="board-header">
-            <h1 class="board-title">
-                <span class="title-text">Mikroplast Mysteriet</span>
-            </h1>
-            <h2 class="board-subtitle">
-                <span class="subtitle-text">En detektiv historie</span>
-            </h2>
-        </div>
+        <div class="cork-board-container">
 
-        <!-- Post-it notes -->
-        <div v-for="item in boardItems" :key="item.id" class="post-it" :class="item.category" :style="{
-            top: item.top,
-            left: item.left,
-            transform: `rotate(${item.rotation}deg)`,
-            backgroundImage: `url(${item.image})`,
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center'
-        }" @click="navigateToCategory(item)">
-            <span class="post-it-text">{{ item.title }}</span>
+            <div class="board-header">
+                <h1 class="board-title">
+                    <span class="title-text">Havet under pres</span>
+                </h1>
+                <h2 class="board-subtitle">
+                    <span class="subtitle-text">Mysteriet om Mikroplasten</span>
+                </h2>
+            </div>
+
+            <!-- Post-it notes -->
+            <div v-for="item in boardItems" :key="item.id" class="post-it" :class="item.category" :style="{
+                top: item.top,
+                left: item.left,
+                transform: `rotate(${item.rotation}deg)`,
+                backgroundImage: `url(${item.image})`,
+                backgroundSize: 'contain',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center'
+            }" @click="navigateToCategory(item)">
+                <span class="post-it-text">{{ item.title }}</span>
+            </div>
+
+        </div>
+        <!-- Persistent logo in bottom left -->
+        <div class="logo-container">
+            <img src="/images/logo.png" alt="Logo" class="logo" />
         </div>
     </div>
 </template>
@@ -36,51 +44,51 @@ const boardItems = ref([
         id: 'sporene',
         title: 'Sporene',
         category: 'clues',
-        top: '30%',
-        left: '45%',
-        rotation: -1,
+        top: '32%',
+        left: '55%',
+        rotation: 5,
         route: '/clues',
-        image: '/images/post-it-yellow.png'
+        image: '/images/post-it-sand.png'
     },
     {
-        id: 'suspects',
-        title: 'De mistænkte',
-        category: 'suspects',
+        id: 'escape',
+        title: 'Flugtruten',
+        category: 'escape',
         top: '55%',
-        left: '65%',
-        rotation: 2,
-        route: '/suspects',
-        image: '/images/post-it-green.png'
+        left: '70%',
+        rotation: 0,
+        route: '/escape',
+        image: '/images/post-it-white.png'
     },
     {
         id: 'ofrene',
         title: 'Ofrene',
         category: 'victims',
         top: '20%',
-        left: '10%',
-        rotation: 5,
+        left: '13%',
+        rotation: -5,
         route: '/victims',
-        image: '/images/post-it-sand.png'
+        image: '/images/post-it-green.png'
     },
     {
-        id: 'flugtruten',
-        title: 'Flugtruten',
+        id: 'suspects',
+        title: 'De mistænkte',
         category: 'escape',
-        top: '70%',
-        left: '10%',
+        top: '59%',
+        left: '5%',
         rotation: -3,
-        route: '/escape',
-        image: '/images/post-it-lime.png'
+        route: '/suspects',
+        image: '/images/post-it-yellow.png'
     },
     {
         id: 'skurk',
         title: 'En ny skurk',
         category: 'villain',
         top: '15%',
-        left: '80%',
+        left: '88%',
         rotation: 15,
         route: '/villain',
-        image: '/images/post-it-white.png'
+        image: '/images/post-it-lime.png'
     }
     // Add more items as needed
 ])
@@ -97,54 +105,77 @@ const navigateToCategory = (item) => {
     height: 100vh;
     background: #F0F4F0;
     overflow: hidden;
-    /* cork board background */
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.cork-board-container {
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/cork-board.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
 }
 
 /* Header Section */
 .board-header {
     position: absolute;
-    top: 30px;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 5;
-}
-
-.board-title {
-    position: relative;
-    margin: 0px 0px 15px 0px;
-    transform: rotate(-1deg);
-}
-
-.board-header {
-    padding: 40px 80px;
-    background-image: url('/images/torn-paper.png');
-    background-size: 100% auto;
+    background-image: url('/images/Group 20.png');
     background-repeat: no-repeat;
+    background-size: contain;
     background-position: center;
+    width: 50vw;
+    /* Set a specific width instead of 100% */
+    height: 23vh;
+    /* Set a specific height */
+    justify-content: left;
+    align-items: left;
+    /* Remove the scale property */
+}
 
+/* Title positioning on top of the PNG */
+.board-title {
+    position: absolute;
+    top: 30%;
+    /* Adjust this to position on the paper */
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    z-index: 6;
+}
+
+.board-subtitle {
+    position: absolute;
+    top: 55%;
+    /* Adjust this to position below the title */
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    z-index: 6;
 }
 
 .title-text {
     color: #000000;
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
-    letter-spacing: 1px;
-}
-
-.board-subtitle {
-    position: relative;
+    font-size: 1.2rem;
+    line-height: 1.2;
     margin: 0;
-    padding: 12px 30px;
-    transform: rotate(1deg);
+    text-align: center;
+    font-weight: normal;
 }
 
 .subtitle-text {
-    color: #34495e;
-    font-size: 1.2rem;
-    font-weight: normal;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
-    font-style: italic;
+    color: #000000;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
 }
 
 .post-it {
@@ -156,12 +187,14 @@ const navigateToCategory = (item) => {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Remove background colors since we're using images */
+    z-index: 3;
+    /* Lower than header but still interactive */
 }
 
 .post-it:hover {
-    transform: rotate(0deg) scale(1.05) !important;
+    transform: rotate(0deg) !important;
     z-index: 10;
+    /* Bring to front on hover */
 }
 
 .post-it-text {
@@ -174,23 +207,31 @@ const navigateToCategory = (item) => {
     padding: 5px;
 }
 
+.logo-container {
+    position: fixed;
+    bottom: 6px;
+    right: 8px;
+    z-index: 1000;
+}
+
+.logo {
+    width: 15vh;
+    height: auto;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .title-text {
-        font-size: 1.8rem;
+    .board-header {
+        width: 300px;
+        height: 150px;
     }
 
-    .subtitle-text {
+    .title-text {
         font-size: 1rem;
     }
 
-    .board-title,
-    .board-subtitle {
-        padding: 15px 25px;
-    }
-
-    .board-header {
-        top: 20px;
+    .subtitle-text {
+        font-size: 1.4rem;
     }
 }
 </style>

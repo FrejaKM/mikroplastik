@@ -6,4 +6,5 @@ import Board from './components/Board.vue'
 <template>
 
   <RouterView />
+
 </template>

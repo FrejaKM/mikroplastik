@@ -19,7 +19,7 @@ export default {
         </div>
 
         <!-- Notesbog -->
-        <div class="notebook" style="background-image: url('/images/note.png')">
+        <div class="notebook" style="background-image: url('/images/bright_notebook.png')">
             <div class="info-text">{{ description }}</div>
         </div>
 
@@ -48,10 +48,14 @@ export default {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(6, 1fr);
     gap: 20px;
-    background-color: #eef5ef;
+    background-image: url('/images/cork-board.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     padding: 20px;
     box-sizing: border-box;
     overflow: hidden;
+    /* Remove the background-color since we're using the cork board image */
 }
 
 /* Post-it */
@@ -68,7 +72,6 @@ export default {
     overflow: hidden;
     min-height: 0;
     min-width: 0;
-    margin-top: 10px;
     rotate: 10deg;
 }
 
@@ -93,7 +96,6 @@ export default {
     justify-content: center;
     padding-top: 20%;
     overflow: hidden;
-    scale: 1.1;
 }
 
 .info-text {
@@ -115,6 +117,7 @@ export default {
     grid-column: 1 / 4;
     grid-row: 1 / 6;
     border: 2px solid #000000;
+    background-color: #eef5ef;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -128,6 +131,7 @@ export default {
     grid-row: 6 / 7;
     background-color: none;
     border: 2px solid black;
+    background-color: #eef5ef;
     border-radius: 10px;
     font-size: 32px;
     padding: 10px 14px;
@@ -145,8 +149,7 @@ export default {
     grid-row: 6 / 7;
     border: 2px solid black;
     border-radius: 10px;
-    background-color: none;
-    background: none;
+    background-color: #eef5ef;
     cursor: pointer;
     font-size: 32px;
     padding: 8px 18px;

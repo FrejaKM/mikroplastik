@@ -1,5 +1,5 @@
 <template>
-    <Base postItUrl="/images/post-it-green.png" title="Sporene"
+    <Base postItUrl="/images/post-it-sand.png" title="Sporene"
         description="En essentiel del af efterforskningen finder sted i supermarkedet. Her gemmer nogle af de  vigtigste spor i mikroplast mysteriet sig på hylderne – uden at nogen lægger mærke til dem."
         instructions="Træk produkter, der er kendt for at indeholde mikroplast eller blive til mikroplast, når de nedbrydes, ned i kurven"
         :completed="gameCompleted" @continue="continueToNext">
