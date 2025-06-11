@@ -26,11 +26,11 @@ export default {
         <!-- Spillets indhold -->
         <div class="game-content">
             <slot></slot>
-        </div>
 
-        <!-- Instruktioner -->
-        <div class="instructions">
-            {{ instructions }}
+            <!-- Instruktioner -->
+            <div class="instructions">
+                {{ instructions }}
+            </div>
         </div>
 
         <!-- Fortsæt-knap -->
@@ -115,11 +115,11 @@ export default {
 /* Spilindhold */
 .game-content {
     grid-column: 1 / 4;
-    grid-row: 1 / 6;
+    grid-row: 1 / 7;
     border: 2px solid #000000;
     background-color: #eef5ef;
-    border-radius: 10px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     overflow: hidden;
@@ -127,20 +127,17 @@ export default {
 
 /* Instruktionstekst */
 .instructions {
-    grid-column: 1 / 4;
-    grid-row: 6 / 7;
     background-color: none;
-    border: 2px solid black;
     background-color: #eef5ef;
-    border-radius: 10px;
-    font-size: 32px;
-    padding: 10px 14px;
+    font-size: 30px;
+    margin: 30px 30px;
+    margin-top: 0px;
     display: flex;
+    text-align: center;
+    border: #000000 2px solid;
     align-items: center;
     overflow: hidden;
     box-sizing: border-box;
-    min-height: 0;
-    min-width: 0;
 }
 
 /* Fortsæt-knap */
