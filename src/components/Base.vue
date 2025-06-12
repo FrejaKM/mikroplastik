@@ -64,7 +64,9 @@ export default {
 
         <!-- Spillets indhold -->
         <div class="game-content">
-            <slot></slot>
+            <div class="game-main">
+                <slot></slot>
+            </div>
 
             <!-- Instruktioner -->
             <div class="instructions">
@@ -101,10 +103,9 @@ export default {
     left: 40px;
     background: #ffffff;
     color: rgb(0, 0, 0);
-    border: 2px solid #000;
     box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.5);
     padding: 10px 20px;
-    font-size: 14px;
+    font-size: 1vw;
     font-weight: bold;
     cursor: pointer;
     z-index: 100;
@@ -175,13 +176,20 @@ export default {
     padding-bottom: 0px;
     grid-column: 1 / 4;
     grid-row: 1 / 7;
-    border: 2px solid #000000;
     background-color: #eef5ef;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     overflow: hidden;
+}
+
+.game-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 /* Instruktionstekst */
@@ -189,11 +197,12 @@ export default {
     background: #ffffff;
     color: rgb(0, 0, 0);
     border: 2px solid #000;
-    box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.5);
     padding: 20px 20px;
     font-size: 30px;
-    margin-top: 0px;
     text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 @keyframes pulse {

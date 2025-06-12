@@ -48,7 +48,7 @@
         </div>
         <!-- Persistent logo in bottom left -->
         <div class="logo-container">
-            <img src="/images/logo_hvid.png" alt="Logo" class="logo" />
+            <img src="/images/logo_white.png" alt="Logo" class="logo" />
         </div>
     </div>
 </template>
@@ -81,7 +81,8 @@ const markLevelCompleted = (levelId) => {
     saveCompletedLevels()
 }
 
-// Start over function - now clears ALL progress
+
+// Start over function - now clears ALL progress and navigates to home
 const startOver = () => {
     if (confirm('Er du sikker på, at du vil starte forfra? Dette vil nulstille alle fremskridt.')) {
         // Clear completed levels
@@ -103,6 +104,9 @@ const startOver = () => {
         })
 
         console.log('All progress cleared')
+
+        // Navigate to home page
+        router.push('/')
     }
 }
 
@@ -111,14 +115,14 @@ const boardItems = ref([
         id: 'sporene',
         title: 'Sporene',
         category: 'clues',
-        top: '32%',
+        top: '30%',
         left: '55%',
         rotation: 5,
         route: '/clues',
         image: '/images/post-it-sand.png',
         completionImage: '/images/kvittering.png',
         completionPosition: {
-            top: '62%',
+            top: '60%',
             left: '48%',
             scale: 13,
             rotation: 0
@@ -129,10 +133,10 @@ const boardItems = ref([
         title: 'Flugtruten',
         category: 'escape',
         top: '55%',
-        left: '70%',
+        left: '65%',
         rotation: 0,
         route: '/escape',
-        image: '/images/post-it-white.png',
+        image: '/images/post-it-pink.png',
         completionImage: '/images/red-pin.png',
         completionPosition: {
             top: '51%',
@@ -145,29 +149,29 @@ const boardItems = ref([
         id: 'ofrene',
         title: 'Ofrene',
         category: 'victims',
-        top: '20%',
+        top: '15%',
         left: '13%',
         rotation: -5,
         route: '/victims',
         image: '/images/post-it-green.png',
-        completionImage: '/images/red-pin.png',
+        completionImage: '/images/victims.png',
         completionPosition: {
-            top: '16%',
-            left: '16%',
-            scale: 1.5,
-            rotation: 25
+            top: '38%',
+            left: '18%',
+            scale: 12,
+            rotation: 0
         }
     },
     {
-        id: 'suspects',
-        title: 'De mistænkte',
-        category: 'suspects',
+        id: 'villain',
+        title: 'Skurken',
+        category: 'villain',
         top: '59%',
         left: '5%',
         rotation: -3,
-        route: '/suspects',
+        route: '/villain',
         image: '/images/post-it-yellow.png',
-        completionImage: '/images/red-pin.png',
+        completionImage: '/images/shelf.png',
         completionPosition: {
             top: '55%',
             left: '8%',
@@ -176,20 +180,20 @@ const boardItems = ref([
         }
     },
     {
-        id: 'skurk',
-        title: 'En ny skurk',
-        category: 'villain',
-        top: '15%',
-        left: '88%',
+        id: 'suspects',
+        title: 'De mistænkte',
+        category: 'suspects',
+        top: '10%',
+        left: '86%',
         rotation: 15,
-        route: '/villain',
+        route: '/suspects',
         image: '/images/post-it-lime.png',
-        completionImage: '/images/red-pin.png',
+        completionImage: '/images/wanted_poster.png',
         completionPosition: {
-            top: '11%',
-            left: '91%',
-            scale: 0.8,
-            rotation: -20
+            top: '40%',
+            left: '85%',
+            scale: 10,
+            rotation: 0
         }
     }
 ])
@@ -216,11 +220,12 @@ onMounted(() => {
     height: 100vh;
     background: #F0F4F0;
     overflow: hidden;
-    padding: 30px;
+    padding: 20px;
     box-sizing: border-box;
 }
 
 .cork-board-container {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
     width: 100%;
     height: 100%;
     background-image: url('/images/cork-board.png');
@@ -232,12 +237,12 @@ onMounted(() => {
 
 .start-over-button {
     position: absolute;
-    top: 25px;
+    top: 20px;
     left: 20px;
     background: #ffffff;
     color: rgb(0, 0, 0);
     border: 2px solid #000;
-    box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.4);
     padding: 10px 20px;
     font-size: 1vw;
     font-weight: bold;
@@ -253,7 +258,7 @@ onMounted(() => {
 /* Header Section */
 .board-header {
     position: absolute;
-    top: 20px;
+    top: 15px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 5;
@@ -331,7 +336,6 @@ onMounted(() => {
 
 .post-it.completed {
     z-index: 10;
-    /* Slightly dimmed when completed */
 }
 
 .post-it-text {
@@ -352,31 +356,14 @@ onMounted(() => {
     background-repeat: no-repeat;
     background-position: center;
     z-index: 9;
-    animation: pinDrop 0.5s ease-out;
     transform-origin: center center;
 }
 
-@keyframes pinDrop {
-    0% {
-        transform: translateY(-20px) scale(0.5);
-        opacity: 0;
-    }
-
-    50% {
-        transform: translateY(5px) scale(1.1);
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
-}
 
 .logo-container {
     position: fixed;
-    bottom: 50px;
-    right: 57px;
+    bottom: 35px;
+    right: 40px;
     z-index: 1000;
 }
 

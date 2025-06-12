@@ -9,7 +9,7 @@
             <router-link to="/board">Start!</router-link>
         </button>
         <div class="logo-container">
-            <img src="/images/logo.png" alt="Logo" class="logo" />
+            <img src="/images/logo_black.png" alt="Logo" class="logo" />
         </div>
     </div>
 </template>
@@ -58,15 +58,16 @@ button {
     cursor: pointer;
 }
 
+
 .logo-container {
-    position: fixed;
-    bottom: 15%;
-    left: 20%;
+    position: relative;
+    bottom: 100px;
+    right: 350px;
     z-index: 1000;
 }
 
 .logo {
-    width: 25vh;
+    width: 15vw;
     height: auto;
 }
 </style>
