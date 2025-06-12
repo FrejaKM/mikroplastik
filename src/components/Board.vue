@@ -48,7 +48,7 @@
         </div>
         <!-- Persistent logo in bottom left -->
         <div class="logo-container">
-            <img src="/images/logo.png" alt="Logo" class="logo" />
+            <img src="/images/logo_hvid.png" alt="Logo" class="logo" />
         </div>
     </div>
 </template>
@@ -81,11 +81,28 @@ const markLevelCompleted = (levelId) => {
     saveCompletedLevels()
 }
 
-// Start over function
+// Start over function - now clears ALL progress
 const startOver = () => {
     if (confirm('Er du sikker på, at du vil starte forfra? Dette vil nulstille alle fremskridt.')) {
+        // Clear completed levels
         completedLevels.value = {}
         localStorage.removeItem('completedLevels')
+
+        // Clear individual level progress for all levels
+        const levelProgressKeys = [
+            'levelProgress_sporene',
+            'levelProgress_escape',
+            'levelProgress_ofrene',
+            'levelProgress_suspects',
+            'levelProgress_skurk'
+            // Add more level progress keys as you create more levels
+        ]
+
+        levelProgressKeys.forEach(key => {
+            localStorage.removeItem(key)
+        })
+
+        console.log('All progress cleared')
     }
 }
 
@@ -222,7 +239,7 @@ onMounted(() => {
     border: 2px solid #000;
     box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.5);
     padding: 10px 20px;
-    font-size: 14px;
+    font-size: 1vw;
     font-weight: bold;
     cursor: pointer;
     z-index: 1000;
@@ -290,8 +307,8 @@ onMounted(() => {
 /* Post-it wrapper for positioning */
 .post-it-wrapper {
     position: absolute;
-    width: 160px;
-    height: 160px;
+    width: 10vw;
+    height: 10vw;
     z-index: 10;
 }
 
@@ -358,13 +375,13 @@ onMounted(() => {
 
 .logo-container {
     position: fixed;
-    bottom: 6px;
-    right: 8px;
+    bottom: 50px;
+    right: 57px;
     z-index: 1000;
 }
 
 .logo {
-    width: 15vh;
+    width: 15vw;
     height: auto;
 }
 
@@ -381,11 +398,6 @@ onMounted(() => {
 
     .subtitle-text {
         font-size: 1.4rem;
-    }
-
-    .start-over-button {
-        font-size: 12px;
-        padding: 8px 16px;
     }
 }
 </style>
