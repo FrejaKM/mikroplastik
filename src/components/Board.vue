@@ -183,16 +183,16 @@ const boardItems = ref([
         id: 'suspects',
         title: 'De mistænkte',
         category: 'suspects',
-        top: '10%',
+        top: '9%',
         left: '86%',
         rotation: 15,
         route: '/suspects',
         image: '/images/post-it-lime.png',
-        completionImage: '/images/wanted_poster.png',
+        completionImage: '/images/poster.png',
         completionPosition: {
-            top: '40%',
-            left: '85%',
-            scale: 10,
+            top: '41%',
+            left: '84%',
+            scale: 9,
             rotation: 0
         }
     }

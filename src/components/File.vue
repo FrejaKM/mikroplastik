@@ -2,8 +2,14 @@
     <div class="file-container">
         <img src="/images/file.png" alt="" class="file-image" />
         <div class="file-text">
-            <h1>Du har fundet en fil, der indeholder vigtige oplysninger om efterforskningen.</h1>
-            <p>Læs den grundigt for at finde spor, der kan hjælpe dig med at opklare sagen.</p>
+            <p class="header">EFTERFORSKNING <br> MILJØSAG #001: MIKROPLAST</p>
+            <p>Et mystisk fund er gjort på en fiskeauktion i Hirtshals: En fiskemave er blevet undersøgt, og inde i den
+                fandt man noget, der hverken hører til i havet eller i dets beboere – plastik! <br> <br> Hvordan er det
+                havnet der? Og hvad betyder det for havets dyr og os mennesker?
+                <br> <br> Det er tid til at opklare sagen, og som
+                detektiv er det nu din opgave at følge sporene og opklare sagen
+                om, hvordan mikroplasten sneg sig ud i havet.
+            </p>
         </div>
         <button>
             <router-link to="/board">Start!</router-link>
@@ -16,6 +22,7 @@
 
 <style scoped>
 .file-container {
+    font-family: 'Courier Prime', monospace;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,12 +42,19 @@
 
 
 .file-text {
+    font-size: 24px;
     position: absolute;
     text-align: left;
     left: 55%;
     top: 10%;
     max-width: 500px;
     margin-bottom: 20px;
+}
+
+.header {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 button {
