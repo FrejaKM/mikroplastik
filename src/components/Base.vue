@@ -59,7 +59,7 @@ export default {
 
         <!-- Notesbog -->
         <div class="notebook" style="background-image: url('/images/bright_notebook.png')">
-            <div class="info-text">{{ description }}</div>
+            <div class="description" v-html="description"></div>
         </div>
 
         <!-- Spillets indhold -->
@@ -156,7 +156,7 @@ export default {
     overflow: hidden;
 }
 
-.info-text {
+.description {
     width: 80%;
     height: 90%;
     padding: 3vh;

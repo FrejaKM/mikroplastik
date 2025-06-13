@@ -1,9 +1,10 @@
 <template>
   <Base postItUrl="/images/post-it-lime.png" title="De mistænkte"
-    description="Når mikroplasten slipper ud i havet, er det oftest havets dyr, det går ud over. Selvom mikroplast helt sikkert ikke hører til i havet, så har det vist sig, at det heldigvis ikke påvirker fødekæden, som man ellers havde frygtet. Vi mennesker skal altså ikke være bange for at komme til at få mikroplast med indenbords, når vi spiser fisk."
-    instructions="Test Instruktioner" levelId="suspects" :completed="true" @continue="handleContinue">
-  <div style="background: red; height: 100px; width: 100%; text-align: center; color: white;">
-    TEST SPILINDHOLD
+    description="Mikroplast er efterhånden at finde alle vegne på vores planet.<br> <br>Et stykke plastik skal være mindre end 5 mm for at man kalder det mikroplastik.<br> <br>Lad os få taget billeder af mikroplasten, så vi kan efterlyse dem!"
+    instructions="Træk de stykker plastik, der er mindre end 5 mm, ind til fotografering." levelId="suspects"
+    :completed="true" @continue="handleContinue">
+  <div>
+    <img src="/images/suspects_game.png" alt="" class="suspects_game" />
   </div>
   </Base>
 </template>
@@ -33,3 +34,12 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.suspects_game {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  scale: 1;
+}
+</style>

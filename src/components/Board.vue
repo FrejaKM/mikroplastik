@@ -129,7 +129,7 @@ const boardItems = ref([
         }
     },
     {
-        id: 'escape',
+        id: 'flugtruten',
         title: 'Flugtruten',
         category: 'escape',
         top: '55%',
@@ -137,12 +137,12 @@ const boardItems = ref([
         rotation: 0,
         route: '/escape',
         image: '/images/post-it-pink.png',
-        completionImage: '/images/red-pin.png',
+        completionImage: '/images/map.png',
         completionPosition: {
-            top: '51%',
-            left: '73%',
-            scale: 1.0,
-            rotation: -10
+            top: '72%',
+            left: '72%',
+            scale: 13,
+            rotation: 0
         }
     },
     {
@@ -183,16 +183,16 @@ const boardItems = ref([
         id: 'suspects',
         title: 'De mistænkte',
         category: 'suspects',
-        top: '9%',
+        top: '7%',
         left: '86%',
         rotation: 15,
         route: '/suspects',
         image: '/images/post-it-lime.png',
         completionImage: '/images/poster.png',
         completionPosition: {
-            top: '41%',
-            left: '84%',
-            scale: 9,
+            top: '39%',
+            left: '85%',
+            scale: 8.5,
             rotation: 0
         }
     }

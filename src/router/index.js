@@ -42,6 +42,14 @@ const router = createRouter({
       component: () => import('../views/VillainView.vue'),
     },
     {
+      path: '/escape',
+      name: 'escape',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/EscapeView.vue'),
+    },
+    {
       path: '/board',
       name: 'board',
       // route level code-splitting
