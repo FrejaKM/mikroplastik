@@ -123,9 +123,9 @@ export default {
 
 .headline {
     color: #000000;
+    font-family: 'Coming Soon', cursive;
     font-size: 2.2vw;
-    font-family: 'Courier Prime', monospace;
-    font-weight: 400;
+    font-weight: 300;
     text-align: center;
     width: 65%;
 }
@@ -149,10 +149,10 @@ export default {
     height: 90%;
     padding: 15px;
     padding-top: 30px;
-    font-size: 1.1vw;
+    font-size: 1.5vw;
+    font-family: 'Coming Soon', cursive;
     text-align: left;
-    font-family: 'Courier Prime', monospace;
-    font-weight: 400;
+    font-weight: 300;
     color: black;
     box-sizing: border-box;
     line-height: 1.3;
@@ -191,6 +191,8 @@ export default {
     box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.3);
     padding: 10px 15px;
     font-size: 20px;
+    font-family: 'ITP', sans-serif;
+    font-weight: 300;
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -201,6 +203,8 @@ export default {
 
 /* Level restart button (top right) */
 .level-restart-button {
+    font-family: 'ITP', sans-serif;
+    font-weight: 300;
     background: #ffffff;
     color: rgb(0, 0, 0);
     border: 2px solid #5b5b5b;
@@ -227,6 +231,9 @@ export default {
 
 /* Instruktionstekst */
 .instructions {
+    font-family: 'ITP', sans-serif;
+    line-height: 1.2;
+    font-weight: 300;
     background: #ffffff;
     color: rgb(0, 0, 0);
     border: 2px solid #000;

@@ -9,7 +9,7 @@
 
             <div class="board-header">
                 <h1 class="board-title">
-                    <span class="title-text">Mysteriet om Mikroplasten</span>
+                    <span class="title-text">Mysteriet om mikroplasten</span>
                 </h1>
             </div>
 
@@ -109,40 +109,6 @@ const startOver = () => {
 
 const boardItems = ref([
     {
-        id: 'sporene',
-        title: 'Sporene',
-        category: 'clues',
-        top: '30%',
-        left: '55%',
-        rotation: 5,
-        route: '/clues',
-        image: '/images/post-it-sand.png',
-        completionImage: '/images/kvittering.png',
-        completionPosition: {
-            top: '60%',
-            left: '48%',
-            scale: 14,
-            rotation: 0
-        }
-    },
-    {
-        id: 'flugtruten',
-        title: 'Flugtruten',
-        category: 'escape',
-        top: '58%',
-        left: '65%',
-        rotation: 0,
-        route: '/escape',
-        image: '/images/post-it-pink.png',
-        completionImage: '/images/map.png',
-        completionPosition: {
-            top: '72%',
-            left: '72%',
-            scale: 14,
-            rotation: 0
-        }
-    },
-    {
         id: 'ofrene',
         title: 'Ofrene',
         category: 'victims',
@@ -160,19 +126,19 @@ const boardItems = ref([
         }
     },
     {
-        id: 'villain',
-        title: 'Skurken',
-        category: 'villain',
-        top: '59%',
-        left: '5%',
-        rotation: -3,
-        route: '/villain',
-        image: '/images/post-it-yellow.png',
-        completionImage: '/images/shelf.png',
+        id: 'sporene',
+        title: 'Sporene',
+        category: 'clues',
+        top: '25%',
+        left: '56%',
+        rotation: 5,
+        route: '/clues',
+        image: '/images/post-it-sand.png',
+        completionImage: '/images/kvittering.png',
         completionPosition: {
-            top: '55%',
-            left: '8%',
-            scale: 2,
+            top: '57%',
+            left: '48%',
+            scale: 15,
             rotation: 0
         }
     },
@@ -192,7 +158,41 @@ const boardItems = ref([
             scale: 9,
             rotation: 0
         }
-    }
+    },
+    {
+        id: 'flugtruten',
+        title: 'Flugtruten',
+        category: 'escape',
+        top: '55%',
+        left: '5%',
+        rotation: 0,
+        route: '/escape',
+        image: '/images/post-it-yellow.png',
+        completionImage: '/images/map.png',
+        completionPosition: {
+            top: '68%',
+            left: '16%',
+            scale: 18,
+            rotation: 0
+        }
+    },
+    {
+        id: 'villain',
+        title: 'Dommen',
+        category: 'villain',
+        top: '58%',
+        left: '65%',
+        rotation: -3,
+        route: '/villain',
+        image: '/images/post-it-pink.png',
+        completionImage: '/images/shelf.png',
+        completionPosition: {
+            top: '55%',
+            left: '8%',
+            scale: 2,
+            rotation: 0
+        }
+    },
 ])
 
 const navigateToCategory = (item) => {
@@ -233,6 +233,8 @@ onMounted(() => {
 }
 
 .start-over-button {
+    font-family: 'ITP', sans-serif;
+    font-weight: 300;
     position: absolute;
     top: 20px;
     left: 20px;
@@ -241,7 +243,7 @@ onMounted(() => {
     border: 2px solid #5b5b5b;
     box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.3);
     padding: 10px 20px;
-    font-size: 1vw;
+    font-size: 20px;
     cursor: pointer;
     z-index: 1000;
     transition: background-color 0.2s ease;
@@ -254,7 +256,7 @@ onMounted(() => {
 /* Header Section */
 .board-header {
     position: absolute;
-    top: 15px;
+    top: 9px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 5;
@@ -263,7 +265,7 @@ onMounted(() => {
     background-size: contain;
     background-position: center;
     width: 50vw;
-    height: 23vh;
+    height: 20vh;
     justify-content: center;
     align-items: center;
 }
@@ -271,7 +273,7 @@ onMounted(() => {
 .board-title {
     position: absolute;
     top: 35%;
-    left: 15%;
+    left: 22%;
     margin: 0;
     z-index: 6;
 }
@@ -280,8 +282,8 @@ onMounted(() => {
     color: #000000;
     font-size: 2.2rem;
     line-height: 1.2;
-    font-family: 'Courier Prime', monospace;
     font-weight: 400;
+    font-family: 'Coming Soon', cursive;
     text-align: center;
     font-weight: normal;
 }
@@ -319,9 +321,10 @@ onMounted(() => {
 
 .post-it-text {
     color: #000000;
-    font-family: 'Courier Prime', monospace;
     font-weight: 400;
     text-align: center;
+    font-family: 'Coming Soon', cursive;
+
     font-size: 1.4vw;
     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
     z-index: 2;

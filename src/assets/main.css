@@ -1,5 +1,79 @@
 @import './base.css';
 
+@font-face {
+  font-family: 'ITP';
+  src: url('/assets/fonts/ITPLight.TTF') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ITP';
+  src: url('/assets/fonts/ITPLightItalic.TTF') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'ITP';
+  src: url('/assets/fonts/ITPRegular.TTF') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ITP';
+  src: url('/assets/fonts/ITPRegularItalic.TTF') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'ITP';
+  src: url('/assets/fonts/ITPMedium.TTF') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ITP';
+  src: url('/assets/fonts/ITPMediumItalic.TTF') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'ITP';
+  src: url('/assets/fonts/ITPBold.TTF') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ITP';
+  src: url('/assets/fonts/ITPBoldItalic.TTF') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+.shadows-into-light-regular {
+  font-family: 'Shadows Into Light', cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.coming-soon-regular {
+  font-family: 'Coming Soon', cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.handlee-regular {
+  font-family: 'Handlee', cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .courier-prime-regular {
   font-family: 'Courier Prime', monospace;
   font-weight: 400;
