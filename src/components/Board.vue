@@ -4,7 +4,7 @@
         <div class="cork-board-container">
             <!-- Start Over Button -->
             <button class="start-over-button" @click="startOver">
-                Start efterfirskningen forfra
+                Nulstil tavlen
             </button>
 
             <div class="board-header">
@@ -20,7 +20,14 @@
                 transform: `rotate(${item.rotation}deg)`,
             }">
                 <!-- Post-it note -->
-                <div class="post-it" :class="[item.category, { completed: completedLevels[item.id] }]" :style="{
+                <div class="post-it" :class="[
+                    item.category,
+                    {
+                        completed: completedLevels[item.id],
+                        available: isLevelAvailable(item.id),
+                        locked: !isLevelAvailable(item.id) && !completedLevels[item.id]
+                    }
+                ]" :style="{
                     backgroundImage: `url(${item.image})`,
                     backgroundSize: 'contain',
                     backgroundRepeat: 'no-repeat',
@@ -32,13 +39,18 @@
 
             <!-- Completion images positioned independently -->
             <div v-for="item in boardItems" :key="`completion-${item.id}`">
-                <div v-if="completedLevels[item.id]" class="completion-image" :style="{
+                <div v-if="completedLevels[item.id]" :data-completion-id="item.id" :class="[
+                    'completion-image',
+                    { 'bounce-in': newlyCompletedLevels.has(item.id) }
+                ]" :style="{
                     position: 'absolute',
                     top: item.completionPosition?.top || item.top,
                     left: item.completionPosition?.left || item.left,
-                    transform: `scale(${item.completionPosition?.scale || 1}) rotate(${item.completionPosition?.rotation || 0}deg)`,
+                    '--final-scale': item.completionPosition?.scale || 1,
+                    '--final-rotation': (item.completionPosition?.rotation || 0) + 'deg',
+                    transform: getCompletionTransform(item),
                     backgroundImage: `url(${item.completionImage || '/images/red-pin.png'})`,
-                }">
+                }" @animationend="onAnimationEnd(item.id)">
                 </div>
             </div>
 
@@ -51,13 +63,38 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted, computed, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
 const router = useRouter()
+const route = useRoute()
 
 // Completion tracking
 const completedLevels = ref({})
+const newlyCompletedLevels = ref(new Set())
+const lastBoardVisit = ref(Date.now())
+
+// Define the order of levels
+const levelOrder = ['sporene', 'suspects', 'flugtruten', 'ofrene', 'villain']
+
+// Computed property to determine which level should be available next
+const nextAvailableLevel = computed(() => {
+    for (let i = 0; i < levelOrder.length; i++) {
+        if (!completedLevels.value[levelOrder[i]]) {
+            return levelOrder[i]
+        }
+    }
+    return null // All levels completed
+})
+
+// Function to check if a level is available
+const isLevelAvailable = (levelId) => {
+    // First level (suspects) is always available
+    if (levelId === 'sporene') return true
+
+    // Check if this is the next level in sequence
+    return levelId === nextAvailableLevel.value
+}
 
 // Load completion state from localStorage
 const loadCompletedLevels = () => {
@@ -65,6 +102,29 @@ const loadCompletedLevels = () => {
     if (saved) {
         completedLevels.value = JSON.parse(saved)
     }
+}
+
+// Check for newly completed levels since last board visit
+const checkForNewCompletions = () => {
+    const lastVisit = localStorage.getItem('lastBoardVisit')
+    const lastVisitTime = lastVisit ? parseInt(lastVisit) : 0
+
+    // Check each level's completion timestamp
+    const saved = localStorage.getItem('completedLevels')
+    if (saved) {
+        const completedData = JSON.parse(saved)
+
+        // Find levels completed since last visit
+        Object.keys(completedData).forEach(levelId => {
+            const completionTime = localStorage.getItem(`completion_time_${levelId}`)
+            if (completionTime && parseInt(completionTime) > lastVisitTime) {
+                newlyCompletedLevels.value.add(levelId)
+            }
+        })
+    }
+
+    // Update last visit time
+    localStorage.setItem('lastBoardVisit', Date.now().toString())
 }
 
 // Save completion state to localStorage
@@ -75,9 +135,31 @@ const saveCompletedLevels = () => {
 // Mark level as completed
 const markLevelCompleted = (levelId) => {
     completedLevels.value[levelId] = true
+    // Store completion timestamp
+    localStorage.setItem(`completion_time_${levelId}`, Date.now().toString())
     saveCompletedLevels()
 }
 
+// Handle animation end and set final transform
+const onAnimationEnd = (levelId) => {
+    newlyCompletedLevels.value.delete(levelId)
+    // Force update to apply final transform
+    const element = document.querySelector(`[data-completion-id="${levelId}"]`)
+    if (element) {
+        const item = boardItems.value.find(i => i.id === levelId)
+        if (item) {
+            element.style.transform = `scale(${item.completionPosition?.scale || 1}) rotate(${item.completionPosition?.rotation || 0}deg)`
+        }
+    }
+}
+
+// Get the final transform for completion images
+const getCompletionTransform = (item) => {
+    if (newlyCompletedLevels.value.has(item.id)) {
+        return 'scale(0)' // Start animation from scale 0
+    }
+    return `scale(${item.completionPosition?.scale || 1}) rotate(${item.completionPosition?.rotation || 0}deg)`
+}
 
 // Start over function - now clears ALL progress and navigates to home
 const startOver = () => {
@@ -187,23 +269,30 @@ const boardItems = ref([
         image: '/images/post-it-pink.png',
         completionImage: '/images/shelf.png',
         completionPosition: {
-            top: '55%',
-            left: '8%',
-            scale: 2,
+            top: '80%',
+            left: '75%',
+            scale: 10,
             rotation: 0
         }
     },
 ])
 
 const navigateToCategory = (item) => {
-    router.push(item.route)
+    // Only allow navigation if the level is available or already completed
+    if (isLevelAvailable(item.id) || completedLevels.value[item.id]) {
+        router.push(item.route)
+    } else {
+        // Optional: Show a message that this level is not yet available
+        console.log(`Level ${item.title} is not yet available`)
+    }
 }
 
 // Check for completion when returning from a level
 onMounted(() => {
     loadCompletedLevels()
+    checkForNewCompletions()
 
-    // Listen for completion events
+    // Listen for completion events (for when levels are completed while on board)
     window.addEventListener('levelCompleted', (event) => {
         markLevelCompleted(event.detail.levelId)
     })
@@ -233,20 +322,22 @@ onMounted(() => {
 }
 
 .start-over-button {
-    font-family: 'ITP', sans-serif;
-    font-weight: 300;
     position: absolute;
+    background-image: url('/images/button_short.png');
     top: 20px;
-    left: 20px;
-    background: #ffffff;
+    background-color: transparent;
+    left: 15px;
+    width: 230px;
+    background-size: 100%;
+    font-family: 'Coming Soon', cursive;
+    font-weight: 300;
+    background-repeat: no-repeat;
     color: rgb(0, 0, 0);
-    border: 2px solid #5b5b5b;
-    box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.3);
-    padding: 10px 20px;
+    padding: 20px;
     font-size: 20px;
     cursor: pointer;
     z-index: 1000;
-    transition: background-color 0.2s ease;
+    border: none;
 }
 
 .start-over-button:hover {
@@ -288,8 +379,6 @@ onMounted(() => {
     font-weight: normal;
 }
 
-
-
 /* Post-it wrapper for positioning */
 .post-it-wrapper {
     position: absolute;
@@ -302,7 +391,7 @@ onMounted(() => {
     width: 100%;
     height: 100%;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, opacity 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -313,10 +402,28 @@ onMounted(() => {
 .post-it:hover {
     transform: rotate(0deg) scale(1.02) !important;
     z-index: 10;
+    filter: brightness(1.05);
 }
 
 .post-it.completed {
     z-index: 10;
+}
+
+/* Available level - pulsing animation (but not if completed) */
+.post-it.available:not(.completed) {
+    animation: pulse 2s ease-in-out infinite;
+    cursor: pointer;
+}
+
+/* Locked level - reduced opacity and no cursor */
+.post-it.locked {
+    filter: brightness(0);
+    cursor: not-allowed;
+}
+
+.post-it.locked:hover {
+    transform: none !important;
+    scale: 1 !important;
 }
 
 .post-it-text {
@@ -324,11 +431,51 @@ onMounted(() => {
     font-weight: 400;
     text-align: center;
     font-family: 'Coming Soon', cursive;
-
-    font-size: 1.4vw;
+    font-size: 1.6vw;
     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
     z-index: 2;
     padding: 5px;
+}
+
+/* Pulsing animation for available levels */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Bouncy animation for newly completed levels */
+@keyframes bounceIn {
+    0% {
+        transform: scale(0) rotate(var(--final-rotation, 0deg));
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(calc(var(--final-scale, 1) * 1.2)) rotate(var(--final-rotation, 0deg));
+        opacity: 1;
+    }
+
+    70% {
+        transform: scale(calc(var(--final-scale, 1) * 0.9)) rotate(var(--final-rotation, 0deg));
+    }
+
+    85% {
+        transform: scale(calc(var(--final-scale, 1) * 1.05)) rotate(var(--final-rotation, 0deg));
+    }
+
+    100% {
+        transform: scale(var(--final-scale, 1)) rotate(var(--final-rotation, 0deg));
+        opacity: 1;
+    }
 }
 
 /* Completion image (red pin/checkmark) */
@@ -342,6 +489,16 @@ onMounted(() => {
     transform-origin: center center;
 }
 
+/* Bounce animation for newly completed levels */
+.completion-image.bounce-in {
+    animation: bounceIn 0.8s ease-out forwards;
+    animation-fill-mode: forwards;
+}
+
+/* After animation, apply the final transform */
+.completion-image:not(.bounce-in) {
+    transition: transform 0.2s ease;
+}
 
 .logo-container {
     position: fixed;

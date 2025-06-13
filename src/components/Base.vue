@@ -40,6 +40,9 @@ export default {
             const completedLevels = saved ? JSON.parse(saved) : {}
             completedLevels[this.levelId] = true
             localStorage.setItem('completedLevels', JSON.stringify(completedLevels))
+
+            // Store completion timestamp for animation detection
+            localStorage.setItem(`completion_time_${this.levelId}`, Date.now().toString())
         },
         goToBoard() {
             this.$router.push('/board')
@@ -167,6 +170,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     justify-content: space-between;
     overflow: hidden;
     position: relative;
@@ -185,16 +189,20 @@ export default {
 
 /* Back to board button (top left) */
 .back-to-board-button {
-    background: #ffffff;
-    color: rgb(0, 0, 0);
-    border: 2px solid #5b5b5b;
-    box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.3);
-    padding: 10px 15px;
-    font-size: 20px;
-    font-family: 'ITP', sans-serif;
+    background-image: url('/images/button_long.png');
+    top: 20px;
+    background-color: transparent;
+    width: 270px;
+    background-size: 100%;
+    font-family: 'Coming Soon', cursive;
     font-weight: 300;
+    background-repeat: no-repeat;
+    color: rgb(0, 0, 0);
+    padding: 20px 20px;
+    font-size: 20px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    z-index: 1000;
+    border: none;
 }
 
 .back-to-board-button:hover {
@@ -203,16 +211,21 @@ export default {
 
 /* Level restart button (top right) */
 .level-restart-button {
-    font-family: 'ITP', sans-serif;
+    background-image: url('/images/button_short.png');
+    top: 20px;
+    background-color: transparent;
+    left: 15px;
+    width: 225px;
+    background-size: 100%;
+    font-family: 'Coming Soon', cursive;
     font-weight: 300;
-    background: #ffffff;
+    background-repeat: no-repeat;
     color: rgb(0, 0, 0);
-    border: 2px solid #5b5b5b;
-    box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.3);
-    padding: 10px 15px;
+    padding: 20px 20px;
     font-size: 20px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    z-index: 1000;
+    border: none;
 }
 
 .level-restart-button:hover {
@@ -231,17 +244,27 @@ export default {
 
 /* Instruktionstekst */
 .instructions {
-    font-family: 'ITP', sans-serif;
-    line-height: 1.2;
+    background-color: transparent;
+    background-image: url('/images/instructions_bg.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: 'Coming Soon', cursive;
     font-weight: 300;
-    background: #ffffff;
     color: rgb(0, 0, 0);
-    border: 2px solid #000;
-    padding: 20px 20px;
+    padding: 40px 40px;
     font-size: 25px;
+    border: none;
+    line-height: 1.2;
     text-align: center;
-    width: 100%;
     box-sizing: border-box;
+    width: 100%;
+    max-width: 1050px;
+    min-height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0 auto;
 }
 
 @keyframes pulse {

@@ -1,5 +1,5 @@
 <template>
-    <Base postItUrl="/images/post-it-lime.png" title="Flugtruten"
+    <Base postItUrl="/images/post-it-yellow.png" title="Flugtruten"
         description="Mikroplast slipper ud i havet via forskellige ruter, du måske aldrig har tænkt over – gennem kloakker, afløb og med regnvand, der skyller ned i gadens riste."
         instructions="Træk og slip, så de de rette flugtruter passer til de rette mistænkte" levelId="flugtruten"
         :completed="true" @continue="handleContinue">
@@ -27,6 +27,9 @@ export default {
             const completedLevels = saved ? JSON.parse(saved) : {};
             completedLevels['flugtruten'] = true;
             localStorage.setItem('completedLevels', JSON.stringify(completedLevels));
+
+            // Store completion timestamp for animation detection
+            localStorage.setItem(`completion_time_flugtruten`, Date.now().toString());
         },
         handleContinue() {
             console.log('Fortsæt!');
@@ -37,8 +40,9 @@ export default {
 
 <style scoped>
 .escape_game {
-    width: 100%;
-    height: 100%;
+    display: block;
+    margin: 0 auto;
+    width: 90%;
     object-fit: cover;
 }
 </style>

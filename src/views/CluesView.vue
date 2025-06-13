@@ -73,7 +73,7 @@ const products = ref([
         containsMicroplastic: true,
         collected: false,
         scale: 1.3,
-        position: { position: 'absolute', top: '-2%', left: '60%' }
+        position: { position: 'absolute', top: '-2%', left: '55%' }
     },
     {
         id: 9,
@@ -82,7 +82,7 @@ const products = ref([
         containsMicroplastic: true,
         collected: false,
         scale: 1,
-        position: { position: 'absolute', top: '-6%', left: '70%' }
+        position: { position: 'absolute', top: '-6%', left: '65%' }
     },
     {
         id: 18,
@@ -91,7 +91,7 @@ const products = ref([
         containsMicroplastic: false,
         collected: false,
         scale: 1.8,
-        position: { position: 'absolute', top: '-8%', left: '82%' }
+        position: { position: 'absolute', top: '-8%', left: '75%' }
     },
 
     // SECOND SHELF 
@@ -424,7 +424,7 @@ onUnmounted(() => {
 
 <style scoped>
 .shelf-container {
-    width: 900px;
+    width: 850px;
     position: relative;
     height: auto;
 }
@@ -523,12 +523,13 @@ onUnmounted(() => {
 }
 
 .score {
+    font-family: 'Coming Soon', cursive;
     position: absolute;
-    bottom: -35px;
+    bottom: -40px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-    font-size: 30px;
+    font-size: 25px;
     color: #000000;
 }
 </style>

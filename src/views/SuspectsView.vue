@@ -37,9 +37,9 @@ export default {
 
 <style scoped>
 .suspects_game {
-  width: 100%;
+  width: 93%;
   height: 100%;
   object-fit: cover;
-  scale: 1;
+  scale: 0.95;
 }
 </style>

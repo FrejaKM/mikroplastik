@@ -7,7 +7,7 @@
                 fandt man noget, der hverken hører til i havet eller i dets beboere – plastik! <br> <br> Hvordan er det
                 havnet der? Og hvad betyder det for havets dyr og os mennesker?
                 <br> <br> Det er tid til at opklare sagen, og som
-                detektiv er det nu din opgave at følge sporene og opklare sagen
+                detektiv er det nu din opgave at følge sporene og opklare mysteriet
                 om, hvordan mikroplasten sneg sig ud i havet.
             </p>
         </div>
@@ -22,7 +22,7 @@
 
 <style scoped>
 .file-container {
-    font-family: 'Courier Prime', monospace;
+    font-family: 'Coming Soon', cursive;
     display: flex;
     flex-direction: column;
     align-items: center;
