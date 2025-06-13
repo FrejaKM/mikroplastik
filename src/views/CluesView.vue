@@ -6,7 +6,7 @@
 
     <div class="game-container">
         <div class="shelf-container">
-            <img src="/images/hylde.png" alt="Shelf" class="shelf-background" />
+            <img src="/images/shelves.png" alt="Shelf" class="shelf-background" />
 
             <div v-for="product in products" :key="product.id" :class="['product', {
                 'dragging': draggingProduct === product.id,
@@ -20,13 +20,13 @@
         </div>
 
         <!-- Shopping basket -->
-        <div class="basket-container" @mouseup="dropProduct($event)" @mouseover="onBasketHover"
-            @mouseleave="onBasketLeave">
+        <div class="basket-container" @mouseover="onBasketHover" @mouseleave="onBasketLeave">
             <img src="/images/basket.png" alt="Shopping basket" class="basket" />
             <div class="basket-items">
                 <div v-for="item in collectedItems" :key="item.id" class="basket-item" :style="{
-                    ...item.basketPosition,
-                    transform: `${item.basketPosition.transform} scale(${item.scale})`
+                    top: '55%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)'
                 }">
                     <img :src="item.image" :alt="item.name" />
                 </div>
@@ -62,7 +62,7 @@ const mousePosition = ref({ x: 0, y: 0 })
 const isOverBasket = ref(false)
 
 const products = ref([
-    // TOP SHELF (10-14% from top)
+    // TOP SHELF 
     {
         id: 6,
         name: 'Toothpaste',
@@ -70,7 +70,7 @@ const products = ref([
         containsMicroplastic: true,
         collected: false,
         scale: 1.3,
-        position: { position: 'absolute', top: '8%', left: '60%' }
+        position: { position: 'absolute', top: '-2%', left: '60%' }
     },
     {
         id: 9,
@@ -79,7 +79,7 @@ const products = ref([
         containsMicroplastic: true,
         collected: false,
         scale: 1,
-        position: { position: 'absolute', top: '4%', left: '70%' }
+        position: { position: 'absolute', top: '-6%', left: '70%' }
     },
     {
         id: 18,
@@ -88,10 +88,10 @@ const products = ref([
         containsMicroplastic: false,
         collected: false,
         scale: 1.8,
-        position: { position: 'absolute', top: '3%', left: '82%' }
+        position: { position: 'absolute', top: '-8%', left: '82%' }
     },
 
-    // SECOND SHELF (25-31% from top)
+    // SECOND SHELF 
     {
         id: 11,
         name: 'Oil',
@@ -99,7 +99,7 @@ const products = ref([
         containsMicroplastic: false,
         collected: false,
         scale: 1.8,
-        position: { position: 'absolute', top: '22%', left: '22%' }
+        position: { position: 'absolute', top: '15%', left: '22%' }
     },
     {
         id: 8,
@@ -108,7 +108,7 @@ const products = ref([
         containsMicroplastic: true,
         collected: false,
         scale: 1.8,
-        position: { position: 'absolute', top: '22%', left: '10%' }
+        position: { position: 'absolute', top: '15%', left: '10%' }
     },
     {
         id: 13,
@@ -117,7 +117,7 @@ const products = ref([
         containsMicroplastic: false,
         collected: false,
         scale: 1.7,
-        position: { position: 'absolute', top: '23%', left: '28%' }
+        position: { position: 'absolute', top: '16%', left: '28%' }
     },
     {
         id: 1,
@@ -126,7 +126,7 @@ const products = ref([
         containsMicroplastic: true,
         collected: false,
         scale: 1.8,
-        position: { position: 'absolute', top: '23%', left: '85%' }
+        position: { position: 'absolute', top: '17%', left: '85%' }
     },
     {
         id: 2,
@@ -135,7 +135,7 @@ const products = ref([
         containsMicroplastic: true,
         collected: false,
         scale: 1.7,
-        position: { position: 'absolute', top: '25%', left: '42%' }
+        position: { position: 'absolute', top: '19%', left: '42%' }
     },
     {
         id: 16,
@@ -144,7 +144,7 @@ const products = ref([
         containsMicroplastic: false,
         collected: false,
         scale: 1.2,
-        position: { position: 'absolute', top: '25%', left: '76%' }
+        position: { position: 'absolute', top: '19%', left: '76%' }
     },
     {
         id: 14,
@@ -153,7 +153,7 @@ const products = ref([
         containsMicroplastic: false,
         collected: false,
         scale: 1.0,
-        position: { position: 'absolute', top: '26%', left: '66%' }
+        position: { position: 'absolute', top: '20%', left: '66%' }
     },
     {
         id: 17,
@@ -162,10 +162,10 @@ const products = ref([
         containsMicroplastic: false,
         collected: false,
         scale: 1.2,
-        position: { position: 'absolute', top: '28%', left: '57%' }
+        position: { position: 'absolute', top: '22%', left: '57%' }
     },
 
-    // THIRD SHELF (48-50% from top)
+    // THIRD SHELF 
     {
         id: 19,
         name: 'Newspaper',
@@ -213,7 +213,7 @@ const products = ref([
     },
 
 
-    // BOTTOM SHELF (66-69% from top)
+    // BOTTOM SHELF 
     {
         id: 15,
         name: 'Socks',
@@ -221,7 +221,7 @@ const products = ref([
         containsMicroplastic: false,
         collected: false,
         scale: 1.5,
-        position: { position: 'absolute', top: '66%', left: '64%' }
+        position: { position: 'absolute', top: '70%', left: '64%' }
     },
     {
         id: 10,
@@ -230,7 +230,7 @@ const products = ref([
         containsMicroplastic: true,
         collected: false,
         scale: 1.9,
-        position: { position: 'absolute', top: '67%', left: '32%' }
+        position: { position: 'absolute', top: '70%', left: '32%' }
     },
     {
         id: 3,
@@ -239,7 +239,7 @@ const products = ref([
         containsMicroplastic: true,
         collected: false,
         scale: 1.8,
-        position: { position: 'absolute', top: '68%', left: '12%' }
+        position: { position: 'absolute', top: '72%', left: '12%' }
     },
     {
         id: 5,
@@ -248,7 +248,7 @@ const products = ref([
         containsMicroplastic: true,
         collected: false,
         scale: 1.5,
-        position: { position: 'absolute', top: '69%', left: '50%' }
+        position: { position: 'absolute', top: '74%', left: '50%' }
     }
 ])
 
@@ -266,30 +266,6 @@ const gameCompleted = computed(() =>
 // Helper function to get currently dragging product
 const getDraggingProduct = () => {
     return products.value.find(p => p.id === draggingProduct.value)
-}
-
-// Function to generate random position in basket
-const generateRandomBasketPosition = (itemIndex) => {
-    // Generate random position within the basket area
-    // Use percentage-based positioning for better distribution
-    const minLeft = 0
-    const maxLeft = 100 // Leave room for item width
-    const minTop = 0
-    const maxTop = 100 // Leave room for item height
-
-    const randomLeft = minLeft + Math.random() * (maxLeft - minLeft)
-    const randomTop = minTop + Math.random() * (maxTop - minTop)
-
-    // Add slight rotation for more natural look
-    const randomRotation = (Math.random() - 0.5) * 30 // -15 to +15 degrees
-
-    return {
-        position: 'absolute',
-        left: `${randomLeft}%`,
-        top: `${randomTop}%`,
-        transform: `rotate(${randomRotation}deg)`,
-        zIndex: itemIndex + 10 // Latest items have higher z-index
-    }
 }
 
 // Mouse tracking
@@ -343,24 +319,15 @@ const onBasketLeave = () => {
     isOverBasket.value = false
 }
 
-const dropProduct = (event) => {
-    // This is now handled by endDrag when mouse is over basket
-}
-
 const handleDrop = () => {
     const product = getDraggingProduct()
 
     if (!product || product.collected) return
 
     if (product.containsMicroplastic) {
-        // Correct! Add to basket with random position
         product.collected = true
-        const productWithBasketPosition = {
-            ...product,
-            basketPosition: generateRandomBasketPosition(collectedItems.value.length)
-        }
-        collectedItems.value.push(productWithBasketPosition)
-        saveProgress() // Save progress after successful collection
+        collectedItems.value.push(product)
+        saveProgress()
         console.log('Correct!', product.name)
     } else {
         // Wrong! Product should bounce back
@@ -454,16 +421,14 @@ onUnmounted(() => {
 
 <style scoped>
 .shelf-container {
+    width: 900px;
     position: relative;
-    width: 100%;
-    max-width: 850px;
     height: auto;
-    aspect-ratio: 4 / 3;
 }
 
 .shelf-background {
     width: 100%;
-    height: 100%;
+    height: 80%;
     object-fit: contain;
 }
 
@@ -514,16 +479,11 @@ onUnmounted(() => {
 
 .basket-container {
     position: absolute;
+    height: 20vh;
     width: 16vw;
-    height: 16vw;
-    max-width: 300px;
-    max-height: 300px;
-    min-width: 200px;
-    min-height: 200px;
-    right: 32vw;
-    bottom: 19vh;
+    right: 7vw;
+    bottom: 20vh;
     rotate: 10deg;
-    aspect-ratio: 1;
 }
 
 .basket-container:hover {
@@ -538,17 +498,17 @@ onUnmounted(() => {
 
 .basket-items {
     position: absolute;
-    top: 20%;
-    left: 20%;
-    width: 60%;
-    height: 60%;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
     overflow: hidden;
 }
 
 .basket-item {
-    width: 45%;
-    height: 45%;
     position: absolute;
+    width: 60%;
+    height: auto;
     aspect-ratio: 1;
 }
 
@@ -556,11 +516,12 @@ onUnmounted(() => {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    background-color: transparent;
 }
 
 .score {
     position: absolute;
-    bottom: -5px;
+    bottom: -35px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;

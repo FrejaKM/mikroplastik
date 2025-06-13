@@ -4,16 +4,13 @@
         <div class="cork-board-container">
             <!-- Start Over Button -->
             <button class="start-over-button" @click="startOver">
-                Start forfra
+                Start efterfirskningen forfra
             </button>
 
             <div class="board-header">
                 <h1 class="board-title">
-                    <span class="title-text">Havet under pres</span>
+                    <span class="title-text">Mysteriet om Mikroplasten</span>
                 </h1>
-                <h2 class="board-subtitle">
-                    <span class="subtitle-text">Mysteriet om Mikroplasten</span>
-                </h2>
             </div>
 
             <!-- Post-it notes -->
@@ -124,7 +121,7 @@ const boardItems = ref([
         completionPosition: {
             top: '60%',
             left: '48%',
-            scale: 13,
+            scale: 14,
             rotation: 0
         }
     },
@@ -132,7 +129,7 @@ const boardItems = ref([
         id: 'flugtruten',
         title: 'Flugtruten',
         category: 'escape',
-        top: '55%',
+        top: '58%',
         left: '65%',
         rotation: 0,
         route: '/escape',
@@ -141,7 +138,7 @@ const boardItems = ref([
         completionPosition: {
             top: '72%',
             left: '72%',
-            scale: 13,
+            scale: 14,
             rotation: 0
         }
     },
@@ -149,16 +146,16 @@ const boardItems = ref([
         id: 'ofrene',
         title: 'Ofrene',
         category: 'victims',
-        top: '15%',
+        top: '14%',
         left: '13%',
         rotation: -5,
         route: '/victims',
         image: '/images/post-it-green.png',
         completionImage: '/images/victims.png',
         completionPosition: {
-            top: '38%',
+            top: '37%',
             left: '18%',
-            scale: 12,
+            scale: 14,
             rotation: 0
         }
     },
@@ -175,7 +172,7 @@ const boardItems = ref([
         completionPosition: {
             top: '55%',
             left: '8%',
-            scale: 1.3,
+            scale: 2,
             rotation: 0
         }
     },
@@ -183,8 +180,8 @@ const boardItems = ref([
         id: 'suspects',
         title: 'De mistænkte',
         category: 'suspects',
-        top: '7%',
-        left: '86%',
+        top: '8%',
+        left: '87%',
         rotation: 15,
         route: '/suspects',
         image: '/images/post-it-lime.png',
@@ -192,7 +189,7 @@ const boardItems = ref([
         completionPosition: {
             top: '39%',
             left: '85%',
-            scale: 8.5,
+            scale: 9,
             rotation: 0
         }
     }
@@ -241,11 +238,10 @@ onMounted(() => {
     left: 20px;
     background: #ffffff;
     color: rgb(0, 0, 0);
-    border: 2px solid #000;
-    box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.4);
+    border: 2px solid #5b5b5b;
+    box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.3);
     padding: 10px 20px;
     font-size: 1vw;
-    font-weight: bold;
     cursor: pointer;
     z-index: 1000;
     transition: background-color 0.2s ease;
@@ -262,52 +258,35 @@ onMounted(() => {
     left: 50%;
     transform: translateX(-50%);
     z-index: 5;
-    background-image: url('/images/Group 20.png');
+    background-image: url('/images/torn_paper.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
     width: 50vw;
     height: 23vh;
-    justify-content: left;
-    align-items: left;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Title positioning on top of the PNG */
 .board-title {
     position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translateX(-50%);
-    margin: 0;
-    z-index: 6;
-}
-
-.board-subtitle {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 35%;
+    left: 15%;
     margin: 0;
     z-index: 6;
 }
 
 .title-text {
     color: #000000;
-    font-size: 1.2rem;
+    font-size: 2.2rem;
     line-height: 1.2;
-    margin: 0;
+    font-family: 'Courier Prime', monospace;
+    font-weight: 400;
     text-align: center;
     font-weight: normal;
 }
 
-.subtitle-text {
-    color: #000000;
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin: 0;
-    text-align: center;
-    font-family: 'Arial', sans-serif;
-}
+
 
 /* Post-it wrapper for positioning */
 .post-it-wrapper {
@@ -339,10 +318,11 @@ onMounted(() => {
 }
 
 .post-it-text {
-    color: #333;
-    font-weight: bold;
+    color: #000000;
+    font-family: 'Courier Prime', monospace;
+    font-weight: 400;
     text-align: center;
-    font-size: 1.3vw;
+    font-size: 1.4vw;
     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
     z-index: 2;
     padding: 5px;

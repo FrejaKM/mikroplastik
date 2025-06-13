@@ -40,6 +40,9 @@ export default {
             const completedLevels = saved ? JSON.parse(saved) : {}
             completedLevels[this.levelId] = true
             localStorage.setItem('completedLevels', JSON.stringify(completedLevels))
+        },
+        goToBoard() {
+            this.$router.push('/board')
         }
     }
 };
@@ -47,11 +50,6 @@ export default {
 
 <template>
     <div class="level-container">
-        <!-- Start Over Button for individual level -->
-        <button class="level-restart-button" @click="$emit('restart')">
-            Start forfra
-        </button>
-
         <!-- Post-it note -->
         <div class="post-it" :style="{ backgroundImage: `url(${postItUrl})` }">
             <div class="headline">{{ title }}</div>
@@ -64,6 +62,16 @@ export default {
 
         <!-- Spillets indhold -->
         <div class="game-content">
+            <!-- Navigation buttons inside game content -->
+            <div class="game-buttons">
+                <button class="back-to-board-button" @click="goToBoard">
+                    Tilbage til opslagstavlen
+                </button>
+                <button class="level-restart-button" @click="$emit('restart')">
+                    Start forfra
+                </button>
+            </div>
+
             <div class="game-main">
                 <slot></slot>
             </div>
@@ -96,26 +104,6 @@ export default {
     overflow: hidden;
 }
 
-/* Level restart button */
-.level-restart-button {
-    position: absolute;
-    top: 40px;
-    left: 40px;
-    background: #ffffff;
-    color: rgb(0, 0, 0);
-    box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.5);
-    padding: 10px 20px;
-    font-size: 1vw;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 100;
-    transition: background-color 0.5s ease;
-}
-
-.level-restart-button:hover {
-    scale: 1.05;
-}
-
 /* Post-it */
 .post-it {
     grid-column: 4 / 5;
@@ -134,12 +122,12 @@ export default {
 }
 
 .headline {
-    width: 70%;
-    font-size: 32px;
+    color: #000000;
+    font-size: 2.2vw;
+    font-family: 'Courier Prime', monospace;
+    font-weight: 400;
     text-align: center;
-    color: black;
-    font-weight: regular;
-    line-height: 1.2;
+    width: 65%;
 }
 
 /* Notesbog */
@@ -159,13 +147,13 @@ export default {
 .description {
     width: 80%;
     height: 90%;
-    padding: 3vh;
-    padding-top: 1vh;
+    padding: 15px;
+    padding-top: 30px;
     font-size: 1.1vw;
     text-align: left;
+    font-family: 'Courier Prime', monospace;
+    font-weight: 400;
     color: black;
-    overflow-y: auto;
-    overflow-x: hidden;
     box-sizing: border-box;
     line-height: 1.3;
 }
@@ -173,7 +161,6 @@ export default {
 /* Spilindhold */
 .game-content {
     padding: 20px;
-    padding-bottom: 0px;
     grid-column: 1 / 4;
     grid-row: 1 / 7;
     background-color: #eef5ef;
@@ -182,6 +169,50 @@ export default {
     align-items: center;
     justify-content: space-between;
     overflow: hidden;
+    position: relative;
+}
+
+/* Game buttons container */
+.game-buttons {
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 100;
+}
+
+/* Back to board button (top left) */
+.back-to-board-button {
+    background: #ffffff;
+    color: rgb(0, 0, 0);
+    border: 2px solid #5b5b5b;
+    box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.3);
+    padding: 10px 15px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.back-to-board-button:hover {
+    transform: scale(1.05);
+}
+
+/* Level restart button (top right) */
+.level-restart-button {
+    background: #ffffff;
+    color: rgb(0, 0, 0);
+    border: 2px solid #5b5b5b;
+    box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.3);
+    padding: 10px 15px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.level-restart-button:hover {
+    transform: scale(1.05);
 }
 
 .game-main {
@@ -190,6 +221,8 @@ export default {
     align-items: center;
     justify-content: center;
     width: 100%;
+    padding-top: 60px;
+    /* Add space for the buttons */
 }
 
 /* Instruktionstekst */
@@ -198,9 +231,8 @@ export default {
     color: rgb(0, 0, 0);
     border: 2px solid #000;
     padding: 20px 20px;
-    font-size: 30px;
+    font-size: 25px;
     text-align: center;
-    margin-bottom: 20px;
     width: 100%;
     box-sizing: border-box;
 }
