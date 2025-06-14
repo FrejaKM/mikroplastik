@@ -59,7 +59,7 @@ export default {
         </div>
 
         <!-- Notesbog -->
-        <div class="notebook" style="background-image: url('/images/bright_notebook.png')">
+        <div class="notebook" style="background-image: url('/images/notebook_page.png')">
             <div class="description" v-html="description"></div>
         </div>
 
@@ -86,7 +86,7 @@ export default {
         </div>
 
         <!-- Fortsæt-knap -->
-        <button v-if="completed" class="continue-button" @click="handleContinue"></button>
+        <button v-if="completed" class="continue-button" @click="handleContinue">Fortsæt -></button>
     </div>
 </template>
 
@@ -137,28 +137,29 @@ export default {
 .notebook {
     grid-column: 4 / 5;
     grid-row: 3 / 6;
-    background-size: contain;
+    background-size: 90%;
     background-repeat: no-repeat;
     background-position: center;
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding-top: 20%;
+    padding-top: 10%;
+    padding-left: 12%;
     overflow: hidden;
 }
 
 .description {
-    width: 80%;
+    width: 85%;
     height: 90%;
     padding: 15px;
-    padding-top: 30px;
-    font-size: 1.5vw;
+    padding-top: 35px;
+    font-size: 20px;
     font-family: 'Coming Soon', cursive;
     text-align: left;
     font-weight: 300;
     color: black;
     box-sizing: border-box;
-    line-height: 1.3;
+    line-height: 1.2;
 }
 
 /* Spilindhold */
@@ -284,15 +285,28 @@ export default {
 .continue-button {
     grid-column: 4 / 5;
     grid-row: 6 / 7;
-    background-image: url('/images/arrow.png');
-    background-size: 60%;
+    background-size: 100%;
     background-color: transparent;
     border: none;
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
     animation: pulse 2s ease-in-out infinite;
-    opacity: 0.8;
+    background-image: url('/images/button_short.png');
+    width: 280px;
+    height: 100px;
+    font-family: 'Coming Soon', cursive;
+    background-repeat: no-repeat;
+    color: rgb(0, 0, 0);
+    padding: 20px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    border: none;
+    justify-self: center;
+    /* Center horizontally in grid cell */
+    align-self: center;
+    /* Center vertically in grid cell (optional) */
 }
 
 .continue-button:hover {

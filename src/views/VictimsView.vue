@@ -1,7 +1,8 @@
 <template>
     <Base postItUrl="/images/post-it-green.png" title="Ofrene"
-        description="Når mikroplasten slipper ud i havet, er det oftest havets dyr, det går ud over. Selvom mikroplast helt sikkert ikke hører til i havet, så har det vist sig, at det heldigvis ikke påvirker fødekæden, som man ellers havde frygtet. Vi mennesker skal altså ikke være bange for at komme til at få mikroplast med indenbords, når vi spiser fisk."
-        instructions="Test Instruktioner" levelId="ofrene" :completed="true" @continue="handleContinue">
+        description="Når mikroplast ender i havet, går det særligt ud over dyrene, der kan komme til at spise det. Heldigvis har forskerne fundet ud af, at mikroplasten ikke kommer videre i fødekæden, som man ellers frygtede. Det betyder, at vi ikke skal være bange for at få mikroplast i kroppen, når vi spiser fisk."
+        instructions="Træk og slip mikroplasten hen på havdyrene og se, hvordan det reagerer på at spise det."
+        levelId="ofrene" :completed="true" @continue="handleContinue">
     <div style="background: red; height: 100px; width: 100%; text-align: center; color: white;">
         TEST SPILINDHOLD
     </div>

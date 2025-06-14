@@ -1,10 +1,7 @@
 <template>
-    <Base postItUrl="/images/post-it-sand.png" title="Sporene" description="En essentiel del af efterforskningen finder sted i supermarkedet. Her gemmer nogle af de vigtigste spor i mikroplast mysteriet sig på hylderne – uden at nogen lægger mærke til dem.
-        <br> <br> 
-        
-        EN ESSENTIEL DEL AF EFTERFORSKNINGEN FINDER STED I SUPERMARKEDET. HER GEMMER NOGLE AF DE VIGTIGSTE SPOR I MYSTERIET OM MIKROPLASTEN SIG PÅ HYLDERNE - UDEN AT NOGEN LÆGGER MÆRKE TIL DEM. 
+    <Base postItUrl="/images/post-it-sand.png" title="Sporene" description="Sporene efter mikroplasten starter tit i supermarkedet. Her sniger det sig ned i indkøbskurven – helt uden at vi lægger mærke til det. Nogle produkter indeholder mikroplast fra starten, mens andre bliver til mikroplast, når de slides op og nedbrydes.
         "
-        instructions="Træk produkter, der er kendt for at indeholde mikroplast eller blive til mikroplast, når de nedbrydes, ned i kurven"
+        instructions="Træk de produkter ned i kurven, som indeholder mikroplast, eller som kan blive til mikroplast, når de slides og nedbrydes."
         levelId="sporene" :completed="gameCompleted" @continue="continueToNext" @restart="restartLevel">
 
     <div class="game-container">

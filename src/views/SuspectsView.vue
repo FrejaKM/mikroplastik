@@ -1,8 +1,8 @@
 <template>
   <Base postItUrl="/images/post-it-lime.png" title="De mistænkte"
     description="Mikroplast er efterhånden at finde alle vegne på vores planet.<br> <br>Et stykke plastik skal være mindre end 5 mm for at man kalder det mikroplastik.<br> <br>Lad os få taget billeder af mikroplasten, så vi kan efterlyse dem!"
-    instructions="Træk de stykker plastik, der er mindre end 5 mm, ind til fotografering." levelId="suspects"
-    :completed="true" @continue="handleContinue">
+    instructions="Som en del af efterforskningen skal der tages billeder af de mistænkte i sagen. Træk de stykker plastik ind, som har mikroplast-størrelse."
+    levelId="suspects" :completed="true" @continue="handleContinue">
   <div>
     <img src="/images/suspects_game.png" alt="" class="suspects_game" />
   </div>

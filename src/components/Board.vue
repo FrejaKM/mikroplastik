@@ -4,7 +4,7 @@
         <div class="cork-board-container">
             <!-- Start Over Button -->
             <button class="start-over-button" @click="startOver">
-                Nulstil tavlen
+                Start forfra
             </button>
 
             <div class="board-header">
@@ -75,7 +75,7 @@ const newlyCompletedLevels = ref(new Set())
 const lastBoardVisit = ref(Date.now())
 
 // Define the order of levels
-const levelOrder = ['sporene', 'suspects', 'flugtruten', 'ofrene', 'villain']
+const levelOrder = ['sporene', 'suspects', 'flugtruten', 'ofrene', 'solution']
 
 // Computed property to determine which level should be available next
 const nextAvailableLevel = computed(() => {
@@ -259,13 +259,13 @@ const boardItems = ref([
         }
     },
     {
-        id: 'villain',
-        title: 'Dommen',
-        category: 'villain',
+        id: 'solution',
+        title: 'Opklaringen',
+        category: 'solution',
         top: '58%',
         left: '65%',
         rotation: -3,
-        route: '/villain',
+        route: '/solution',
         image: '/images/post-it-pink.png',
         completionImage: '/images/shelf.png',
         completionPosition: {

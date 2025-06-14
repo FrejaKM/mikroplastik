@@ -1,20 +1,12 @@
 @import './base.css';
 
-/* Detective board color palette */
-:root {
-  --post-it-yellow: #ffeb3b;
-  --post-it-green: #4caf50;
-  --post-it-blue: #2196f3;
-  --red-string: #cc0000;
-  --board-bg: #f5f5dc; /* beige background */
-}
-
 /* Remove the centered layout for detective board */
 #app {
   margin: 0;
   padding: 0;
   max-width: none;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Coming Soon', cursive;
+  font-weight: 300;
 }
 
 body {

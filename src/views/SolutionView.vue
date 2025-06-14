@@ -1,7 +1,8 @@
 <template>
-    <Base postItUrl="/images/post-it-pink.png" title="En ny skurk"
-        description="Når mikroplasten slipper ud i havet, er det oftest havets dyr, det går ud over. Selvom mikroplast helt sikkert ikke hører til i havet, så har det vist sig, at det heldigvis ikke påvirker fødekæden, som man ellers havde frygtet. Vi mennesker skal altså ikke være bange for at komme til at få mikroplast med indenbords, når vi spiser fisk."
-        instructions="Test Instruktioner" levelId="villain" :completed="true" @continue="handleContinue">
+    <Base postItUrl="/images/post-it-pink.png" title="Opklaringen"
+        description="Sagen er næsten opklaret. Du har identificeret og fundet mikroplasten, fulgt dens vej ud mod havet og set, hvem det går ud over. <br> <br> Men én vigtig brik mangler: Hvordan forhindrer vi, at sagen gentager sig?"
+        instructions="Hvordan kan vi stoppe mikroplast fra at ende i havet?" levelId="solution" :completed="true"
+        @continue="handleContinue">
     <div style="background: red; height: 100px; width: 100%; text-align: center; color: white;">
         TEST SPILINDHOLD
     </div>
@@ -12,7 +13,7 @@
 import Base from '../components/Base.vue';
 
 export default {
-    name: 'VillainView',
+    name: 'SolutionView',
     components: {
         Base
     },
@@ -24,7 +25,7 @@ export default {
         markAsCompleted() {
             const saved = localStorage.getItem('completedLevels');
             const completedLevels = saved ? JSON.parse(saved) : {};
-            completedLevels['villain'] = true; // Fixed: changed from 'skurk' to 'villain'
+            completedLevels['solution'] = true; // Fixed: changed from 'skurk' to 'villain'
             localStorage.setItem('completedLevels', JSON.stringify(completedLevels));
         },
         handleContinue() {
