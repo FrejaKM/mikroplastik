@@ -68,11 +68,10 @@ export default {
             <!-- Navigation buttons inside game content -->
             <div class="game-buttons">
                 <button class="back-to-board-button" @click="goToBoard">
-                    Tilbage til opslagstavlen
-                </button>
-                <button class="level-restart-button" @click="$emit('restart')">
-                    Start forfra
-                </button>
+                    <- Tilbage til opslagstavlen </button>
+                        <button class="level-restart-button" @click="$emit('restart')">
+                            Start forfra
+                        </button>
             </div>
 
             <div class="game-main">
@@ -193,7 +192,7 @@ export default {
     background-image: url('/images/button_long.png');
     top: 20px;
     background-color: transparent;
-    width: 270px;
+    width: 290px;
     background-size: 100%;
     font-family: 'Coming Soon', cursive;
     font-weight: 300;
@@ -216,7 +215,7 @@ export default {
     top: 20px;
     background-color: transparent;
     left: 15px;
-    width: 225px;
+    width: 240px;
     background-size: 100%;
     font-family: 'Coming Soon', cursive;
     font-weight: 300;
@@ -299,6 +298,7 @@ export default {
     background-repeat: no-repeat;
     color: rgb(0, 0, 0);
     padding: 20px 20px;
+    padding-top: 10px;
     font-size: 20px;
     cursor: pointer;
     z-index: 1000;
