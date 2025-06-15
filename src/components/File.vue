@@ -15,36 +15,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: top;
     width: 100vw;
     height: 100vh;
-    background-color: #eef5ef;
+    background-color: transparent;
     padding: 20px;
     box-sizing: border-box;
 }
 
 .file-image {
-    width: 80vw;
+    display: block;
+    width: 85vw;
     height: auto;
     margin-bottom: 20px;
 }
 
-
-.file-text {
-    font-size: 24px;
-    position: absolute;
-    text-align: left;
-    left: 55%;
-    top: 10%;
-    max-width: 500px;
-    margin-bottom: 20px;
-}
-
-.header {
-    font-size: 30px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
 
 .start-button {
     position: absolute;
@@ -53,8 +38,8 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    right: 2%;
-    top: 90%;
+    right: 1%;
+    top: 91%;
     background-image: url('/images/button_long.png');
     background-color: transparent;
     width: 290px;
