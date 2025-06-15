@@ -53,7 +53,7 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    right: 1%;
+    right: 2%;
     top: 90%;
     background-image: url('/images/button_long.png');
     background-color: transparent;
@@ -68,10 +68,26 @@
     cursor: pointer;
     z-index: 1000;
     border: none;
+    animation: pulse 2s ease-in-out infinite;
 }
 
 
 .start-button:hover {
     transform: scale(1.05);
+}
+
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 </style>

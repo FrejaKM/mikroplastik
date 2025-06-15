@@ -42,7 +42,7 @@ export default {
 .escape_game {
     display: block;
     margin: 0 auto;
-    width: 90%;
+    width: 100%;
     object-fit: cover;
 }
 </style>

@@ -1,7 +1,8 @@
 <template>
-  <Base postItUrl="/images/post-it-lime.png" title="De mistænkte"
-    description="Mikroplast er efterhånden at finde alle vegne på vores planet.<br> <br>Et stykke plastik skal være mindre end 5 mm for at man kalder det mikroplastik.<br> <br>Lad os få taget billeder af mikroplasten, så vi kan efterlyse dem!"
-    instructions="Som en del af efterforskningen skal der tages billeder af de mistænkte i sagen. Træk de stykker plastik ind, som har mikroplast-størrelse."
+  <Base postItUrl="/images/post-it-lime.png" title="De mistænkte" description="
+Mikroplast er efterhånden at finde alle vegne på vores planet, men det er meget svært at opdage.  
+Et stykke plastik skal nemlig være mindre end 5 millimeter, for at man kalder det for mikroplastik. "
+    instructions="Som en del af efterforskningen skal der tages billeder af de mistænkte i sagen. Træk de stykker plastik ind, som har mikroplast-størrelse (mindre end 5 millimeter)."
     levelId="suspects" :completed="true" @continue="handleContinue">
   <div>
     <img src="/images/suspects_game.png" alt="" class="suspects_game" />
@@ -37,9 +38,11 @@ export default {
 
 <style scoped>
 .suspects_game {
-  width: 93%;
+  width: 85%;
   height: 100%;
   object-fit: cover;
   scale: 0.95;
+  display: block;
+  justify-self: center;
 }
 </style>

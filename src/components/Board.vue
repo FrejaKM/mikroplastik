@@ -252,9 +252,9 @@ const boardItems = ref([
         image: '/images/post-it-yellow.png',
         completionImage: '/images/map.png',
         completionPosition: {
-            top: '68%',
+            top: '73%',
             left: '16%',
-            scale: 18,
+            scale: 12,
             rotation: 0
         }
     },

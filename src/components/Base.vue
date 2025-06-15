@@ -54,8 +54,10 @@ export default {
 <template>
     <div class="level-container">
         <!-- Post-it note -->
-        <div class="post-it" :style="{ backgroundImage: `url(${postItUrl})` }">
-            <div class="headline">{{ title }}</div>
+        <div class="post-it-wrapper">
+            <div class="post-it" :style="{ backgroundImage: `url(${postItUrl})` }">
+                <div class="post-it-text">{{ title }}</div>
+            </div>
         </div>
 
         <!-- Notesbog -->
@@ -107,58 +109,82 @@ export default {
 }
 
 /* Post-it */
+.post-it-wrapper {
+    background-size: contain;
+    position: absolute;
+    width: 250px;
+    /* Fixed width */
+    height: 250px;
+    /* Adjust as needed for your post-it image */
+    z-index: 100;
+    top: 30px;
+    right: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Remove 5vw height, use px for consistency */
+}
+
 .post-it {
-    grid-column: 4 / 5;
-    grid-row: 1 / 3;
+    width: 100%;
+    /* Fixed width */
+    height: 100%;
+    /* Match wrapper height */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    position: relative;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding-top: 30%;
-    overflow: hidden;
-    min-height: 0;
-    min-width: 0;
-    rotate: 10deg;
+    box-sizing: border-box;
 }
 
-.headline {
+.post-it-text {
     color: #000000;
-    font-family: 'Coming Soon', cursive;
-    font-size: 2.2vw;
-    font-weight: 300;
+    font-weight: 400;
     text-align: center;
-    width: 65%;
+    font-family: 'Coming Soon', cursive;
+    font-size: 1.6vw;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    z-index: 2;
+    padding: 5px;
 }
+
 
 /* Notesbog */
 .notebook {
     grid-column: 4 / 5;
     grid-row: 3 / 6;
-    background-size: 90%;
+    padding-top: 50px;
+    padding-left: 40px;
+    width: 300px;
+    height: 400px;
+    background-size: 320px 420px;
     background-repeat: no-repeat;
     background-position: center;
     display: flex;
-    align-items: flex-start;
     justify-content: center;
-    padding-top: 10%;
-    padding-left: 12%;
     overflow: hidden;
+    justify-self: center;
+    /* Center horizontally in grid cell */
+    align-self: center;
+    /* Center vertically in grid cell (optional) */
 }
 
 .description {
-    width: 85%;
-    height: 90%;
-    padding: 15px;
-    padding-top: 35px;
+    padding-top: 10px;
+    width: 230px;
+    height: 100%;
     font-size: 20px;
     font-family: 'Coming Soon', cursive;
     text-align: left;
     font-weight: 300;
     color: black;
     box-sizing: border-box;
-    line-height: 1.2;
+    line-height: 1.5;
 }
 
 /* Spilindhold */
@@ -255,7 +281,7 @@ export default {
     padding: 40px 40px;
     font-size: 25px;
     border: none;
-    line-height: 1.2;
+    line-height: 1.5;
     text-align: center;
     box-sizing: border-box;
     width: 100%;
@@ -291,6 +317,7 @@ export default {
     background-position: center;
     cursor: pointer;
     animation: pulse 2s ease-in-out infinite;
+
     background-image: url('/images/button_short.png');
     width: 280px;
     height: 100px;
