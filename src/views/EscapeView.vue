@@ -1,8 +1,8 @@
 <template>
     <Base postItUrl="/images/post-it-yellow.png" title="Flugtruten"
         description="Mikroplast er snu! Det rejser gennem vandet fra vores håndvaske, brusere og vaskemaskiner. På gaden skylles det med regnvandet ned i kloakken – og ender til sidst i havet."
-        instructions="Træk og slip, så de de rette flugtruter passer til de rette mistænkte" levelId="flugtruten"
-        :completed="true" @continue="handleContinue">
+        instructions="Tegn pile, så flugtrutene passer." levelId="flugtruten" :completed="true"
+        @continue="handleContinue">
     <div>
         <img src="/images/escape_game.png" alt="" class="escape_game" />
     </div>

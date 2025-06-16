@@ -15,7 +15,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: top;
+    justify-content: center;
     width: 100vw;
     height: 100vh;
     background-color: transparent;
@@ -38,8 +38,8 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    right: 1%;
-    top: 91%;
+    right: 18%;
+    top: 71%;
     background-image: url('/images/button_long.png');
     background-color: transparent;
     width: 290px;

@@ -1,59 +1,60 @@
 <template>
     <div class="detective-board">
         <!-- Title Section -->
+        <div class="cork-board-container">
+            <!-- Start Over Button -->
+            <button class="start-over-button" @click="startOver">
+                Start forfra
+            </button>
 
-        <!-- Start Over Button -->
-        <button class="start-over-button" @click="startOver">
-            Start forfra
-        </button>
-
-        <div class="board-header">
-            <h1 class="board-title">
-                <span class="title-text">Mysteriet om mikroplasten</span>
-            </h1>
-        </div>
-
-        <!-- Post-it notes -->
-        <div v-for="item in boardItems" :key="item.id" class="post-it-wrapper" :style="{
-            top: item.top,
-            left: item.left,
-            transform: `rotate(${item.rotation}deg)`,
-        }">
-            <!-- Post-it note -->
-            <div class="post-it" :class="[
-                item.category,
-                {
-                    completed: completedLevels[item.id],
-                    available: isLevelAvailable(item.id),
-                    locked: !isLevelAvailable(item.id) && !completedLevels[item.id]
-                }
-            ]" :style="{
-                backgroundImage: `url(${item.image})`,
-                backgroundSize: 'contain',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center'
-            }" @click="navigateToCategory(item)">
-                <span class="post-it-text">{{ item.title }}</span>
+            <div class="board-header">
+                <h1 class="board-title">
+                    <span class="title-text">Mysteriet om mikroplasten</span>
+                </h1>
             </div>
-        </div>
 
-        <!-- Completion images positioned independently -->
-        <div v-for="item in boardItems" :key="`completion-${item.id}`">
-            <div v-if="completedLevels[item.id]" :data-completion-id="item.id" :class="[
-                'completion-image',
-                { 'bounce-in': newlyCompletedLevels.has(item.id) }
-            ]" :style="{
-                position: 'absolute',
-                top: item.completionPosition?.top || item.top,
-                left: item.completionPosition?.left || item.left,
-                '--final-scale': item.completionPosition?.scale || 1,
-                '--final-rotation': (item.completionPosition?.rotation || 0) + 'deg',
-                transform: getCompletionTransform(item),
-                backgroundImage: `url(${item.completionImage || '/images/red-pin.png'})`,
-            }" @animationend="onAnimationEnd(item.id)">
+            <!-- Post-it notes -->
+            <div v-for="item in boardItems" :key="item.id" class="post-it-wrapper" :style="{
+                top: item.top,
+                left: item.left,
+                transform: `rotate(${item.rotation}deg)`,
+            }">
+                <!-- Post-it note -->
+                <div class="post-it" :class="[
+                    item.category,
+                    {
+                        completed: completedLevels[item.id],
+                        available: isLevelAvailable(item.id),
+                        locked: !isLevelAvailable(item.id) && !completedLevels[item.id]
+                    }
+                ]" :style="{
+                    backgroundImage: `url(${item.image})`,
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center'
+                }" @click="navigateToCategory(item)">
+                    <span class="post-it-text">{{ item.title }}</span>
+                </div>
             </div>
-        </div>
 
+            <!-- Completion images positioned independently -->
+            <div v-for="item in boardItems" :key="`completion-${item.id}`">
+                <div v-if="completedLevels[item.id]" :data-completion-id="item.id" :class="[
+                    'completion-image',
+                    { 'bounce-in': newlyCompletedLevels.has(item.id) }
+                ]" :style="{
+                    position: 'absolute',
+                    top: item.completionPosition?.top || item.top,
+                    left: item.completionPosition?.left || item.left,
+                    '--final-scale': item.completionPosition?.scale || 1,
+                    '--final-rotation': (item.completionPosition?.rotation || 0) + 'deg',
+                    transform: getCompletionTransform(item),
+                    backgroundImage: `url(${item.completionImage || '/images/red-pin.png'})`,
+                }" @animationend="onAnimationEnd(item.id)">
+                </div>
+            </div>
+
+        </div>
         <!-- Persistent logo in bottom left -->
         <div class="logo-container">
             <img src="/images/logo_white.png" alt="Logo" class="logo" />
@@ -244,8 +245,8 @@ const boardItems = ref([
         id: 'flugtruten',
         title: 'Flugtruten',
         category: 'escape',
-        top: '55%',
-        left: '5%',
+        top: '53%',
+        left: '10%',
         rotation: 0,
         route: '/escape',
         image: '/images/post-it-yellow.png',
@@ -307,6 +308,18 @@ onMounted(() => {
     overflow: hidden;
     padding: 20px;
     box-sizing: border-box;
+    transform-origin: center;
+}
+
+.cork-board-container {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/cork-board.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
 }
 
 .start-over-button {
