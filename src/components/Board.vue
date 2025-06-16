@@ -54,6 +54,21 @@
                 </div>
             </div>
 
+            <!-- Final completion image - appears when all levels are done -->
+            <div v-if="allLevelsCompleted" class="final-completion-image" :class="{ 'fade-in': showFinalImage }">
+                <img src="/images/final_file.png" alt="Case Completed" />
+
+                <!-- Close button -->
+                <button class="close-button" @click="closeFinalImage">
+
+                </button>
+
+                <!-- Stamp that appears on top of the file -->
+                <div v-if="showStamp" class="stamp-image" :class="{ 'stamp-in': showStamp }">
+                    <img src="/images/stamp.png" alt="Case Stamped" />
+                </div>
+            </div>
+
         </div>
         <!-- Persistent logo in bottom left -->
         <div class="logo-container">
@@ -63,7 +78,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, computed, watch, nextTick } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 
 const router = useRouter()
@@ -73,6 +88,8 @@ const route = useRoute()
 const completedLevels = ref({})
 const newlyCompletedLevels = ref(new Set())
 const lastBoardVisit = ref(Date.now())
+const showFinalImage = ref(false)
+const showStamp = ref(false)
 
 // Define the order of levels
 const levelOrder = ['sporene', 'suspects', 'flugtruten', 'ofrene', 'solution']
@@ -85,6 +102,29 @@ const nextAvailableLevel = computed(() => {
         }
     }
     return null // All levels completed
+})
+
+// Computed property to check if all levels are completed
+const allLevelsCompleted = computed(() => {
+    return levelOrder.every(levelId => completedLevels.value[levelId])
+})
+
+// Watch for when all levels become completed
+watch(allLevelsCompleted, async (newVal) => {
+    if (newVal) {
+        // Small delay to let any animations finish
+        await nextTick()
+        setTimeout(() => {
+            showFinalImage.value = true
+            // Show stamp 1 second after the file appears
+            setTimeout(() => {
+                showStamp.value = true
+            }, 2000)
+        }, 2500)
+    } else {
+        showFinalImage.value = false
+        showStamp.value = false
+    }
 })
 
 // Function to check if a level is available
@@ -287,6 +327,12 @@ const navigateToCategory = (item) => {
     }
 }
 
+// Close final completion image
+const closeFinalImage = () => {
+    showFinalImage.value = false
+    showStamp.value = false
+}
+
 // Check for completion when returning from a level
 onMounted(() => {
     loadCompletedLevels()
@@ -337,7 +383,7 @@ onMounted(() => {
     padding: 20px;
     font-size: 20px;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 1100;
     border: none;
 }
 
@@ -501,6 +547,107 @@ onMounted(() => {
     transition: transform 0.2s ease;
 }
 
+/* Final completion image styles */
+.final-completion-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+.final-completion-image:not(.fade-in) {
+    transition: none;
+}
+
+.final-completion-image.fade-in {
+    opacity: 1;
+}
+
+.final-completion-image img {
+    width: 85vw;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.8));
+}
+
+/* Close button styles */
+.close-button {
+    background-image: url('/images/x.png');
+    background-size: contain;
+    position: absolute;
+    background-repeat: no-repeat;
+    top: 80px;
+    left: 1180px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+    transition: all 0.2s ease;
+    font-family: Arial, sans-serif;
+}
+
+.close-button:hover {
+    transform: scale(1.1);
+}
+
+/* Stamp animation */
+@keyframes stampIn {
+    0% {
+        transform: translate(-50%, -50%) scale(100);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+
+    70% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    85% {
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+.stamp-image {
+    position: absolute;
+    top: 54%;
+    left: 76%;
+    transform: translate(-50%, -50%);
+    z-index: 1100;
+    opacity: 0;
+}
+
+.stamp-image.stamp-in {
+    animation: stampIn 1s ease-out forwards;
+}
+
+.stamp-image img {
+    width: 450px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.01));
+}
+
 .logo-container {
     position: fixed;
     bottom: 35px;
@@ -511,21 +658,5 @@ onMounted(() => {
 .logo {
     width: 15vw;
     height: auto;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .board-header {
-        width: 300px;
-        height: 150px;
-    }
-
-    .title-text {
-        font-size: 1rem;
-    }
-
-    .subtitle-text {
-        font-size: 1.4rem;
-    }
 }
 </style>
