@@ -15,7 +15,7 @@
                 ...product.position,
                 transform: `scale(${product.scale})`
             }" @mousedown="startDrag(product, $event)">
-                <img :src="product.image" :alt="product.name" />
+                <img :src="product.image" :alt="product.name" :class="{ 'shake': product.shake }" />
             </div>
         </div>
 
@@ -69,6 +69,7 @@ const products = ref([
         image: '/images/products/toothpaste.png',
         containsMicroplastic: true,
         collected: false,
+        shake: false,
         scale: 1.3,
         position: { position: 'absolute', top: '-2%', left: '55%' }
     },
@@ -78,6 +79,9 @@ const products = ref([
         image: '/images/products/gum.png',
         containsMicroplastic: true,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 1,
         position: { position: 'absolute', top: '-6%', left: '65%' }
     },
@@ -87,6 +91,9 @@ const products = ref([
         image: '/images/products/paper.png',
         containsMicroplastic: false,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 1.8,
         position: { position: 'absolute', top: '-8%', left: '75%' }
     },
@@ -98,6 +105,9 @@ const products = ref([
         image: '/images/products/oil.png',
         containsMicroplastic: false,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 1.8,
         position: { position: 'absolute', top: '15%', left: '22%' }
     },
@@ -107,6 +117,9 @@ const products = ref([
         image: '/images/products/chips.png',
         containsMicroplastic: true,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 1.8,
         position: { position: 'absolute', top: '15%', left: '10%' }
     },
@@ -116,6 +129,9 @@ const products = ref([
         image: '/images/products/milk.png',
         containsMicroplastic: false,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 1.7,
         position: { position: 'absolute', top: '16%', left: '28%' }
     },
@@ -125,6 +141,9 @@ const products = ref([
         image: '/images/products/sponges.png',
         containsMicroplastic: true,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 1.8,
         position: { position: 'absolute', top: '17%', left: '85%' }
     },
@@ -134,6 +153,9 @@ const products = ref([
         image: '/images/products/cola.png',
         containsMicroplastic: true,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 1.7,
         position: { position: 'absolute', top: '19%', left: '42%' }
     },
@@ -143,6 +165,9 @@ const products = ref([
         image: '/images/products/pickles.png',
         containsMicroplastic: false,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 1.2,
         position: { position: 'absolute', top: '19%', left: '76%' }
     },
@@ -152,6 +177,9 @@ const products = ref([
         image: '/images/products/soda.png',
         containsMicroplastic: false,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 1.0,
         position: { position: 'absolute', top: '20%', left: '66%' }
     },
@@ -161,6 +189,9 @@ const products = ref([
         image: '/images/products/can.png',
         containsMicroplastic: false,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 1.2,
         position: { position: 'absolute', top: '22%', left: '57%' }
     },
@@ -172,6 +203,9 @@ const products = ref([
         image: '/images/products/newspaper.png',
         containsMicroplastic: false,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 3,
         position: { position: 'absolute', top: '48%', left: '15%' }
     },
@@ -181,6 +215,9 @@ const products = ref([
         image: '/images/products/teabag.png',
         containsMicroplastic: true,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 1,
         position: { position: 'absolute', top: '49%', left: '30%' }
     },
@@ -190,6 +227,9 @@ const products = ref([
         image: '/images/products/candle.png',
         containsMicroplastic: false,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 1.3,
         position: { position: 'absolute', top: '47%', left: '42%' }
     },
@@ -199,6 +239,9 @@ const products = ref([
         image: '/images/products/eggs.png',
         containsMicroplastic: false,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 2,
         position: { position: 'absolute', top: '48%', left: '60%' }
     },
@@ -208,10 +251,12 @@ const products = ref([
         image: '/images/products/pods.png',
         containsMicroplastic: true,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 1.5,
         position: { position: 'absolute', top: '47%', left: '80%' }
     },
-
 
     // BOTTOM SHELF 
     {
@@ -220,6 +265,9 @@ const products = ref([
         image: '/images/products/socks.png',
         containsMicroplastic: false,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 1.5,
         position: { position: 'absolute', top: '70%', left: '64%' }
     },
@@ -229,6 +277,9 @@ const products = ref([
         image: '/images/products/shorts.png',
         containsMicroplastic: true,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 1.9,
         position: { position: 'absolute', top: '70%', left: '32%' }
     },
@@ -238,6 +289,9 @@ const products = ref([
         image: '/images/products/shoes.png',
         containsMicroplastic: true,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 1.8,
         position: { position: 'absolute', top: '72%', left: '12%' }
     },
@@ -247,6 +301,9 @@ const products = ref([
         image: '/images/products/makeup.png',
         containsMicroplastic: true,
         collected: false,
+        wrongFlash: false,
+        shake: false,
+        showWrongIcon: false,
         scale: 1.5,
         position: { position: 'absolute', top: '74%', left: '50%' }
     }
@@ -297,12 +354,6 @@ const endDrag = (event) => {
     // Check if dropped on basket
     if (isOverBasket.value) {
         handleDrop()
-    } else {
-        // Not dropped on basket, animate return
-        const product = getDraggingProduct()
-        if (product && !product.containsMicroplastic) {
-            animateProductReturn(product)
-        }
     }
 
     // Clean up
@@ -330,24 +381,18 @@ const handleDrop = () => {
         saveProgress()
         console.log('Correct!', product.name)
     } else {
-        // Wrong! Product should bounce back
-        animateProductReturn(product)
+        // Wrong! Show multiple feedback types
+        showWrongFeedback(product)
         console.log('Wrong!', product.name)
     }
 }
 
-const animateProductReturn = (product) => {
-    // Find the product element and animate it
+const showWrongFeedback = (product) => {
+    // Shake the product
+    product.shake = true
     setTimeout(() => {
-        const productElements = document.querySelectorAll('.product')
-        const productElement = productElements[product.id - 1]
-        if (productElement) {
-            productElement.style.animation = 'bounce 0.5s ease-in-out'
-            setTimeout(() => {
-                productElement.style.animation = ''
-            }, 500)
-        }
-    }, 100)
+        product.shake = false
+    }, 600)
 }
 
 // Progress saving and loading
@@ -383,6 +428,7 @@ const restartLevel = () => {
     collectedItems.value = []
     products.value.forEach(product => {
         product.collected = false
+        product.shake = false
     })
 
     // Remove progress from localStorage
@@ -439,6 +485,8 @@ onUnmounted(() => {
     width: 8%;
     height: auto;
     aspect-ratio: 1;
+    position: relative;
+    transition: all 0.2s ease;
 }
 
 .product.dragging {
@@ -451,11 +499,79 @@ onUnmounted(() => {
     pointer-events: none;
 }
 
+/* Wrong feedback animations */
+.product img.shake {
+    animation: shake 0.6s ease-in-out;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-4px) rotate(-1deg);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(4px) rotate(1deg);
+    }
+}
+
 .product img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     pointer-events: none;
+}
+
+/* Wrong icon overlay */
+.wrong-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 40%;
+    background: rgba(255, 0, 0, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    animation: wrongIconPop 0.8s ease-out forwards;
+    z-index: 10;
+}
+
+@keyframes wrongIconPop {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+
+    30% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+
+    70% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
 }
 
 .drag-ghost {
