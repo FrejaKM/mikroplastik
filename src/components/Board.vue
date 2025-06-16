@@ -214,7 +214,7 @@ const startOver = () => {
             'levelProgress_escape',
             'levelProgress_ofrene',
             'levelProgress_suspects',
-            'levelProgress_skurk'
+            'levelProgress_solution',
             // Add more level progress keys as you create more levels
         ]
 
@@ -645,7 +645,7 @@ onMounted(() => {
     width: 450px;
     height: auto;
     object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.01));
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.));
 }
 
 .logo-container {
