@@ -38,8 +38,8 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    right: 18%;
-    top: 71%;
+    right: 12%;
+    top: 77%;
     background-image: url('/images/button_long.png');
     background-color: transparent;
     width: 290px;

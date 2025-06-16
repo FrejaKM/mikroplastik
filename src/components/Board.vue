@@ -3,7 +3,7 @@
         <!-- Title Section -->
         <div class="cork-board-container">
             <!-- Start Over Button -->
-            <button class="start-over-button" @click="startOver">
+            <button class="start-over-button" :class="{ 'pulse-button': shouldPulseStartOver }" @click="startOver">
                 Start forfra
             </button>
 
@@ -90,6 +90,7 @@ const newlyCompletedLevels = ref(new Set())
 const lastBoardVisit = ref(Date.now())
 const showFinalImage = ref(false)
 const showStamp = ref(false)
+const shouldPulseStartOver = ref(false)
 
 // Define the order of levels
 const levelOrder = ['sporene', 'suspects', 'flugtruten', 'ofrene', 'solution']
@@ -119,11 +120,13 @@ watch(allLevelsCompleted, async (newVal) => {
             // Show stamp 1 second after the file appears
             setTimeout(() => {
                 showStamp.value = true
+                shouldPulseStartOver.value = true
             }, 2000)
         }, 2500)
     } else {
         showFinalImage.value = false
         showStamp.value = false
+        shouldPulseStartOver.value = false
     }
 })
 
@@ -204,6 +207,9 @@ const getCompletionTransform = (item) => {
 // Start over function - now clears ALL progress and navigates to home
 const startOver = () => {
     if (confirm('Er du sikker på, at du vil starte forfra? Dette vil nulstille alle fremskridt.')) {
+        // Stop the pulsing
+        shouldPulseStartOver.value = false
+
         // Clear completed levels
         completedLevels.value = {}
         localStorage.removeItem('completedLevels')
@@ -389,6 +395,10 @@ onMounted(() => {
 
 .start-over-button:hover {
     scale: 1.05;
+}
+
+.start-over-button.pulse-button {
+    animation: pulse 2s ease-in-out infinite;
 }
 
 /* Header Section */
@@ -645,7 +655,7 @@ onMounted(() => {
     width: 450px;
     height: auto;
     object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.));
+    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.0));
 }
 
 .logo-container {
