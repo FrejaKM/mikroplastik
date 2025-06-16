@@ -20,7 +20,7 @@
         <div class="drop-zones">
             <!-- Good Habits Box -->
             <div class="drop-zone" @dragover.prevent @drop="dropItem('good', $event)">
-                <h3>Gode vaner ✓</h3>
+                <p>Gode vaner ✓</p>
                 <div class="dropped-items">
                     <img v-for="item in goodHabitsItems" :key="`good-${item.id}`" :src="item.image" :alt="item.name"
                         class="dropped-item" />
@@ -29,7 +29,7 @@
 
             <!-- Bad Habits Box -->
             <div class="drop-zone" @dragover.prevent @drop="dropItem('bad', $event)">
-                <h3>Dårlige vaner ✗</h3>
+                <p>Dårlige vaner ✗</p>
                 <div class="dropped-items">
                     <img v-for="item in badHabitsItems" :key="`bad-${item.id}`" :src="item.image" :alt="item.name"
                         class="dropped-item" />
@@ -239,15 +239,17 @@ export default {
     justify-content: center;
     align-items: center;
     height: 280px;
-    border: 3px solid black;
-    padding: 20px;
+    padding: 40px;
     background-color: transparent;
+    background-image: url('/images/drop-zone.png');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
-.drop-zone h3 {
+.drop-zone p {
     text-align: center;
     margin: 0 0 10px 0;
-    font-size: 24px;
+    font-size: 25px;
 }
 
 .dropped-items {

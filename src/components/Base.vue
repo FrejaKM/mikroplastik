@@ -175,7 +175,6 @@ export default {
 }
 
 .description {
-    rotation: -2deg;
     padding-top: 10px;
     width: 230px;
     height: 100%;
