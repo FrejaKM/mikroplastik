@@ -262,14 +262,14 @@ const boardItems = ref([
         id: 'solution',
         title: 'Opklaringen',
         category: 'solution',
-        top: '58%',
+        top: '52%',
         left: '65%',
         rotation: -3,
         route: '/solution',
         image: '/images/post-it-pink.png',
-        completionImage: '/images/shelf.png',
+        completionImage: '/images/habits.png',
         completionPosition: {
-            top: '80%',
+            top: '77%',
             left: '75%',
             scale: 10,
             rotation: 0
