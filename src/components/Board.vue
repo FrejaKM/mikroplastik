@@ -356,7 +356,7 @@ onMounted(() => {
     position: absolute;
     width: 100vw;
     height: 100vh;
-    background-color: transparent;
+    background-color: #F1F4F0;
     overflow: hidden;
     padding: 20px;
     box-sizing: border-box;

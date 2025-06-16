@@ -192,7 +192,7 @@ export default {
     padding: 20px;
     grid-column: 1 / 4;
     grid-row: 1 / 7;
-    background-color: #eef5ef;
+    background-color: #F1F4F0;
     display: flex;
     flex-direction: column;
     align-items: center;

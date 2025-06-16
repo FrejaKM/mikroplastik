@@ -11,6 +11,7 @@
 
 <style scoped>
 .file-container {
+    background-color: #F1F4F0;
     font-family: 'Coming Soon', cursive;
     display: flex;
     flex-direction: column;
@@ -18,7 +19,6 @@
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    background-color: transparent;
     padding: 20px;
     box-sizing: border-box;
 }
