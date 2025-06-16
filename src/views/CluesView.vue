@@ -23,7 +23,9 @@
         <div class="basket-container" @mouseover="onBasketHover" @mouseleave="onBasketLeave">
             <img src="/images/basket.png" alt="Shopping basket" class="basket" />
             <div class="basket-items">
-                <div v-for="item in collectedItems" :key="item.id" class="basket-item" :style="{
+                <div v-for="item in collectedItems" :key="item.id" :class="['basket-item', {
+                    'bounce': item.justAdded
+                }]" :style="{
                     top: '55%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)'
@@ -377,7 +379,19 @@ const handleDrop = () => {
 
     if (product.containsMicroplastic) {
         product.collected = true
-        collectedItems.value.push(product)
+
+        // Add bounce animation flag
+        const itemWithBounce = { ...product, justAdded: true }
+        collectedItems.value.push(itemWithBounce)
+
+        // Remove bounce flag after animation completes
+        setTimeout(() => {
+            const item = collectedItems.value.find(item => item.id === product.id)
+            if (item) {
+                item.justAdded = false
+            }
+        }, 800) // Match animation duration
+
         saveProgress()
         console.log('Correct!', product.name)
     } else {
@@ -633,6 +647,32 @@ onUnmounted(() => {
     height: 100%;
     object-fit: contain;
     background-color: transparent;
+}
+
+.basket-item.bounce {
+    animation: bounce 0.8s ease-out;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+
+    25% {
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+
+    75% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
 }
 
 .score {
