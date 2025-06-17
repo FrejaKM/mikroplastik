@@ -9,7 +9,8 @@
         <div class="items-container">
             <div v-for="item in gameItems" :key="item.id" class="game-item-slot">
                 <div v-if="![...goodHabitsItems.map(i => i.id), ...badHabitsItems.map(i => i.id)].includes(item.id)"
-                    class="game-item" :draggable="true" @dragstart="startDrag(item.id, $event)" @dragend="endDrag"
+                    class="game-item" :class="{ 'shake': item.shake }" :draggable="true"
+                    @dragstart="startDrag(item.id, $event)" @dragend="endDrag"
                     @touchstart="handleTouchStart(item.id, $event)" @touchmove="handleTouchMove"
                     @touchend="handleTouchEnd">
                     <img :src="item.image" :alt="item.name" />
@@ -25,7 +26,7 @@
                 <p>Gode vaner ✓</p>
                 <div class="dropped-items">
                     <img v-for="item in goodHabitsItems" :key="`good-${item.id}`" :src="item.image" :alt="item.name"
-                        class="dropped-item" />
+                        :class="['dropped-item', { 'bounce': item.justAdded }]" />
                 </div>
             </div>
 
@@ -35,7 +36,7 @@
                 <p>Dårlige vaner ✗</p>
                 <div class="dropped-items">
                     <img v-for="item in badHabitsItems" :key="`bad-${item.id}`" :src="item.image" :alt="item.name"
-                        class="dropped-item" />
+                        :class="['dropped-item', { 'bounce': item.justAdded }]" />
                 </div>
             </div>
         </div>
@@ -62,61 +63,71 @@ export default {
                     id: 'reusable-bottle',
                     name: 'Genbrugsflaske',
                     image: '/images/habits/bottle_metal.png',
-                    category: 'good'
+                    category: 'good',
+                    shake: false
                 },
                 {
                     id: 'plastic-bottle',
                     name: 'Plastikflaske',
                     image: '/images/habits/bottle_plastic.png',
-                    category: 'bad'
+                    category: 'bad',
+                    shake: false
                 },
                 {
                     id: 'canvas-bag',
                     name: 'Stofpose',
                     image: '/images/habits/totebag.png',
-                    category: 'good'
+                    category: 'good',
+                    shake: false
                 },
                 {
                     id: 'plastic-bag',
                     name: 'Plastikpose',
                     image: '/images/habits/plasticbag.png',
-                    category: 'bad'
+                    category: 'bad',
+                    shake: false
                 },
                 {
                     id: 'recycling-bin',
                     name: 'Affaldsortering',
                     image: '/images/habits/trash_empty.png',
-                    category: 'good'
+                    category: 'good',
+                    shake: false
                 },
                 {
                     id: 'metal-straws',
                     name: 'Metalsugerør',
                     image: '/images/habits/straws_metal.png',
-                    category: 'good'
+                    category: 'good',
+                    shake: false
                 },
                 {
                     id: 'plastic-straws',
                     name: 'Plastiksugerør',
                     image: '/images/habits/straws_plastic.png',
-                    category: 'bad'
+                    category: 'bad',
+                    shake: false
                 },
                 {
                     id: 'quality-clothing',
                     name: 'Kvalitetstøj',
                     image: '/images/habits/sweater.png',
-                    category: 'good'
+                    category: 'good',
+                    shake: false
                 },
                 {
                     id: 'full-bin',
                     name: 'Overfyldt skraldespand',
                     image: '/images/habits/trash_full.png',
-                    category: 'bad'
+                    category: 'bad',
+                    shake: false
                 },
                 {
                     id: 'fast-fashion',
                     name: 'Fast fashion',
                     image: '/images/habits/fleece.png',
-                    category: 'bad'
+                    category: 'bad',
+                    shake: false
                 }
             ],
             goodHabitsItems: [],
@@ -210,15 +221,28 @@ export default {
                 (zone === 'bad' && item.category === 'bad');
 
             if (isCorrect) {
+                // Add bounce animation flag to the item
+                const itemWithBounce = { ...item, justAdded: true };
+
                 if (zone === 'good') {
-                    this.goodHabitsItems.push(item);
+                    this.goodHabitsItems.push(itemWithBounce);
                 } else {
-                    this.badHabitsItems.push(item);
+                    this.badHabitsItems.push(itemWithBounce);
                 }
+
+                // Remove bounce flag after animation completes
+                setTimeout(() => {
+                    const targetArray = zone === 'good' ? this.goodHabitsItems : this.badHabitsItems;
+                    const placedItem = targetArray.find(i => i.id === item.id);
+                    if (placedItem) {
+                        placedItem.justAdded = false;
+                    }
+                }, 800); // Match animation duration
+
                 this.saveProgress();
             } else {
                 // Visual feedback for wrong placement
-                this.showWrongFeedback();
+                this.showWrongFeedback(item);
             }
 
             this.draggedItem = null;
@@ -256,10 +280,15 @@ export default {
             this.touchStartPos = null;
         },
 
-        showWrongFeedback() {
-            // Add visual feedback for wrong placement
-            // You can implement a shake animation or color change here
-            console.log('Wrong placement!');
+        showWrongFeedback(item) {
+            // Add shake animation to the original item
+            const originalItem = this.gameItems.find(i => i.id === item.id);
+            if (originalItem) {
+                originalItem.shake = true;
+                setTimeout(() => {
+                    originalItem.shake = false;
+                }, 600); // Match shake animation duration
+            }
         },
 
         saveProgress() {
@@ -284,6 +313,11 @@ export default {
             this.badHabitsItems = [];
             this.draggedItem = null;
             this.dragOverZone = null;
+
+            // Reset shake animations for all items
+            this.gameItems.forEach(item => {
+                item.shake = false;
+            });
 
             // Remove progress from localStorage
             localStorage.removeItem('levelProgress_solution');
@@ -430,5 +464,60 @@ export default {
 
 .wrong-placement {
     animation: wrongPlacement 0.3s ease-in-out;
+}
+
+/* Shake animation for wrong items (similar to CluesView) */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-4px) rotate(-1deg);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(4px) rotate(1deg);
+    }
+}
+
+.game-item.shake {
+    animation: shake 0.6s ease-in-out;
+}
+
+/* Bounce animation for correct items (similar to CluesView) */
+@keyframes bounce {
+    0% {
+        transform: scale(0.5);
+    }
+
+    25% {
+        transform: scale(1.2);
+    }
+
+    50% {
+        transform: scale(0.9);
+    }
+
+    75% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.dropped-item.bounce {
+    animation: bounce 0.8s ease-out;
 }
 </style>
