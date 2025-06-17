@@ -55,7 +55,10 @@
             </div>
 
             <!-- Final completion image - appears when all levels are done -->
-            <div v-if="allLevelsCompleted" class="final-completion-image" :class="{ 'fade-in': showFinalImage }">
+            <div v-if="allLevelsCompleted" class="final-completion-image" :class="{
+                'fade-in': showFinalImage,
+                'no-pointer-events': !showFinalImage
+            }">
                 <img src="/images/games+completion/final_file.png" alt="Case Completed" />
 
                 <!-- Close button -->
@@ -574,6 +577,11 @@ onMounted(() => {
 
 .final-completion-image.fade-in {
     opacity: 1;
+}
+
+/* Critical fix: Disable pointer events when hidden */
+.final-completion-image.no-pointer-events {
+    pointer-events: none;
 }
 
 .final-completion-image img {
