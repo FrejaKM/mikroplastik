@@ -9,7 +9,6 @@
 
             <div class="board-header">
                 <h1 class="board-title">
-                    <span class="title-text">Mysteriet om mikroplasten</span>
                 </h1>
             </div>
 
@@ -421,23 +420,7 @@ onMounted(() => {
     align-items: center;
 }
 
-.board-title {
-    position: absolute;
-    top: 35%;
-    left: 22%;
-    margin: 0;
-    z-index: 6;
-}
 
-.title-text {
-    color: #000000;
-    font-size: 2.2rem;
-    line-height: 1.2;
-    font-weight: 400;
-    font-family: 'Coming Soon', cursive;
-    text-align: center;
-    font-weight: normal;
-}
 
 /* Post-it wrapper for positioning */
 .post-it-wrapper {
@@ -491,7 +474,7 @@ onMounted(() => {
     font-weight: 400;
     text-align: center;
     font-family: 'Coming Soon', cursive;
-    font-size: 1.6vw;
+    font-size: 20px;
     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
     z-index: 2;
     padding: 5px;
