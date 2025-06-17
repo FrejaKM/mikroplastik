@@ -1,6 +1,6 @@
 <template>
     <div class="file-container">
-        <img src="/images/file.png" alt="" class="file-image" />
+        <img src="/images/games+completion/file.png" alt="" class="file-image" />
 
         <button class="start-button">
             <router-link to="/board">Start efterforskningen -></router-link>
@@ -40,7 +40,7 @@
     display: inline-block;
     right: 12%;
     top: 77%;
-    background-image: url('/images/button_long.png');
+    background-image: url('/images/ui/button_long.png');
     background-color: transparent;
     width: 290px;
     background-size: 100%;

@@ -1,5 +1,5 @@
 <template>
-    <Base postItUrl="/images/post-it-pink.png" title="Opklaringen"
+    <Base postItUrl="/images/post-it/post-it-pink.png" title="Opklaringen"
         description="Sagen er næsten opklaret. Du har identificeret og fundet mikroplasten, fulgt dens vej ud mod havet og set, hvem det går ud over. <br> <br> Men én vigtig brik mangler: Hvordan forhindrer vi, at sagen gentager sig?"
         instructions="Ved hjælp af gode vaner kan vi alle være med til at stoppe mikroplast fra at ende i havet. Sorter tingene i gode og dårlige vaner."
         levelId="solution" :completed="gameCompleted" @continue="handleContinue">
@@ -241,7 +241,7 @@ export default {
     height: 280px;
     padding: 40px;
     background-color: transparent;
-    background-image: url('/images/drop-zone.png');
+    background-image: url('/images/ui/drop-zone.png');
     background-size: contain;
     background-repeat: no-repeat;
 }

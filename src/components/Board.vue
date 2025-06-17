@@ -49,14 +49,14 @@
                     '--final-scale': item.completionPosition?.scale || 1,
                     '--final-rotation': (item.completionPosition?.rotation || 0) + 'deg',
                     transform: getCompletionTransform(item),
-                    backgroundImage: `url(${item.completionImage || '/images/red-pin.png'})`,
+                    backgroundImage: `url(${item.completionImage || '/images/ui/red-pin.png'})`,
                 }" @animationend="onAnimationEnd(item.id)">
                 </div>
             </div>
 
             <!-- Final completion image - appears when all levels are done -->
             <div v-if="allLevelsCompleted" class="final-completion-image" :class="{ 'fade-in': showFinalImage }">
-                <img src="/images/final_file.png" alt="Case Completed" />
+                <img src="/images/games+completion/final_file.png" alt="Case Completed" />
 
                 <!-- Close button -->
                 <button class="close-button" @click="closeFinalImage">
@@ -65,14 +65,14 @@
 
                 <!-- Stamp that appears on top of the file -->
                 <div v-if="showStamp" class="stamp-image" :class="{ 'stamp-in': showStamp }">
-                    <img src="/images/stamp.png" alt="Case Stamped" />
+                    <img src="/images/ui/stamp.png" alt="Case Stamped" />
                 </div>
             </div>
 
         </div>
         <!-- Persistent logo in bottom left -->
         <div class="logo-container">
-            <img src="/images/logo_white.png" alt="Logo" class="logo" />
+            <img src="/images/ui/logo_white.png" alt="Logo" class="logo" />
         </div>
     </div>
 </template>
@@ -244,8 +244,8 @@ const boardItems = ref([
         left: '13%',
         rotation: -5,
         route: '/victims',
-        image: '/images/post-it-green.png',
-        completionImage: '/images/victims.png',
+        image: '/images/post-it/post-it-green.png',
+        completionImage: '/images/games+completion/victims.png',
         completionPosition: {
             top: '37%',
             left: '18%',
@@ -261,8 +261,8 @@ const boardItems = ref([
         left: '56%',
         rotation: 5,
         route: '/clues',
-        image: '/images/post-it-sand.png',
-        completionImage: '/images/kvittering.png',
+        image: '/images/post-it/post-it-sand.png',
+        completionImage: '/images/games+completion/kvittering.png',
         completionPosition: {
             top: '57%',
             left: '48%',
@@ -278,8 +278,8 @@ const boardItems = ref([
         left: '87%',
         rotation: 15,
         route: '/suspects',
-        image: '/images/post-it-lime.png',
-        completionImage: '/images/poster.png',
+        image: '/images/post-it/post-it-lime.png',
+        completionImage: '/images/games+completion/poster.png',
         completionPosition: {
             top: '39%',
             left: '85%',
@@ -295,8 +295,8 @@ const boardItems = ref([
         left: '10%',
         rotation: 0,
         route: '/escape',
-        image: '/images/post-it-yellow.png',
-        completionImage: '/images/map.png',
+        image: '/images/post-it/post-it-yellow.png',
+        completionImage: '/images/games+completion/map.png',
         completionPosition: {
             top: '73%',
             left: '16%',
@@ -312,8 +312,8 @@ const boardItems = ref([
         left: '65%',
         rotation: -3,
         route: '/solution',
-        image: '/images/post-it-pink.png',
-        completionImage: '/images/habits.png',
+        image: '/images/post-it/post-it-pink.png',
+        completionImage: '/images/games+completion/habits.png',
         completionPosition: {
             top: '77%',
             left: '75%',
@@ -367,7 +367,7 @@ onMounted(() => {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
     width: 100%;
     height: 100%;
-    background-image: url('/images/cork-board.png');
+    background-image: url('/images/ui/cork-board.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -376,7 +376,7 @@ onMounted(() => {
 
 .start-over-button {
     position: absolute;
-    background-image: url('/images/button_short.png');
+    background-image: url('/images/ui/button_short.png');
     top: 20px;
     background-color: transparent;
     left: 15px;
@@ -408,7 +408,7 @@ onMounted(() => {
     left: 50%;
     transform: translateX(-50%);
     z-index: 5;
-    background-image: url('/images/torn_paper.png');
+    background-image: url('/images/ui/torn_paper.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -585,7 +585,7 @@ onMounted(() => {
 
 /* Close button styles */
 .close-button {
-    background-image: url('/images/x.png');
+    background-image: url('/images/ui/x.png');
     background-size: contain;
     position: absolute;
     background-repeat: no-repeat;

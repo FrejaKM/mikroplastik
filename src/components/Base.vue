@@ -61,7 +61,7 @@ export default {
         </div>
 
         <!-- Notesbog -->
-        <div class="notebook" style="background-image: url('/images/notebook_page.png')">
+        <div class="notebook" style="background-image: url('/images/ui/notebook_page.png')">
             <div class="description" v-html="description"></div>
         </div>
 
@@ -99,7 +99,7 @@ export default {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(6, 1fr);
     gap: 20px;
-    background-image: url('/images/cork-board.png');
+    background-image: url('/images/ui/cork-board.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -215,7 +215,7 @@ export default {
 
 /* Back to board button (top left) */
 .back-to-board-button {
-    background-image: url('/images/button_long.png');
+    background-image: url('/images/ui/button_long.png');
     top: 20px;
     background-color: transparent;
     width: 290px;
@@ -237,7 +237,7 @@ export default {
 
 /* Level restart button (top right) */
 .level-restart-button {
-    background-image: url('/images/button_short.png');
+    background-image: url('/images/ui/button_short.png');
     top: 20px;
     background-color: transparent;
     left: 15px;
@@ -271,7 +271,7 @@ export default {
 /* Instruktionstekst */
 .instructions {
     background-color: transparent;
-    background-image: url('/images/instructions_bg.png');
+    background-image: url('/images/ui/instructions_bg.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -318,7 +318,7 @@ export default {
     cursor: pointer;
     animation: pulse 2s ease-in-out infinite;
 
-    background-image: url('/images/button_short.png');
+    background-image: url('/images/ui/button_short.png');
     width: 280px;
     height: 100px;
     font-family: 'Coming Soon', cursive;

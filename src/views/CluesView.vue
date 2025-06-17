@@ -1,12 +1,12 @@
 <template>
-    <Base postItUrl="/images/post-it-sand.png" title="Sporene" description="Jagten på mikroplasten starter i supermarkedet. Her sniger det sig ned i indkøbskurven – tit uden at vi lægger mærke til det.<br>Nogle produkter indeholder mikroplast fra starten, mens andre bliver til mikroplast, når de slides op og nedbrydes.
+    <Base postItUrl="/images/post-it/post-it-sand.png" title="Sporene" description="Jagten på mikroplasten starter i supermarkedet. Her sniger det sig ned i indkøbskurven – tit uden at vi lægger mærke til det.<br>Nogle produkter indeholder mikroplast fra starten, mens andre bliver til mikroplast, når de slides op og nedbrydes.
         "
         instructions="Træk de produkter ned i kurven, som indeholder mikroplast, eller som kan blive til mikroplast, når de slides op og nedbrydes."
         levelId="sporene" :completed="gameCompleted" @continue="continueToNext" @restart="restartLevel">
 
     <div class="game-container">
         <div class="shelf-container">
-            <img src="/images/shelves.png" alt="Shelf" class="shelf-background" />
+            <img src="/images/ui/shelves.png" alt="Shelf" class="shelf-background" />
 
             <div v-for="product in products" :key="product.id" :class="['product', {
                 'dragging': draggingProduct === product.id,
@@ -21,7 +21,7 @@
 
         <!-- Shopping basket -->
         <div class="basket-container" @mouseover="onBasketHover" @mouseleave="onBasketLeave">
-            <img src="/images/basket.png" alt="Shopping basket" class="basket" />
+            <img src="/images/ui/basket.png" alt="Shopping basket" class="basket" />
             <div class="basket-items">
                 <div v-for="item in collectedItems" :key="item.id" :class="['basket-item', {
                     'bounce': item.justAdded
