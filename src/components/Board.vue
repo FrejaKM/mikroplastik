@@ -309,7 +309,7 @@ const boardItems = ref([
         id: 'solution',
         title: 'Opklaringen',
         category: 'solution',
-        top: '52%',
+        top: '50%',
         left: '65%',
         rotation: -3,
         route: '/solution',
