@@ -1,11 +1,11 @@
 <template>
     <div class="file-container">
-        <img src="/images/games+completion/file.png" alt="" class="file-image" />
-
-        <button class="start-button">
-            <router-link to="/board">Start efterforskningen -></router-link>
-        </button>
-
+        <div class="file-image-wrapper">
+            <img src="/images/games+completion/file.png" alt="" class="file-image" />
+            <button class="start-button">
+                <router-link to="/board"></router-link>
+            </button>
+        </div>
     </div>
 </template>
 
@@ -21,36 +21,33 @@
     box-sizing: border-box;
 }
 
+.file-image-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
 .file-image {
     display: block;
     width: 140vh;
+    max-width: 90vw;
+    height: auto;
 }
 
 .start-button {
     position: absolute;
-    border: 1px solid #000000;
-    padding: var(--padding-small) var(--padding-medium);
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    right: var(--padding-large);
-    bottom: clamp(20px, 2vh, 40px);
-    background-image: url('/images/ui/button_long.png');
+    border: none;
+    background-image: url('/images/ui/begin_btn.png');
     background-color: transparent;
-    width: auto;
-    height: var(--button-height);
     background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
-    font-family: 'Coming Soon', cursive;
-    font-weight: 300;
-    color: rgb(0, 0, 0);
-    padding: var(--padding-medium);
-    font-size: var(--font-medium);
-    cursor: pointer;
     z-index: 1000;
-    border: none;
+    cursor: pointer;
     animation: pulse 2s ease-in-out infinite;
+    background-size: contain;
+    right: 5%;
+    bottom: 5%;
+    width: 30vh;
+    height: 10vh;
 }
 
 .start-button:hover {
