@@ -385,8 +385,6 @@ onMounted(() => {
     font-weight: 300;
     background-repeat: no-repeat;
     color: rgb(0, 0, 0);
-    padding: var(--padding-small);
-    font-size: var(--font-medium);
     cursor: pointer;
     z-index: 1100;
     border: none;
