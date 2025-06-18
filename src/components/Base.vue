@@ -61,7 +61,7 @@ export default {
         </div>
 
         <!-- Notesbog -->
-        <div class="notebook" style="background-image: url('/images/ui/notebook_page.png')">
+        <div class="notebook" style="background-image: url('/images/ui/clues_text.png')">
             <div class="description" v-html="description"></div>
         </div>
 
@@ -154,8 +154,8 @@ export default {
     grid-row: 3 / 6;
     padding-top: clamp(30px, 4vh, 60px);
     padding-left: clamp(20px, 3vw, 50px);
-    width: clamp(250px, 25vw, 350px);
-    height: clamp(300px, 35vh, 450px);
+    width: clamp(350px, 30vw, 500px);
+    height: clamp(400px, 50vh, 600px);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -164,11 +164,13 @@ export default {
     overflow: hidden;
     justify-self: center;
     align-self: center;
+    background-color: aqua;
 }
 
 .description {
-    padding-top: clamp(8px, 1vh, 15px);
-    width: clamp(180px, 18vw, 250px);
+    opacity: 0;
+    padding-top: clamp(10px, 2vh, 20px);
+    width: 65%;
     height: 100%;
     font-size: var(--font-medium);
     font-family: 'Coming Soon', cursive;
