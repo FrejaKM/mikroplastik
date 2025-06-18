@@ -356,7 +356,6 @@ export default {
 <style scoped>
 .game-container {
     width: 100%;
-    background-color: aquamarine;
     height: 90%;
     padding: var(--padding-medium);
     padding-top: 0;
@@ -370,7 +369,6 @@ export default {
     padding: var(--padding-medium);
     padding-bottom: 0;
     padding-top: 0;
-    background-color: tomato;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -380,7 +378,6 @@ export default {
 .game-item-slot {
     width: auto;
     height: 15vh;
-    background-color: thistle;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -411,7 +408,6 @@ export default {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    background-color: lightpink;
     column-gap: var(--padding-small); /* or any value you want for the space between */
 }
 
@@ -442,7 +438,6 @@ export default {
 .drop-zone p {
     text-align: center;
     padding: 0;
-    background-color: aquamarine;
     font-size: var(--font-large);
     flex-shrink: 0; /* Prevent the title from shrinking */
 }
