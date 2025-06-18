@@ -554,7 +554,7 @@ onMounted(() => {
 }
 
 .final-completion-image img {
-    width: 80vw;
+    width: 140vh;
     height: auto;
     object-fit: contain;
     filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.8));
