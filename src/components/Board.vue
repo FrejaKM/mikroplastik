@@ -629,13 +629,13 @@ onMounted(() => {
 
 .logo-container {
     position: fixed;
-    bottom: var(--padding-large);
-    right: var(--padding-large);
-    z-index: 1000;
+    bottom: var(--padding-medium);
+    right: var(--padding-medium);
+    z-index: 100;
 }
 
 .logo {
-    width: clamp(80px, 15vw, 200px);
+    width: 30vh;
     height: auto;
 }
 

@@ -422,7 +422,7 @@ export default {
     min-height: 45vh; /* Ensure it doesn't shrink */
     max-height: 45vh; /* Ensure it doesn't grow */
     min-width: 60vh;
-    max-width: 6vh;
+    max-width: 60vh;
     background-color: transparent;
     padding-top: 10px;
     background-image: url('/images/ui/drop-zone.png');
