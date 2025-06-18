@@ -16,18 +16,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: top;
     width: 100vw;
     height: 100vh;
-    padding: 20px;
+    padding-top: 10px;
     box-sizing: border-box;
 }
 
 .file-image {
     display: block;
-    width: 85vw;
+    width: 80vw;
     height: auto;
-    margin-bottom: 20px;
 }
 
 
@@ -38,12 +37,12 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    right: 12vw;
-    top: 80vh;
+    right: 40px;
+    bottom: 4px;
     background-image: url('/images/ui/button_long.png');
     background-color: transparent;
-    width: 15vw;
-    height: 10vh;
+    width: auto;
+    height: 12vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -51,7 +50,7 @@
     font-weight: 300;
     color: rgb(0, 0, 0);
     padding: 20px 20px;
-    font-size: 20px;
+    font-size: 1.5vh;
     cursor: pointer;
     z-index: 1000;
     border: none;

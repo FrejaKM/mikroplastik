@@ -38,11 +38,9 @@ export default {
 
 <style scoped>
 .suspects_game {
-  width: 85%;
-  height: 100%;
-  object-fit: cover;
-  scale: 0.95;
   display: block;
-  justify-self: center;
+  margin: 0 auto;
+  width: 60vw;
+  object-fit: cover;
 }
 </style>
