@@ -43,7 +43,7 @@ export default {
 .victims_game {
     display: block;
     margin: 0 auto;
-    width: 120vh;
+    width: 110vh;
     object-fit: cover;
 }
 </style>
