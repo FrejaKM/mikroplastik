@@ -416,8 +416,8 @@ onMounted(() => {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    width: clamp(400px, 50vw, 900px);
-    height: clamp(200px, 30vh, 300px);
+    width: 50vw;
+    height: 20vh;
     justify-content: center;
     align-items: center;
 }
