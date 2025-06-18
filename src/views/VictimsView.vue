@@ -3,8 +3,8 @@
     postItUrl="/images/post-it/post-it-green.png" 
     instructionsUrl="/images/ui/instructions_victims.png"
     notebookUrl="/images/ui/victims_notebook.png"
-    title="Flugtruten"
-    levelId="flugtruten" 
+    title="Ofrene"
+    levelId="ofrene" 
     :completed="true"
     @continue="handleContinue">
     <div>

@@ -68,9 +68,8 @@ export default {
             <!-- Navigation buttons inside game content -->
             <div class="game-buttons">
                 <button class="back-to-board-button" @click="goToBoard">
-                    <- Tilbage til opslagstavlen </button>
+                   </button>
                         <button class="level-restart-button" @click="$emit('restart')">
-                            Start forfra
                         </button>
             </div>
 
@@ -84,7 +83,7 @@ export default {
         </div>
 
         <!-- Fortsæt-knap -->
-        <button v-if="completed" class="continue-button" @click="handleContinue">Fortsæt -></button>
+        <button v-if="completed" class="continue-button" @click="handleContinue"></button>
     </div>
 </template>
 
@@ -108,15 +107,15 @@ export default {
 /* Post-it */
 .post-it-wrapper {
     background-size: contain;
-    position: absolute;
-    width: clamp(180px, 20vw, 300px);
-    height: clamp(180px, 20vw, 300px);
-    z-index: 100;
-    top: var(--padding-large);
-    right: clamp(40px, 6vw, 100px);
+    width: 30vh;
+    height: 30vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    grid-column: 4 / 5;
+    grid-row: 1 / 3;
+    justify-self: center;
+    align-self: start;
 }
 
 .post-it {
@@ -133,8 +132,6 @@ export default {
     background-position: center;
     box-sizing: border-box;
 }
-
-
 
 /* Notesbog */
 .notebook {
@@ -171,31 +168,26 @@ export default {
 /* Game buttons container */
 .game-buttons {
     position: absolute;
-    left: 0;
-    right: 0;
+    top: var(--padding-small);
+    left: var(--padding-small);
+    right: var(--padding-small);
     display: flex;
     justify-content: space-between;
-    padding: 0 var(--padding-medium);
     z-index: 100;
 }
 
 /* Back to board button (top left) */
 .back-to-board-button {
-    background-image: url('/images/ui/button_long.png');
-    top: var(--padding-medium);
+    background-image: url('/images/ui/back_btn.png');
     background-color: transparent;
-    width: var(--button-width-long);
-    height: var(--button-height);
-    background-size: 100%;
-    font-family: 'Coming Soon', cursive;
-    font-weight: 300;
+    background-size: contain;
     background-repeat: no-repeat;
-    color: rgb(0, 0, 0);
-    padding: var(--padding-small) var(--padding-medium);
-    font-size: var(--font-medium);
+    background-position: center;
+    border: none;
     cursor: pointer;
     z-index: 1000;
-    border: none;
+    width: 30vh;
+    height: 10vh;
 }
 
 .back-to-board-button:hover {
@@ -204,22 +196,16 @@ export default {
 
 /* Level restart button (top right) */
 .level-restart-button {
-    background-image: url('/images/ui/button_short.png');
-    top: var(--padding-medium);
+    background-image: url('/images/ui/startover_btn.png');
     background-color: transparent;
-    left: var(--padding-small);
-    width: var(--button-width-short);
-    height: var(--button-height);
-    background-size: 100%;
-    font-family: 'Coming Soon', cursive;
-    font-weight: 300;
+    background-size: contain;
     background-repeat: no-repeat;
-    color: rgb(0, 0, 0);
-    padding: var(--padding-small) var(--padding-medium);
-    font-size: var(--font-medium);
+    background-position: center;
+    border: none;
     cursor: pointer;
     z-index: 1000;
-    border: none;
+    width: 22vh;
+    height: 10vh;
 }
 
 .level-restart-button:hover {
@@ -276,17 +262,10 @@ export default {
     background-position: center;
     cursor: pointer;
     animation: pulse 2s ease-in-out infinite;
-    background-image: url('/images/ui/button_short.png');
-    width: var(--button-width-short);
-    height: var(--button-height);
-    font-family: 'Coming Soon', cursive;
-    background-repeat: no-repeat;
-    color: rgb(0, 0, 0);
-    padding: var(--padding-small) var(--padding-medium);
-    font-size: var(--font-medium);
-    cursor: pointer;
+    background-image: url('/images/ui/continue_btn.png');
+    width: 30vh;
+    height: 10vh;
     z-index: 1000;
-    border: none;
     justify-self: center;
     align-self: center;
 }

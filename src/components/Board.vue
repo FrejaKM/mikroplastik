@@ -439,6 +439,7 @@ onMounted(() => {
     justify-content: center;
     z-index: 10;
     position: relative;
+    scale: 1.3;
 }
 
 .post-it:hover {
@@ -465,7 +466,7 @@ onMounted(() => {
 
 .post-it.locked:hover {
     transform: none !important;
-    scale: 1 !important;
+    scale: 1.3 !important;
 }
 
 
