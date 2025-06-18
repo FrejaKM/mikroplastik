@@ -4,7 +4,7 @@
         <div class="cork-board-container">
             <!-- Start Over Button -->
             <button class="start-over-button" :class="{ 'pulse-button': shouldPulseStartOver }" @click="startOver">
-                Start forfra
+                
             </button>
 
             <div class="board-header">
@@ -377,12 +377,8 @@ onMounted(() => {
 
 .start-over-button {
     position: absolute;
-    background-image: url('/images/ui/button_short.png');
-    top: var(--padding-small);
     background-color: transparent;
     left: var(--padding-small);
-    width: var(--button-width-short);
-    height: var(--button-height);
     background-size: 100%;
     background-position: center;
     font-family: 'Coming Soon', cursive;
@@ -394,6 +390,11 @@ onMounted(() => {
     cursor: pointer;
     z-index: 1100;
     border: none;
+    background-image: url('/images/ui/startover_btn.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 22vh;
+    height: 10vh;
 }
 
 .start-over-button:hover {
@@ -415,8 +416,8 @@ onMounted(() => {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    width: clamp(300px, 50vw, 800px);
-    height: clamp(100px, 20vh, 200px);
+    width: 60vh;
+    height: clamp(150px, 25vh, 250px);
     justify-content: center;
     align-items: center;
 }
