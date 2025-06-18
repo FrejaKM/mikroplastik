@@ -84,7 +84,7 @@
   
   /* Game specific sizes */
   --basket-size: clamp(120px, 16vw, 200px);
-  --completion-image-size: clamp(30px, 3vw, 50px);
+  --completion-image-size: clamp(30px, 3vw, 45px);
 }
 
 /* Media queries for different screen sizes */
