@@ -1,8 +1,12 @@
 <template>
-    <Base postItUrl="/images/post-it/post-it-green.png" title="Ofrene"
-        description="Når mikroplast ender i havet, går det ud over dyrene. Heldigvis har forskerne fundet ud af, at mikroplasten ikke kommer videre i fødekæden, som man ellers frygtede. Det betyder, at vi ikke skal være bange for at få mikroplast i kroppen, når vi spiser fisk."
-        instructions="Træk og slip mikroplasten hen på havdyrene og se, hvordan det reagerer på at spise det."
-        levelId="ofrene" :completed="true" @continue="handleContinue">
+    <Base 
+    postItUrl="/images/post-it/post-it-yellow.png" 
+    notebookUrl="/images/ui/victims_notebook.png"
+    title="Flugtruten"
+    instructions="Tegn pile, så flugtruterne passer." 
+    levelId="flugtruten" 
+    :completed="true"
+    @continue="handleContinue">
     <div>
         <img src="/images/games+completion/victims_game.png" alt="" class="victims_game" />
     </div>

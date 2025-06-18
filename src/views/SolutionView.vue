@@ -1,8 +1,13 @@
 <template>
-    <Base postItUrl="/images/post-it/post-it-pink.png" title="Opklaringen"
-        description="Sagen er næsten opklaret. Du har identificeret og fundet mikroplasten, fulgt dens vej ud mod havet og set, hvem det går ud over. <br> <br> Men én vigtig brik mangler: Hvordan forhindrer vi, at sagen gentager sig?"
-        instructions="Ved hjælp af gode vaner kan vi alle være med til at stoppe mikroplast fra at ende i havet. Sorter tingene i gode og dårlige vaner."
-        levelId="solution" :completed="gameCompleted" @continue="handleContinue" @restart="resetGame">
+    <Base 
+    postItUrl="/images/post-it/post-it-pink.png"
+    notebookUrl="/images/ui/solution_notebook.png"
+    title="Opklaringen"
+    instructions="Ved hjælp af gode vaner kan vi alle være med til at stoppe mikroplast fra at ende i havet. Sorter tingene i gode og dårlige vaner."
+    levelId="solution" 
+    :completed="gameCompleted" 
+    @continue="handleContinue" 
+    @restart="resetGame">
 
     <div class="game-container">
         <!-- Game Items Area -->

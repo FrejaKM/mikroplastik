@@ -1,8 +1,14 @@
 <template>
-    <Base postItUrl="/images/post-it/post-it-sand.png" title="Sporene" description="Jagten på mikroplasten starter i supermarkedet. Her sniger det sig ned i indkøbskurven – tit uden at vi lægger mærke til det. Nogle produkter indeholder mikroplast fra starten (primær mikroplast), mens andre bliver til mikroplast, når de nedbrydes (sekundær mikroplast).
-        "
-        instructions="Træk de produkter ned i kurven, som indeholder primær mikroplast, eller som indeholder plast, der kan blive til sekundær mikroplast ved nedbrydning."
-        levelId="sporene" :completed="gameCompleted" @continue="continueToNext" @restart="restartLevel">
+    <Base 
+    postItUrl="/images/post-it/post-it-sand.png" 
+    notebookUrl="/images/ui/clues_notebook.png"
+    title="Sporene" 
+    instructions="Træk de produkter ned i kurven, som indeholder primær mikroplast, eller som indeholder plast, der kan blive til sekundær mikroplast ved nedbrydning."
+    levelId="sporene" 
+    :completed="gameCompleted" 
+    @continue="continueToNext" 
+    @restart="restartLevel">
+
 
     <div class="game-container">
         <div class="shelf-container">

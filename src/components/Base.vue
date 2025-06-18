@@ -3,11 +3,11 @@ export default {
     name: "Base",
     props: {
         postItUrl: { type: String, required: true },
+        notebookUrl: { type: String, required: true },
         title: { type: String, required: true },
-        description: { type: String, required: true },
         instructions: { type: String, required: true },
         completed: { type: Boolean, default: false },
-        levelId: { type: String, required: true } // Add levelId prop
+        levelId: { type: String, required: true }
     },
     mounted() {
         // Check if level was already completed
@@ -60,9 +60,8 @@ export default {
             </div>
         </div>
 
-        <!-- Notesbog -->
-        <div class="notebook" style="background-image: url('/images/ui/clues_text.png')">
-            <div class="description" v-html="description"></div>
+        <!-- Notesbog with dynamic background -->
+        <div class="notebook" :style="{ backgroundImage: `url(${notebookUrl})` }">
         </div>
 
         <!-- Spillets indhold -->
@@ -154,8 +153,8 @@ export default {
     grid-row: 3 / 6;
     padding-top: clamp(30px, 4vh, 60px);
     padding-left: clamp(20px, 3vw, 50px);
-    width: clamp(350px, 30vw, 500px);
-    height: clamp(400px, 50vh, 600px);
+    width: clamp(350px, 30vh, 500px);
+    height: 100%;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -164,21 +163,6 @@ export default {
     overflow: hidden;
     justify-self: center;
     align-self: center;
-    background-color: aqua;
-}
-
-.description {
-    opacity: 0;
-    padding-top: clamp(10px, 2vh, 20px);
-    width: 65%;
-    height: 100%;
-    font-size: var(--font-medium);
-    font-family: 'Coming Soon', cursive;
-    text-align: left;
-    font-weight: 300;
-    color: black;
-    box-sizing: border-box;
-    line-height: 1.5;
 }
 
 /* Spilindhold */

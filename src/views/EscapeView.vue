@@ -1,8 +1,12 @@
 <template>
-    <Base postItUrl="/images/post-it/post-it-yellow.png" title="Flugtruten"
-        description="Mikroplast er snu! Det rejser gennem vandet fra vores håndvaske, brusere og vaskemaskiner. På gaden skylles det med regnvandet ned i kloakken – og ender til sidst i havet."
-        instructions="Tegn pile, så flugtruterne passer." levelId="flugtruten" :completed="true"
-        @continue="handleContinue">
+    <Base 
+    postItUrl="/images/post-it/post-it-yellow.png" 
+    notebookUrl="/images/ui/escape_notebook.png"
+    title="Flugtruten"
+    instructions="Tegn pile, så flugtruterne passer." 
+    levelId="flugtruten" 
+    :completed="true"
+    @continue="handleContinue">
     <div>
         <img src="/images/games+completion/escape_game.png" alt="" class="escape_game" />
     </div>
