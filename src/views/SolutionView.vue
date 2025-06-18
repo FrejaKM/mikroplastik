@@ -368,7 +368,8 @@ export default {
 .items-container {
     padding: var(--padding-medium);
     padding-bottom: 0;
-    padding-top: 0;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
     width: 100%;
     display: flex;
     justify-content: space-between;
