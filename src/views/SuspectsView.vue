@@ -1,9 +1,9 @@
 <template>
   <Base 
     postItUrl="/images/post-it/post-it-lime.png" 
+    instructionsUrl="/images/ui/instructions_suspects.png"
     notebookUrl="/images/ui/suspects_notebook.png"
     title="De mistænkte" 
-    instructions="Som en del af efterforskningen skal der tages billeder af de mistænkte i sagen. Træk de stykker plastik ind, som har mikroplast-størrelse (mindre end 5 millimeter)."
     levelId="suspects" 
     :completed="true" 
     @continue="handleContinue">
@@ -44,7 +44,7 @@ export default {
 .suspects_game {
   display: block;
   margin: 0 auto;
-  width: 60vw;
+  width: 100vh;
   object-fit: cover;
 }
 </style>

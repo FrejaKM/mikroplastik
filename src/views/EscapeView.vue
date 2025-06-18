@@ -1,9 +1,9 @@
 <template>
     <Base 
     postItUrl="/images/post-it/post-it-yellow.png" 
+    instructionsUrl="/images/ui/instructions_escape.png"
     notebookUrl="/images/ui/escape_notebook.png"
     title="Flugtruten"
-    instructions="Tegn pile, så flugtruterne passer." 
     levelId="flugtruten" 
     :completed="true"
     @continue="handleContinue">
@@ -46,7 +46,7 @@ export default {
 .escape_game {
     display: block;
     margin: 0 auto;
-    width: 100%;
+    width: 120vh;
     object-fit: cover;
 }
 </style>

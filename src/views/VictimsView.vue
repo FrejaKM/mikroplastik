@@ -1,9 +1,9 @@
 <template>
     <Base 
-    postItUrl="/images/post-it/post-it-yellow.png" 
+    postItUrl="/images/post-it/post-it-green.png" 
+    instructionsUrl="/images/ui/instructions_victims.png"
     notebookUrl="/images/ui/victims_notebook.png"
     title="Flugtruten"
-    instructions="Tegn pile, så flugtruterne passer." 
     levelId="flugtruten" 
     :completed="true"
     @continue="handleContinue">
@@ -43,7 +43,7 @@ export default {
 .victims_game {
     display: block;
     margin: 0 auto;
-    width: 100%;
+    width: 120vh;
     object-fit: cover;
 }
 </style>

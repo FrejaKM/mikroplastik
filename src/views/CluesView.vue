@@ -1,9 +1,9 @@
 <template>
     <Base 
     postItUrl="/images/post-it/post-it-sand.png" 
+    instructionsUrl="/images/ui/instructions_clues.png"
     notebookUrl="/images/ui/clues_notebook.png"
     title="Sporene" 
-    instructions="Træk de produkter ned i kurven, som indeholder primær mikroplast, eller som indeholder plast, der kan blive til sekundær mikroplast ved nedbrydning."
     levelId="sporene" 
     :completed="gameCompleted" 
     @continue="continueToNext" 

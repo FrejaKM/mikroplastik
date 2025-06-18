@@ -32,7 +32,6 @@
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center'
                 }" @click="navigateToCategory(item)">
-                    <span class="post-it-text">{{ item.title }}</span>
                 </div>
             </div>
 
@@ -469,16 +468,7 @@ onMounted(() => {
     scale: 1 !important;
 }
 
-.post-it-text {
-    color: #000000;
-    font-weight: 400;
-    text-align: center;
-    font-family: 'Coming Soon', cursive;
-    font-size: var(--post-it-font);
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
-    z-index: 2;
-    padding: var(--padding-small);
-}
+
 
 /* Pulsing animation for available levels */
 @keyframes pulse {

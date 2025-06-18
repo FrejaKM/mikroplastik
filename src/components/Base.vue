@@ -4,8 +4,8 @@ export default {
     props: {
         postItUrl: { type: String, required: true },
         notebookUrl: { type: String, required: true },
+        instructionsUrl: { type: String, required: true },
         title: { type: String, required: true },
-        instructions: { type: String, required: true },
         completed: { type: Boolean, default: false },
         levelId: { type: String, required: true }
     },
@@ -56,7 +56,6 @@ export default {
         <!-- Post-it note -->
         <div class="post-it-wrapper">
             <div class="post-it" :style="{ backgroundImage: `url(${postItUrl})` }">
-                <div class="post-it-text">{{ title }}</div>
             </div>
         </div>
 
@@ -80,8 +79,7 @@ export default {
             </div>
 
             <!-- Instruktioner -->
-            <div class="instructions">
-                {{ instructions }}
+            <div class="instructions" :style="{ backgroundImage: `url(${instructionsUrl})` }">
             </div>
         </div>
 
@@ -102,7 +100,7 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    padding: var(--padding-medium);
+    padding: var(--padding-small);
     box-sizing: border-box;
     overflow: hidden;
 }
@@ -136,16 +134,7 @@ export default {
     box-sizing: border-box;
 }
 
-.post-it-text {
-    color: #000000;
-    font-weight: 400;
-    text-align: center;
-    font-family: 'Coming Soon', cursive;
-    font-size: var(--post-it-font);
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
-    z-index: 2;
-    padding: var(--padding-small);
-}
+
 
 /* Notesbog */
 .notebook {
@@ -167,7 +156,7 @@ export default {
 
 /* Spilindhold */
 .game-content {
-    padding: var(--padding-medium);
+    padding: var(--padding-small);
     grid-column: 1 / 4;
     grid-row: 1 / 7;
     background-color: #F1F4F0;
@@ -255,20 +244,14 @@ export default {
     background-position: center;
     font-family: 'Coming Soon', cursive;
     font-weight: 300;
-    color: rgb(0, 0, 0);
     padding: var(--padding-large);
-    font-size: var(--font-large);
     border: none;
-    line-height: 1.5;
-    text-align: center;
     box-sizing: border-box;
+    height: 15vh;
     width: 100%;
-    max-width: clamp(600px, 80vw, 1050px);
-    min-height: clamp(100px, 12vh, 150px);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
 }
 
 @keyframes pulse {

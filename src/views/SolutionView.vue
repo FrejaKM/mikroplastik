@@ -1,9 +1,9 @@
 <template>
     <Base 
     postItUrl="/images/post-it/post-it-pink.png"
+    instructionsUrl="/images/ui/instructions_solution.png"
     notebookUrl="/images/ui/solution_notebook.png"
     title="Opklaringen"
-    instructions="Ved hjælp af gode vaner kan vi alle være med til at stoppe mikroplast fra at ende i havet. Sorter tingene i gode og dårlige vaner."
     levelId="solution" 
     :completed="gameCompleted" 
     @continue="handleContinue" 
