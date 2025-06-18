@@ -79,7 +79,7 @@ const products = ref([
         collected: false,
         shake: false,
         scale: 1.3,
-        position: { position: 'absolute', top: '-2%', left: '55%' }
+        position: { position: 'absolute', top: '-1%', left: '55%' }
     },
     {
         id: 9,
@@ -91,7 +91,7 @@ const products = ref([
         shake: false,
         showWrongIcon: false,
         scale: 1,
-        position: { position: 'absolute', top: '-6%', left: '65%' }
+        position: { position: 'absolute', top: '-5%', left: '65%' }
     },
     {
         id: 18,
@@ -103,7 +103,7 @@ const products = ref([
         shake: false,
         showWrongIcon: false,
         scale: 1.8,
-        position: { position: 'absolute', top: '-8%', left: '75%' }
+        position: { position: 'absolute', top: '-6%', left: '75%' }
     },
 
     // SECOND SHELF 
@@ -117,7 +117,7 @@ const products = ref([
         shake: false,
         showWrongIcon: false,
         scale: 1.8,
-        position: { position: 'absolute', top: '15%', left: '22%' }
+        position: { position: 'absolute', top: '18%', left: '22%' }
     },
     {
         id: 8,
@@ -129,7 +129,7 @@ const products = ref([
         shake: false,
         showWrongIcon: false,
         scale: 1.8,
-        position: { position: 'absolute', top: '15%', left: '10%' }
+        position: { position: 'absolute', top: '18%', left: '10%' }
     },
     {
         id: 13,
@@ -141,7 +141,7 @@ const products = ref([
         shake: false,
         showWrongIcon: false,
         scale: 1.7,
-        position: { position: 'absolute', top: '16%', left: '28%' }
+        position: { position: 'absolute', top: '19%', left: '28%' }
     },
     {
         id: 1,
@@ -153,7 +153,7 @@ const products = ref([
         shake: false,
         showWrongIcon: false,
         scale: 1.8,
-        position: { position: 'absolute', top: '17%', left: '85%' }
+        position: { position: 'absolute', top: '20%', left: '85%' }
     },
     {
         id: 2,
@@ -165,7 +165,7 @@ const products = ref([
         shake: false,
         showWrongIcon: false,
         scale: 1.7,
-        position: { position: 'absolute', top: '19%', left: '42%' }
+        position: { position: 'absolute', top: '21%', left: '42%' }
     },
     {
         id: 16,
@@ -177,7 +177,7 @@ const products = ref([
         shake: false,
         showWrongIcon: false,
         scale: 1.2,
-        position: { position: 'absolute', top: '19%', left: '76%' }
+        position: { position: 'absolute', top: '22%', left: '76%' }
     },
     {
         id: 14,
@@ -189,7 +189,7 @@ const products = ref([
         shake: false,
         showWrongIcon: false,
         scale: 1.0,
-        position: { position: 'absolute', top: '20%', left: '66%' }
+        position: { position: 'absolute', top: '22%', left: '66%' }
     },
     {
         id: 17,
@@ -201,7 +201,7 @@ const products = ref([
         shake: false,
         showWrongIcon: false,
         scale: 1.2,
-        position: { position: 'absolute', top: '22%', left: '57%' }
+        position: { position: 'absolute', top: '24%', left: '57%' }
     },
 
     // THIRD SHELF 
@@ -487,7 +487,7 @@ onUnmounted(() => {
 
 <style scoped>
 .shelf-container {
-    width: clamp(600px, 70vw, 950px);
+    width: 95vh;
     position: relative;
     height: auto;
 }
@@ -599,10 +599,10 @@ onUnmounted(() => {
 
 .basket-container {
     position: absolute;
-    height: var(--basket-size);
-    width: var(--basket-size);
-    right: clamp(40px, 6vw, 80px);
-    bottom: clamp(120px, 18vh, 200px);
+    height: 20vh;
+    width: 16vw;
+    right: 7vw;
+    bottom: 20vh;
     rotate: 10deg;
 }
 
@@ -664,7 +664,7 @@ onUnmounted(() => {
 .score {
     font-family: 'Coming Soon', cursive;
     position: absolute;
-    bottom: clamp(-30px, -4vh, -50px);
+    bottom: -4vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;

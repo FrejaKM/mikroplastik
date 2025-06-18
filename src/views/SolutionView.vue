@@ -355,24 +355,32 @@ export default {
 
 <style scoped>
 .game-container {
-    width: clamp(600px, 90vw, 1000px);
+    width: 100%;
+    background-color: aquamarine;
     height: 90%;
-    padding-top: var(--padding-large);
+    padding: var(--padding-medium);
+    padding-top: 0;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-between;
 }
 
 .items-container {
+    padding: var(--padding-medium);
+    padding-bottom: 0;
+    padding-top: 0;
+    background-color: tomato;
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     flex-wrap: wrap;
-    margin-top: var(--padding-small);
 }
 
 .game-item-slot {
     width: auto;
-    height: clamp(80px, 10vh, 120px);
+    height: 15vh;
+    background-color: thistle;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -394,7 +402,7 @@ export default {
 
 .game-item img {
     width: auto;
-    height: clamp(80px, 10vh, 120px);
+    height: 15vh;
     object-fit: contain;
     pointer-events: none;
 }
@@ -402,46 +410,58 @@ export default {
 .drop-zones {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    justify-content: center;
     align-items: center;
-    gap: var(--padding-medium);
-    margin-bottom: var(--padding-medium);
-}
-
-.drop-zone {
-    justify-content: center;
-    align-items: center;
-    height: clamp(200px, 25vh, 280px);
-    padding: var(--padding-large);
-    background-color: transparent;
-    background-image: url('/images/ui/drop-zone.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    transition: transform 0.2s ease, filter 0.2s ease;
+    background-color: lightpink;
+    column-gap: var(--padding-small); /* or any value you want for the space between */
 }
 
 .drop-zone.drag-over {
     transform: scale(1.02);
     filter: brightness(1.1);
 }
+.drop-zone {
+    justify-content: center; /* Changed from center to flex-start */
+    align-items: center;
+    min-height: 45vh; /* Ensure it doesn't shrink */
+    max-height: 45vh; /* Ensure it doesn't grow */
+    min-width: 60vh;
+    max-width: 6vh;
+    background-color: transparent;
+    padding-top: 10px;
+    background-image: url('/images/ui/drop-zone.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    display: flex;
+    column-gap: 0;
+    row-gap: 0;
+    flex-direction: column;
+    overflow: hidden; /* Prevent content from expanding the zone */
+}
 
 .drop-zone p {
     text-align: center;
-    margin: 0 0 var(--padding-small) 0;
+    padding: 0;
+    background-color: aquamarine;
     font-size: var(--font-large);
+    flex-shrink: 0; /* Prevent the title from shrinking */
 }
 
 .dropped-items {
     display: flex;
     flex-wrap: wrap;
-    column-gap: var(--padding-large);
+    column-gap: 0;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Changed to flex-start for better alignment */
+    flex: 1; /* Take up remaining space */
+    overflow-y: auto; /* Allow scrolling if too many items */
+    overflow-x: hidden;
+    padding: var(--padding-small); /* Add some padding */
+    width: 100%; /* Ensure full width usage */
 }
-
 .dropped-item {
     width: auto;
-    height: clamp(80px, 10vh, 120px);
+    height: 15vh;;
     object-fit: contain;
     transition: transform 0.3s ease;
 }
