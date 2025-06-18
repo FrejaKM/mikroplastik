@@ -360,7 +360,7 @@ onMounted(() => {
     height: 100vh;
     background-color: #F1F4F0;
     overflow: hidden;
-    padding: var(--padding-medium);
+    padding: var(--padding-small);
     box-sizing: border-box;
     transform-origin: center;
 }
@@ -379,12 +379,13 @@ onMounted(() => {
 .start-over-button {
     position: absolute;
     background-image: url('/images/ui/button_short.png');
-    top: var(--padding-medium);
+    top: var(--padding-small);
     background-color: transparent;
     left: var(--padding-small);
     width: var(--button-width-short);
     height: var(--button-height);
     background-size: 100%;
+    background-position: center;
     font-family: 'Coming Soon', cursive;
     font-weight: 300;
     background-repeat: no-repeat;
