@@ -637,4 +637,11 @@ onMounted(() => {
     width: clamp(80px, 15vw, 200px);
     height: auto;
 }
+
+@media (max-width: 1700px) {
+    .completion-image {
+        width: 40px !important;
+        height: 40px !important;
+    }
+}
 </style>
