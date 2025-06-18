@@ -2,9 +2,7 @@
     <div class="file-container">
         <div class="file-image-wrapper">
             <img src="/images/games+completion/file.png" alt="" class="file-image" />
-            <button class="start-button">
-                <router-link to="/board"></router-link>
-            </button>
+            <router-link to="/board" class="start-button"></router-link>
         </div>
     </div>
 </template>
