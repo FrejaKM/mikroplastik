@@ -350,9 +350,9 @@ export default {
 
 <style scoped>
 .game-container {
-    width: 1000px;
+    width: clamp(600px, 90vw, 1000px);
     height: 90%;
-    padding-top: 40px;
+    padding-top: var(--padding-large);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -362,12 +362,12 @@ export default {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: 10px;
+    margin-top: var(--padding-small);
 }
 
 .game-item-slot {
     width: auto;
-    height: 120px;
+    height: clamp(80px, 10vh, 120px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -389,7 +389,7 @@ export default {
 
 .game-item img {
     width: auto;
-    height: 120px;
+    height: clamp(80px, 10vh, 120px);
     object-fit: contain;
     pointer-events: none;
 }
@@ -399,15 +399,15 @@ export default {
     grid-template-columns: 1fr 1fr;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-    margin-bottom: 20px;
+    gap: var(--padding-medium);
+    margin-bottom: var(--padding-medium);
 }
 
 .drop-zone {
     justify-content: center;
     align-items: center;
-    height: 280px;
-    padding: 40px;
+    height: clamp(200px, 25vh, 280px);
+    padding: var(--padding-large);
     background-color: transparent;
     background-image: url('/images/ui/drop-zone.png');
     background-size: contain;
@@ -422,21 +422,21 @@ export default {
 
 .drop-zone p {
     text-align: center;
-    margin: 0 0 10px 0;
-    font-size: 25px;
+    margin: 0 0 var(--padding-small) 0;
+    font-size: var(--font-large);
 }
 
 .dropped-items {
     display: flex;
     flex-wrap: wrap;
-    column-gap: 40px;
+    column-gap: var(--padding-large);
     justify-content: center;
     align-items: center;
 }
 
 .dropped-item {
     width: auto;
-    height: 120px;
+    height: clamp(80px, 10vh, 120px);
     object-fit: contain;
     transition: transform 0.3s ease;
 }
@@ -447,16 +447,12 @@ export default {
 
 /* Animations */
 @keyframes wrongPlacement {
-
-    0%,
-    100% {
+    0%, 100% {
         transform: translateX(0);
     }
-
     25% {
         transform: translateX(-5px);
     }
-
     75% {
         transform: translateX(5px);
     }
@@ -468,24 +464,13 @@ export default {
 
 /* Shake animation for wrong items (similar to CluesView) */
 @keyframes shake {
-
-    0%,
-    100% {
+    0%, 100% {
         transform: translateX(0);
     }
-
-    10%,
-    30%,
-    50%,
-    70%,
-    90% {
+    10%, 30%, 50%, 70%, 90% {
         transform: translateX(-4px) rotate(-1deg);
     }
-
-    20%,
-    40%,
-    60%,
-    80% {
+    20%, 40%, 60%, 80% {
         transform: translateX(4px) rotate(1deg);
     }
 }
@@ -499,19 +484,15 @@ export default {
     0% {
         transform: scale(0.5);
     }
-
     25% {
         transform: scale(1.2);
     }
-
     50% {
         transform: scale(0.9);
     }
-
     75% {
         transform: scale(1.1);
     }
-
     100% {
         transform: scale(1);
     }

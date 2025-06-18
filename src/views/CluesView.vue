@@ -481,7 +481,7 @@ onUnmounted(() => {
 
 <style scoped>
 .shelf-container {
-    width: 850px;
+    width: clamp(600px, 70vw, 950px);
     position: relative;
     height: auto;
 }
@@ -496,7 +496,7 @@ onUnmounted(() => {
     cursor: grab;
     z-index: 5;
     user-select: none;
-    width: 8%;
+    width: clamp(40px, 6vw, 80px);
     height: auto;
     aspect-ratio: 1;
     position: relative;
@@ -519,24 +519,13 @@ onUnmounted(() => {
 }
 
 @keyframes shake {
-
-    0%,
-    100% {
+    0%, 100% {
         transform: translateX(0);
     }
-
-    10%,
-    30%,
-    50%,
-    70%,
-    90% {
+    10%, 30%, 50%, 70%, 90% {
         transform: translateX(-4px) rotate(-1deg);
     }
-
-    20%,
-    40%,
-    60%,
-    80% {
+    20%, 40%, 60%, 80% {
         transform: translateX(4px) rotate(1deg);
     }
 }
@@ -571,17 +560,14 @@ onUnmounted(() => {
         transform: translate(-50%, -50%) scale(0);
         opacity: 0;
     }
-
     30% {
         transform: translate(-50%, -50%) scale(1.2);
         opacity: 1;
     }
-
     70% {
         transform: translate(-50%, -50%) scale(1);
         opacity: 1;
     }
-
     100% {
         transform: translate(-50%, -50%) scale(0);
         opacity: 0;
@@ -590,10 +576,8 @@ onUnmounted(() => {
 
 .drag-ghost {
     position: fixed;
-    width: 8vw;
-    height: 8vw;
-    max-width: 200px;
-    max-height: 200px;
+    width: clamp(40px, 6vw, 80px);
+    height: clamp(40px, 6vw, 80px);
     pointer-events: none;
     z-index: 1000;
     opacity: 1;
@@ -609,10 +593,10 @@ onUnmounted(() => {
 
 .basket-container {
     position: absolute;
-    height: 20vh;
-    width: 16vw;
-    right: 7vw;
-    bottom: 20vh;
+    height: var(--basket-size);
+    width: var(--basket-size);
+    right: clamp(40px, 6vw, 80px);
+    bottom: clamp(120px, 18vh, 200px);
     rotate: 10deg;
 }
 
@@ -657,19 +641,15 @@ onUnmounted(() => {
     0% {
         transform: translate(-50%, -50%) scale(0.5);
     }
-
     25% {
         transform: translate(-50%, -50%) scale(1.2);
     }
-
     50% {
         transform: translate(-50%, -50%) scale(0.9);
     }
-
     75% {
         transform: translate(-50%, -50%) scale(1.1);
     }
-
     100% {
         transform: translate(-50%, -50%) scale(1);
     }
@@ -678,11 +658,11 @@ onUnmounted(() => {
 .score {
     font-family: 'Coming Soon', cursive;
     position: absolute;
-    bottom: -40px;
+    bottom: clamp(-30px, -4vh, -50px);
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-    font-size: 25px;
+    font-size: var(--font-large);
     color: #000000;
 }
 </style>

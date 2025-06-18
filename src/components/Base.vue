@@ -98,12 +98,12 @@ export default {
     height: 100vh;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(6, 1fr);
-    gap: 20px;
+    gap: var(--padding-medium);
     background-image: url('/images/ui/cork-board.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    padding: 20px;
+    padding: var(--padding-medium);
     box-sizing: border-box;
     overflow: hidden;
 }
@@ -112,24 +112,19 @@ export default {
 .post-it-wrapper {
     background-size: contain;
     position: absolute;
-    width: 250px;
-    /* Fixed width */
-    height: 250px;
-    /* Adjust as needed for your post-it image */
+    width: clamp(180px, 20vw, 300px);
+    height: clamp(180px, 20vw, 300px);
     z-index: 100;
-    top: 30px;
-    right: 75px;
+    top: var(--padding-large);
+    right: clamp(40px, 6vw, 100px);
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Remove 5vw height, use px for consistency */
 }
 
 .post-it {
     width: 100%;
-    /* Fixed width */
     height: 100%;
-    /* Match wrapper height */
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -147,38 +142,35 @@ export default {
     font-weight: 400;
     text-align: center;
     font-family: 'Coming Soon', cursive;
-    font-size: 1.6vw;
+    font-size: var(--post-it-font);
     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
     z-index: 2;
-    padding: 5px;
+    padding: var(--padding-small);
 }
-
 
 /* Notesbog */
 .notebook {
     grid-column: 4 / 5;
     grid-row: 3 / 6;
-    padding-top: 50px;
-    padding-left: 40px;
-    width: 300px;
-    height: 400px;
-    background-size: 320px 420px;
+    padding-top: clamp(30px, 4vh, 60px);
+    padding-left: clamp(20px, 3vw, 50px);
+    width: clamp(250px, 25vw, 350px);
+    height: clamp(300px, 35vh, 450px);
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     display: flex;
     justify-content: center;
     overflow: hidden;
     justify-self: center;
-    /* Center horizontally in grid cell */
     align-self: center;
-    /* Center vertically in grid cell (optional) */
 }
 
 .description {
-    padding-top: 10px;
-    width: 230px;
+    padding-top: clamp(8px, 1vh, 15px);
+    width: clamp(180px, 18vw, 250px);
     height: 100%;
-    font-size: 20px;
+    font-size: var(--font-medium);
     font-family: 'Coming Soon', cursive;
     text-align: left;
     font-weight: 300;
@@ -189,14 +181,13 @@ export default {
 
 /* Spilindhold */
 .game-content {
-    padding: 20px;
+    padding: var(--padding-medium);
     grid-column: 1 / 4;
     grid-row: 1 / 7;
     background-color: #F1F4F0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     justify-content: space-between;
     overflow: hidden;
     position: relative;
@@ -209,23 +200,24 @@ export default {
     right: 0;
     display: flex;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 var(--padding-medium);
     z-index: 100;
 }
 
 /* Back to board button (top left) */
 .back-to-board-button {
     background-image: url('/images/ui/button_long.png');
-    top: 20px;
+    top: var(--padding-medium);
     background-color: transparent;
-    width: 290px;
+    width: var(--button-width-long);
+    height: var(--button-height);
     background-size: 100%;
     font-family: 'Coming Soon', cursive;
     font-weight: 300;
     background-repeat: no-repeat;
     color: rgb(0, 0, 0);
-    padding: 20px 20px;
-    font-size: 20px;
+    padding: var(--padding-small) var(--padding-medium);
+    font-size: var(--font-medium);
     cursor: pointer;
     z-index: 1000;
     border: none;
@@ -238,17 +230,18 @@ export default {
 /* Level restart button (top right) */
 .level-restart-button {
     background-image: url('/images/ui/button_short.png');
-    top: 20px;
+    top: var(--padding-medium);
     background-color: transparent;
-    left: 15px;
-    width: 240px;
+    left: var(--padding-small);
+    width: var(--button-width-short);
+    height: var(--button-height);
     background-size: 100%;
     font-family: 'Coming Soon', cursive;
     font-weight: 300;
     background-repeat: no-repeat;
     color: rgb(0, 0, 0);
-    padding: 20px 20px;
-    font-size: 20px;
+    padding: var(--padding-small) var(--padding-medium);
+    font-size: var(--font-medium);
     cursor: pointer;
     z-index: 1000;
     border: none;
@@ -264,8 +257,7 @@ export default {
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding-top: 60px;
-    /* Add space for the buttons */
+    padding-top: clamp(60px, 8vh, 100px);
 }
 
 /* Instruktionstekst */
@@ -278,30 +270,28 @@ export default {
     font-family: 'Coming Soon', cursive;
     font-weight: 300;
     color: rgb(0, 0, 0);
-    padding: 40px 40px;
-    font-size: 25px;
+    padding: var(--padding-large);
+    font-size: var(--font-large);
     border: none;
     line-height: 1.5;
     text-align: center;
     box-sizing: border-box;
     width: 100%;
-    max-width: 1050px;
-    min-height: 130px;
+    max-width: clamp(600px, 80vw, 1050px);
+    min-height: clamp(100px, 12vh, 150px);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 0 auto;
+    margin: 0 auto;
 }
 
 @keyframes pulse {
     0% {
         transform: scale(1);
     }
-
     50% {
         transform: scale(1.1);
     }
-
     100% {
         transform: scale(1);
     }
@@ -317,23 +307,19 @@ export default {
     background-position: center;
     cursor: pointer;
     animation: pulse 2s ease-in-out infinite;
-
     background-image: url('/images/ui/button_short.png');
-    width: 280px;
-    height: 100px;
+    width: var(--button-width-short);
+    height: var(--button-height);
     font-family: 'Coming Soon', cursive;
     background-repeat: no-repeat;
     color: rgb(0, 0, 0);
-    padding: 20px 20px;
-    padding-top: 10px;
-    font-size: 20px;
+    padding: var(--padding-small) var(--padding-medium);
+    font-size: var(--font-medium);
     cursor: pointer;
     z-index: 1000;
     border: none;
     justify-self: center;
-    /* Center horizontally in grid cell */
     align-self: center;
-    /* Center vertically in grid cell (optional) */
 }
 
 .continue-button:hover {

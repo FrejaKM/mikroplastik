@@ -56,6 +56,60 @@
   font-style: italic;
 }
 
+/* CSS Custom Properties for Responsive Scaling */
+:root {
+  /* Base scaling factors */
+  --scale-factor: 1vw;
+  --font-scale: 1vw;
+  
+  /* Standard sizes using viewport units */
+  --post-it-size: 10vw;
+  --post-it-font: clamp(12px, 1.6vw, 24px);
+  
+  /* Button sizes */
+  --button-height: clamp(60px, 8vh, 120px);
+  --button-width-short: clamp(200px, 20vw, 280px);
+  --button-width-long: clamp(250px, 25vw, 350px);
+  
+  /* Spacing and positioning */
+  --padding-small: clamp(10px, 1vw, 20px);
+  --padding-medium: clamp(20px, 2vw, 40px);
+  --padding-large: clamp(30px, 3vw, 60px);
+  
+  /* Font sizes */
+  --font-small: clamp(14px, 1.2vw, 18px);
+  --font-medium: clamp(18px, 1.6vw, 24px);
+  --font-large: clamp(20px, 2vw, 28px);
+  --font-xlarge: clamp(24px, 2.4vw, 32px);
+  
+  /* Game specific sizes */
+  --basket-size: clamp(120px, 16vw, 200px);
+  --completion-image-size: clamp(30px, 3vw, 50px);
+}
+
+/* Media queries for different screen sizes */
+@media screen and (min-width: 1920px) {
+  :root {
+    --scale-factor: 0.8vw; /* Smaller scaling for large screens */
+    --font-scale: 0.8vw;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  :root {
+    --scale-factor: 1.2vw; /* Larger scaling for smaller screens */
+    --font-scale: 1.2vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --scale-factor: 2vw; /* Much larger scaling for tablets */
+    --font-scale: 2vw;
+    --post-it-size: 15vw;
+  }
+}
+
 .coming-soon-regular {
   font-family: 'Coming Soon', cursive;
   font-weight: 400;

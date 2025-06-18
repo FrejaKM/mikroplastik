@@ -360,7 +360,7 @@ onMounted(() => {
     height: 100vh;
     background-color: #F1F4F0;
     overflow: hidden;
-    padding: 20px;
+    padding: var(--padding-medium);
     box-sizing: border-box;
     transform-origin: center;
 }
@@ -379,17 +379,18 @@ onMounted(() => {
 .start-over-button {
     position: absolute;
     background-image: url('/images/ui/button_short.png');
-    top: 20px;
+    top: var(--padding-medium);
     background-color: transparent;
-    left: 15px;
-    width: 230px;
+    left: var(--padding-small);
+    width: var(--button-width-short);
+    height: var(--button-height);
     background-size: 100%;
     font-family: 'Coming Soon', cursive;
     font-weight: 300;
     background-repeat: no-repeat;
     color: rgb(0, 0, 0);
-    padding: 20px;
-    font-size: 20px;
+    padding: var(--padding-small);
+    font-size: var(--font-medium);
     cursor: pointer;
     z-index: 1100;
     border: none;
@@ -406,7 +407,7 @@ onMounted(() => {
 /* Header Section */
 .board-header {
     position: absolute;
-    top: 9px;
+    top: 0.5vh;
     left: 50%;
     transform: translateX(-50%);
     z-index: 5;
@@ -414,19 +415,17 @@ onMounted(() => {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    width: 50vw;
-    height: 20vh;
+    width: clamp(300px, 50vw, 800px);
+    height: clamp(100px, 20vh, 200px);
     justify-content: center;
     align-items: center;
 }
 
-
-
 /* Post-it wrapper for positioning */
 .post-it-wrapper {
     position: absolute;
-    width: 10vw;
-    height: 10vw;
+    width: var(--post-it-size);
+    height: var(--post-it-size);
     z-index: 10;
 }
 
@@ -474,10 +473,10 @@ onMounted(() => {
     font-weight: 400;
     text-align: center;
     font-family: 'Coming Soon', cursive;
-    font-size: 20px;
+    font-size: var(--post-it-font);
     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
     z-index: 2;
-    padding: 5px;
+    padding: var(--padding-small);
 }
 
 /* Pulsing animation for available levels */
@@ -485,11 +484,9 @@ onMounted(() => {
     0% {
         transform: scale(1);
     }
-
     50% {
         transform: scale(1.1);
     }
-
     100% {
         transform: scale(1);
     }
@@ -501,20 +498,16 @@ onMounted(() => {
         transform: scale(0) rotate(var(--final-rotation, 0deg));
         opacity: 0;
     }
-
     50% {
         transform: scale(calc(var(--final-scale, 1) * 1.2)) rotate(var(--final-rotation, 0deg));
         opacity: 1;
     }
-
     70% {
         transform: scale(calc(var(--final-scale, 1) * 0.9)) rotate(var(--final-rotation, 0deg));
     }
-
     85% {
         transform: scale(calc(var(--final-scale, 1) * 1.05)) rotate(var(--final-rotation, 0deg));
     }
-
     100% {
         transform: scale(var(--final-scale, 1)) rotate(var(--final-rotation, 0deg));
         opacity: 1;
@@ -523,8 +516,8 @@ onMounted(() => {
 
 /* Completion image (red pin/checkmark) */
 .completion-image {
-    width: 40px;
-    height: 40px;
+    width: var(--completion-image-size);
+    height: var(--completion-image-size);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -568,7 +561,7 @@ onMounted(() => {
 }
 
 .final-completion-image img {
-    width: 85vw;
+    width: clamp(300px, 85vw, 1200px);
     height: auto;
     object-fit: contain;
     filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.8));
@@ -580,20 +573,17 @@ onMounted(() => {
     background-size: contain;
     position: absolute;
     background-repeat: no-repeat;
-    top: 80px;
-    left: 1180px;
-    width: 40px;
-    height: 40px;
+    top: clamp(40px, 8vh, 100px);
+    right: clamp(40px, 8vw, 120px);
+    width: clamp(30px, 3vw, 50px);
+    height: clamp(30px, 3vw, 50px);
     border: none;
-    font-size: 24px;
-    font-weight: bold;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1001;
     transition: all 0.2s ease;
-    font-family: Arial, sans-serif;
 }
 
 .close-button:hover {
@@ -606,23 +596,18 @@ onMounted(() => {
         transform: translate(-50%, -50%) scale(100);
         opacity: 0;
     }
-
     10% {
         opacity: 1;
     }
-
     50% {
         transform: translate(-50%, -50%) scale(0.8);
     }
-
     70% {
         transform: translate(-50%, -50%) scale(1.1);
     }
-
     85% {
         transform: translate(-50%, -50%) scale(0.95);
     }
-
     100% {
         transform: translate(-50%, -50%) scale(1);
         opacity: 1;
@@ -643,7 +628,7 @@ onMounted(() => {
 }
 
 .stamp-image img {
-    width: 450px;
+    width: clamp(200px, 30vw, 450px);
     height: auto;
     object-fit: contain;
     filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.0));
@@ -651,13 +636,13 @@ onMounted(() => {
 
 .logo-container {
     position: fixed;
-    bottom: 35px;
-    right: 40px;
+    bottom: var(--padding-large);
+    right: var(--padding-large);
     z-index: 1000;
 }
 
 .logo {
-    width: 15vw;
+    width: clamp(80px, 15vw, 200px);
     height: auto;
 }
 </style>
