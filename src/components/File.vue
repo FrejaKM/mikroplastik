@@ -12,21 +12,18 @@
 <style scoped>
 .file-container {
     background-color: #F1F4F0;
-    font-family: 'Coming Soon', cursive;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: top;
     width: 100vw;
     height: 100vh;
-    padding-top: var(--padding-small);
     box-sizing: border-box;
 }
 
 .file-image {
     display: block;
-    width: clamp(300px, 80vw, 1200px);
-    height: auto;
+    width: 140vh;
 }
 
 .start-button {

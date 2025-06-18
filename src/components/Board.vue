@@ -554,7 +554,7 @@ onMounted(() => {
 }
 
 .final-completion-image img {
-    width: clamp(300px, 85vw, 1200px);
+    width: 80vw;
     height: auto;
     object-fit: contain;
     filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.8));
@@ -566,8 +566,8 @@ onMounted(() => {
     background-size: contain;
     position: absolute;
     background-repeat: no-repeat;
-    top: clamp(40px, 8vh, 100px);
-    right: clamp(40px, 8vw, 120px);
+    top: clamp(50px, 10vh, 110px);
+    right: clamp(35px, 7vw, 110px);
     width: clamp(30px, 3vw, 50px);
     height: clamp(30px, 3vw, 50px);
     border: none;
@@ -621,7 +621,7 @@ onMounted(() => {
 }
 
 .stamp-image img {
-    width: clamp(200px, 30vw, 450px);
+    width: 50vh;
     height: auto;
     object-fit: contain;
     filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.0));
